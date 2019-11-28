@@ -18,4 +18,5 @@
 	<SolidColorBrush x:Key="MenuButton.PressedBorder" Color="#FF33A4FF" />
 	<SolidColorBrush x:Key="Warning.Background" Color="#FFFEBD38" />
 	<SolidColorBrush x:Key="Warning.Foreground" Color="Black" />
+	<Pen x:Key="Icon.Outline" Thickness="4" Brush="Black"/>
 </ResourceDictionary>
