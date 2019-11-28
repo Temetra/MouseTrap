@@ -1,0 +1,61 @@
+﻿<Window x:Class="MouseTrap.Views.AboutWindowControl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:c="clr-namespace:MouseTrap.Controls"
+	mc:Ignorable="d"
+	Title="About Mouse Trap" 
+	Width="450" Height="460"
+	MinWidth="450" MinHeight="350"
+	WindowStartupLocation="CenterScreen"
+	ShowInTaskbar="False">
+
+	<Grid Margin="16,8,16,16">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+			<StackPanel>
+				<StackPanel.Resources>
+					<Style x:Key="BaseText" TargetType="{x:Type TextBlock}">
+						<Setter Property="FontSize" Value="13"/>
+						<Setter Property="LineHeight" Value="22"/>
+						<Setter Property="TextWrapping" Value="Wrap"/>
+						<Setter Property="Margin" Value="0,0,0,16" />
+					</Style>
+					<Style BasedOn="{StaticResource BaseText}" TargetType="{x:Type TextBlock}" />
+					<Style x:Key="Subheading" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseText}">
+						<Setter Property="FontWeight" Value="Medium"/>
+						<Setter Property="Margin" Value="0,0,0,8"/>
+					</Style>
+				</StackPanel.Resources>
+				<TextBlock FontSize="24" Margin="0,0,0,8">
+					<Image Source="{StaticResource AppIcon}" Width="64" Height="64" Margin="0,8,8,0" />
+					<Run BaselineAlignment="Center">Mouse Trap</Run>
+				</TextBlock>
+				<TextBlock>
+					Version 5. Copyright (c) 2019 Temetra. 
+					<LineBreak/>This project is licensed under the <c:Link Uri="https://github.com/Temetra/MouseTrap/blob/master/Docs/LICENSE.md">MIT License</c:Link>.
+				</TextBlock>
+				<TextBlock Style="{StaticResource Subheading}">
+					About
+				</TextBlock>
+				<TextBlock>
+					Made with <c:Link Uri="https://docs.microsoft.com/en-gb/dotnet/framework/wpf/introduction-to-wpf?view=vs-2019">Windows Presentation Foundation</c:Link>.
+					<LineBreak/>Full source and documentation found at <c:Link Uri="https://github.com/Temetra/MouseTrap">GitHub</c:Link>.
+				</TextBlock>
+				<TextBlock Style="{StaticResource Subheading}">
+					Acknowledgments
+				</TextBlock>
+				<TextBlock Margin="0">
+					<c:Link Uri="https://pixabay.com/en/mouse-mouse-icon-symbol-pc-cursor-2487884/">denizimo01 on Pixabay</c:Link> for the logo.
+					<LineBreak /><c:Link Uri="https://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030">Patterns - WPF Apps With The Model-View-ViewModel Design Pattern</c:Link> for RelayCommand class.
+					<LineBreak /><c:Link Uri="https://github.com/twitter/twemoji">Twitter Emoji glyphs</c:Link> (modified) licensed under <c:Link Uri="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</c:Link>.
+				</TextBlock>
+			</StackPanel>
+		</ScrollViewer>
+		<Button Grid.Row="1" Margin="0,16,0,0" Height="24" Width="64" HorizontalAlignment="Right" Click="Button_Click">Close</Button>
+	</Grid>
+</Window>

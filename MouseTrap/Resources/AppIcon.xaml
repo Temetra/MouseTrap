@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<DrawingImage x:Key="AppIcon">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing Brush="Transparent">
+					<GeometryDrawing.Geometry>
+						<GeometryGroup>
+							<RectangleGeometry Rect="0,0,64,64"/>
+						</GeometryGroup>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+				<GeometryDrawing Brush="Black" Geometry="m 30.50189,4.1712973 c 0,0 1.481482,1.4814815 1.481482,2.9629629 0,0.7407408 -2.222223,2.2222223 -2.222223,4.4444438 0,1.481481 0.740741,4.444444 0.740741,4.444444 h 2.222222 c 0,0 -0.74074,-2.962963 -0.74074,-4.444444 0,-1.481481 2.222222,-2.9629623 2.222222,-4.4444438 0,-1.4814814 -0.740741,-2.9629629 -0.740741,-2.9629629 z" />
+				<GeometryDrawing Brush="Black" Geometry="M 31.242631,16.023148 26,16 c -2.222223,0 -4.5,2.277778 -4.5,4.5 V 25 c 2.5,1.5 4.75,3 9.75,3 V 24.25 C 30.75,24.25 30.5,24 30.5,23.5 v -3 c 0,-0.5 0.25,-0.75 0.75,-0.75 z" />
+				<GeometryDrawing Brush="Black" Geometry="M 32.757369,16.023148 38,16 c 2.222223,0 4.5,2.277778 4.5,4.5 V 25 c -2.5,1.5 -4.75,3 -9.75,3 v -3.75 c 0.5,0 0.75,-0.25 0.75,-0.75 v -3 c 0,-0.5 -0.25,-0.75 -0.75,-0.75 z" />
+				<GeometryDrawing Brush="Black" Geometry="m 31.25,20.75 c 0,-0.5 0.75,-0.5 0.75,-0.5 0,0 0.75,0 0.75,0.5 v 2.5 c 0,0.5 -0.75,0.5 -0.75,0.5 0,0 -0.75,0 -0.75,-0.5 z" />
+				<GeometryDrawing Brush="Black" Geometry="m 21.5,26 c 0,0 4.5,3 10.5,3 8,0 10.5,-3 10.5,-3 v 19 c 0,1.5 -1.5,3 -3,3 h -15 c -1.5,0 -3,-1.5 -3,-3 z" />
+				<GeometryDrawing>
+					<GeometryDrawing.Pen>
+						<Pen Thickness="4" Brush="Black" LineJoin="Bevel" StartLineCap="Round" EndLineCap="Round" />
+					</GeometryDrawing.Pen>
+					<GeometryDrawing.Geometry>
+						<GeometryGroup>
+							<EllipseGeometry Center="32,32" RadiusX="29" RadiusY="29" />
+						</GeometryGroup>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+</ResourceDictionary>

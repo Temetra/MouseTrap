@@ -1,4 +1,4 @@
-﻿using MouseTrap.Models;
+﻿using MouseTrap.Data;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -10,12 +10,12 @@ namespace MouseTrap.Binding
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var dimensions = (double[])value;
+			var dimensions = (Dimensions)value;
 
-			double left = GetMargin(dimensions[0]);
-			double right = GetMargin(dimensions[1]);
-			double top = GetMargin(dimensions[2]);
-			double bottom = GetMargin(dimensions[3]);
+			double left = GetMargin(dimensions.Left);
+			double top = GetMargin(dimensions.Top);
+			double right = GetMargin(dimensions.Right);
+			double bottom = GetMargin(dimensions.Bottom);
 
 			return new Thickness(left, top, right, bottom);
 		}

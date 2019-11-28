@@ -5,9 +5,11 @@
 ![Language][language]
 ![License][license]
 
-Mouse Trap restricts the mouse cursor to a specific window.
+Mouse Trap restricts the mouse cursor to the area of a specific window.
 
-This can help when the cursor shouldn't wander outside to talk to other windows, but the program fails to capture the mouse normally. Some game examples are; Morrowind, Oblivion, Skyrim, Fallout 3, Fallout: New Vegas and Fallout 4.
+Full-screen games typically capture the mouse, preventing it from leaving the game area. Sometimes they don't, and clicking or using the mouse wheel can result in the window losing focus, or scrolling in a different window.
+
+Some game examples are; Morrowind, Oblivion, Skyrim, Fallout 3, Fallout: New Vegas and Fallout 4. It can also benefit windowed games and programs where leaving the area is undesirable.
 
 Particularly useful for dual-monitor setups, but can be used for any number of displays greater than zero.
 
@@ -52,10 +54,23 @@ If the window is closed, the application returns to the list or file tab.
 
 <p align="center"><img src="img/lock-screen-foreground.png"></p>
 
+### Administrator notification
+
+If the target program is run as administrator, Mouse Trap will also need to be run as administrator for the mouse hook to work. The lock screen will warn you if you need to take action.
+
+<p align="center"><img src="img/lock-screen-warning.png"></p>
+
+### Hotkeys
+
+* <kbd>F1</kbd> - Choose Window
+* <kbd>F2</kbd> - Find Program
+* <kbd>F3</kbd> - Lock/Unlock Mouse
+* <kbd>F5</kbd> - Refresh list in Choose Window mode
+* <kbd>Alt</kbd>+<kbd>F4</kbd> - Quits program
+
 ## Built With
 
 * [Windows Presentation Foundation (WPF)](https://docs.microsoft.com/en-us/visualstudio/designers/introduction-to-wpf?view=vs-2017) - Desktop client framework
-* [Emoji.Wpf](https://github.com/samhocevar/emoji.wpf) - A proof of concept implementation of Emoji for WPF
 
 ## License
 

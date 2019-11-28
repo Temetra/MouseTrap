@@ -1,0 +1,62 @@
+﻿<Window x:Class="MouseTrap.Views.MainWindowControl"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:binding="clr-namespace:MouseTrap.Binding"
+		xmlns:models="clr-namespace:MouseTrap.ViewModels"
+		xmlns:views="clr-namespace:MouseTrap.Views"
+		xmlns:design="clr-namespace:MouseTrap.DesignTime"
+		mc:Ignorable="d"
+		Width="500" Height="380"
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="CanMinimize" 
+		d:DataContext="{d:DesignInstance design:MainWindow, IsDesignTimeCreatable=True}"
+>
+	<Window.Resources>
+		<ResourceDictionary>
+			<DataTemplate DataType="{x:Type models:AppToolbar}"><views:AppToolbarView /></DataTemplate>
+			<DataTemplate DataType="{x:Type models:WindowList}"><views:WindowListView /></DataTemplate>
+			<DataTemplate DataType="{x:Type models:FindProgram}"><views:FindProgramView /></DataTemplate>
+			<DataTemplate DataType="{x:Type models:LockWindow}"><views:LockWindowView /></DataTemplate>
+			<binding:MergeTitleConverter x:Key="MergeTitleConverter" />
+		</ResourceDictionary>
+	</Window.Resources>
+	<Window.InputBindings>
+		<KeyBinding Command="{Binding ToolbarViewModel.ChooseWindowCommand}" Key="F1" Modifiers=""/>
+		<KeyBinding Command="{Binding ToolbarViewModel.FindProgramCommand}" Key="F2" Modifiers=""/>
+		<KeyBinding Command="{Binding ToolbarViewModel.ToggleLockCommand}" Key="F3" Modifiers=""/>
+		<KeyBinding Command="{Binding ToolbarViewModel.RefreshListCommand}" Key="F5" Modifiers=""/>
+	</Window.InputBindings>
+	<Window.Style>
+		<Style TargetType="{x:Type Window}">
+			<Setter Property="Title" Value="Mouse Trap"/>
+			<Style.Triggers>
+				<Trigger Property="WindowState" Value="Minimized">
+					<Setter Property="Title" Value="{Binding WindowSubtitle, ConverterParameter='Mouse Trap', Converter={StaticResource MergeTitleConverter}}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Style>
+	<DockPanel Margin="8">
+		<ContentControl Content="{Binding ToolbarViewModel}" DockPanel.Dock="Top" Margin="0,0,0,8" IsTabStop="False" />
+		<ContentControl>
+			<ContentControl.Style>
+				<Style TargetType="ContentControl">
+					<Setter Property="Content" Value="{Binding CurrentViewModel}" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" Value="{x:Null}">
+							<Setter Property="ContentControl.Template">
+								<Setter.Value>
+									<ControlTemplate>
+										<Image Source="{StaticResource Hourglass}" />
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ContentControl.Style>
+		</ContentControl>
+	</DockPanel>
+</Window>

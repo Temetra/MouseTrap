@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,196 +8,6 @@ namespace MouseTrap.Controls
 {
 	public class BarButtonControl : Control
 	{
-		// Button image source
-		public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(
-			"Image", typeof(ImageSource), typeof(BarButtonControl)
-			);
-
-		public ImageSource Image
-		{
-			get => (ImageSource)GetValue(ImageProperty);
-			set => SetValue(ImageProperty, value);
-		}
-
-		// Image margin
-		public static readonly DependencyProperty ImageMarginProperty = DependencyProperty.Register(
-			"ImageMargin", typeof(Thickness), typeof(BarButtonControl)
-			);
-
-		public Thickness ImageMargin
-		{
-			get => (Thickness)GetValue(ImageMarginProperty);
-			set => SetValue(ImageMarginProperty, value);
-		}
-
-		// Button text
-		public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-			"Text", typeof(string), typeof(BarButtonControl)
-			);
-
-		public string Text
-		{
-			get => (string)GetValue(TextProperty);
-			set => SetValue(TextProperty, value);
-		}
-
-		// Hover background brush
-		public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(
-			"HoverBackground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Transparent)
-			);
-
-		public Brush HoverBackground
-		{
-			get => (Brush)GetValue(HoverBackgroundProperty);
-			set => SetValue(HoverBackgroundProperty, value);
-		}
-
-		// Hover border brush
-		public static readonly DependencyProperty HoverBorderProperty = DependencyProperty.Register(
-			"HoverBorder", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Transparent)
-			);
-
-		public Brush HoverBorder
-		{
-			get => (Brush)GetValue(HoverBorderProperty);
-			set => SetValue(HoverBorderProperty, value);
-		}
-
-		// Hover highlighted background brush
-		public static readonly DependencyProperty HoverHighlightedBackgroundProperty = DependencyProperty.Register(
-			"HoverHighlightedBackground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Transparent)
-			);
-
-		public Brush HoverHighlightedBackground
-		{
-			get => (Brush)GetValue(HoverHighlightedBackgroundProperty);
-			set => SetValue(HoverHighlightedBackgroundProperty, value);
-		}
-
-		// Pressed foreground brush
-		public static readonly DependencyProperty PressedForegroundProperty = DependencyProperty.Register(
-			"PressedForeground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Black)
-			);
-
-		public Brush PressedForeground
-		{
-			get => (Brush)GetValue(PressedForegroundProperty);
-			set => SetValue(PressedForegroundProperty, value);
-		}
-
-		// Pressed background brush
-		public static readonly DependencyProperty PressedBackgroundProperty = DependencyProperty.Register(
-			"PressedBackground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Transparent)
-			);
-
-		public Brush PressedBackground
-		{
-			get => (Brush)GetValue(PressedBackgroundProperty);
-			set => SetValue(PressedBackgroundProperty, value);
-		}
-
-		// Pressed border brush
-		public static readonly DependencyProperty PressedBorderProperty = DependencyProperty.Register(
-			"PressedBorder", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Transparent)
-			);
-
-		public Brush PressedBorder
-		{
-			get => (Brush)GetValue(PressedBorderProperty);
-			set => SetValue(PressedBorderProperty, value);
-		}
-
-		// Disabled background brush
-		public static readonly DependencyProperty DisabledBackgroundProperty = DependencyProperty.Register(
-			"DisabledBackground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Black)
-			);
-
-		public Brush DisabledBackground
-		{
-			get => (Brush)GetValue(DisabledBackgroundProperty);
-			set => SetValue(DisabledBackgroundProperty, value);
-		}
-
-		// Disabled border brush
-		public static readonly DependencyProperty DisabledBorderProperty = DependencyProperty.Register(
-			"DisabledBorder", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Black)
-			);
-
-		public Brush DisabledBorder
-		{
-			get => (Brush)GetValue(DisabledBorderProperty);
-			set => SetValue(DisabledBorderProperty, value);
-		}
-
-		// Disabled foreground brush
-		public static readonly DependencyProperty DisabledForegroundProperty = DependencyProperty.Register(
-			"DisabledForeground", typeof(Brush), typeof(BarButtonControl),
-			new PropertyMetadata(Brushes.Black)
-			);
-
-		public Brush DisabledForeground
-		{
-			get => (Brush)GetValue(DisabledForegroundProperty);
-			set => SetValue(DisabledForegroundProperty, value);
-		}
-
-		// Disabled image source
-		public static readonly DependencyProperty DisabledImageProperty = DependencyProperty.Register(
-			"DisabledImage", typeof(ImageSource), typeof(BarButtonControl)
-			);
-
-		public ImageSource DisabledImage
-		{
-			get => (ImageSource)GetValue(DisabledImageProperty);
-			set => SetValue(DisabledImageProperty, value);
-		}
-
-		// IsPressed
-		public static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register(
-			"IsPressed", typeof(bool), typeof(BarButtonControl)
-			);
-
-		public bool IsPressed
-		{
-			get => (bool)GetValue(IsPressedProperty);
-			set => SetValue(IsPressedProperty, value);
-		}
-
-		// IsHighlighted
-		public static readonly DependencyProperty IsHighlightedProperty = DependencyProperty.Register(
-			"IsHighlighted", typeof(bool), typeof(BarButtonControl)
-			);
-
-		public bool IsHighlighted
-		{
-			get => (bool)GetValue(IsHighlightedProperty);
-			set => SetValue(IsHighlightedProperty, value);
-		}
-
-		// Command
-		public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
-			"Command", typeof(ICommand), typeof(BarButtonControl)
-			);
-
-		public ICommand Command
-		{
-			get => (ICommand)GetValue(CommandProperty);
-			set
-			{
-				SetValue(CommandProperty, value);
-				IsEnabled = Command.CanExecute(this);
-			}
-		}
-
-		// Static constructor
 		static BarButtonControl()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(
@@ -206,28 +16,128 @@ namespace MouseTrap.Controls
 			);
 		}
 
-		// Constructor
 		public BarButtonControl() : base()
 		{
 			MouseDown += BarButtonControl_MouseDown;
 			MouseUp += BarButtonControl_MouseUp;
-			Loaded += BarButtonControl_Loaded;
 		}
 
-		private void BarButtonControl_Loaded(object sender, RoutedEventArgs e)
+		private static DependencyProperty Register<T>(string name)
 		{
-			if (Command != null)
-			{
-				Command.CanExecuteChanged += Command_CanExecuteChanged;
-			}
+			return DependencyProperty.Register(name, typeof(T), typeof(BarButtonControl));
+		} 
+
+		public static readonly DependencyProperty ImageProperty = Register<ImageSource>("Image");
+		public static readonly DependencyProperty ImageMarginProperty = Register<Thickness>("ImageMargin");
+		public static readonly DependencyProperty TextProperty = Register<string>("Text");
+		public static readonly DependencyProperty HighlightedBackgroundProperty = Register<Brush>("HighlightedBackground");
+		public static readonly DependencyProperty HoverBackgroundProperty = Register<Brush>("HoverBackground");
+		public static readonly DependencyProperty HoverBorderProperty = Register<Brush>("HoverBorder");
+		public static readonly DependencyProperty HoverHighlightedBackgroundProperty = Register<Brush>("HoverHighlightedBackground");
+		public static readonly DependencyProperty PressedForegroundProperty = Register<Brush>("PressedForeground");
+		public static readonly DependencyProperty PressedBackgroundProperty = Register<Brush>("PressedBackground");
+		public static readonly DependencyProperty PressedBorderProperty = Register<Brush>("PressedBorder");
+		public static readonly DependencyProperty DisabledBackgroundProperty = Register<Brush>("DisabledBackground");
+		public static readonly DependencyProperty DisabledBorderProperty = Register<Brush>("DisabledBorder");
+		public static readonly DependencyProperty DisabledForegroundProperty = Register<Brush>("DisabledForeground");
+		public static readonly DependencyProperty IsPressedProperty = Register<bool>("IsPressed");
+		public static readonly DependencyProperty IsHighlightedProperty = Register<bool>("IsHighlighted");
+		public static readonly DependencyProperty CommandProperty = Register<ICommand>("Command");
+
+		public ImageSource Image
+		{
+			get => (ImageSource)GetValue(ImageProperty);
+			set => SetValue(ImageProperty, value);
 		}
 
-		private void Command_CanExecuteChanged(object sender, EventArgs e)
+		public Thickness ImageMargin
 		{
-			if (Command != null)
-			{
-				IsEnabled = Command.CanExecute(this);
-			}
+			get => (Thickness)GetValue(ImageMarginProperty);
+			set => SetValue(ImageMarginProperty, value);
+		}
+
+		public string Text
+		{
+			get => (string)GetValue(TextProperty);
+			set => SetValue(TextProperty, value);
+		}
+
+		public Brush HighlightedBackground
+		{
+			get => (Brush)GetValue(HighlightedBackgroundProperty);
+			set => SetValue(HighlightedBackgroundProperty, value);
+		}
+
+		public Brush HoverBackground
+		{
+			get => (Brush)GetValue(HoverBackgroundProperty);
+			set => SetValue(HoverBackgroundProperty, value);
+		}
+
+		public Brush HoverBorder
+		{
+			get => (Brush)GetValue(HoverBorderProperty);
+			set => SetValue(HoverBorderProperty, value);
+		}
+
+		public Brush HoverHighlightedBackground
+		{
+			get => (Brush)GetValue(HoverHighlightedBackgroundProperty);
+			set => SetValue(HoverHighlightedBackgroundProperty, value);
+		}
+
+		public Brush PressedForeground
+		{
+			get => (Brush)GetValue(PressedForegroundProperty);
+			set => SetValue(PressedForegroundProperty, value);
+		}
+
+		public Brush PressedBackground
+		{
+			get => (Brush)GetValue(PressedBackgroundProperty);
+			set => SetValue(PressedBackgroundProperty, value);
+		}
+
+		public Brush PressedBorder
+		{
+			get => (Brush)GetValue(PressedBorderProperty);
+			set => SetValue(PressedBorderProperty, value);
+		}
+
+		public Brush DisabledBackground
+		{
+			get => (Brush)GetValue(DisabledBackgroundProperty);
+			set => SetValue(DisabledBackgroundProperty, value);
+		}
+
+		public Brush DisabledBorder
+		{
+			get => (Brush)GetValue(DisabledBorderProperty);
+			set => SetValue(DisabledBorderProperty, value);
+		}
+
+		public Brush DisabledForeground
+		{
+			get => (Brush)GetValue(DisabledForegroundProperty);
+			set => SetValue(DisabledForegroundProperty, value);
+		}
+
+		public bool IsPressed
+		{
+			get => (bool)GetValue(IsPressedProperty);
+			set => SetValue(IsPressedProperty, value);
+		}
+
+		public bool IsHighlighted
+		{
+			get => (bool)GetValue(IsHighlightedProperty);
+			set => SetValue(IsHighlightedProperty, value);
+		}
+
+		public ICommand Command
+		{
+			get => (ICommand)GetValue(CommandProperty);
+			set => SetValue(CommandProperty, value);
 		}
 
 		private void BarButtonControl_MouseDown(object sender, MouseButtonEventArgs e)

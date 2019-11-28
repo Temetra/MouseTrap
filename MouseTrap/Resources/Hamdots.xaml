@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<SolidColorBrush x:Key="Foreground" Color="Black"/>
+	<DrawingImage x:Key="Hamdots">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing Brush="Transparent">
+					<GeometryDrawing.Geometry>
+						<GeometryGroup>
+							<RectangleGeometry Rect="0,0,64,64"/>
+						</GeometryGroup>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+				<GeometryDrawing Brush="{StaticResource Foreground}">
+					<GeometryDrawing.Geometry>
+						<GeometryGroup>
+							<EllipseGeometry Center="8,32" RadiusX="6" RadiusY="6" />
+							<EllipseGeometry Center="32,32" RadiusX="6" RadiusY="6" />
+							<EllipseGeometry Center="56,32" RadiusX="6" RadiusY="6" />
+						</GeometryGroup>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+</ResourceDictionary>

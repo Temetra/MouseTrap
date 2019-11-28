@@ -1,24 +1,21 @@
-﻿<UserControl x:Class="MouseTrap.Views.WindowListView"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-		xmlns:controls="clr-namespace:MouseTrap.Controls"
-		xmlns:viewmodels="clr-namespace:MouseTrap.ViewModels"
-		mc:Ignorable="d" 
-		d:DataContext="{d:DesignInstance viewmodels:WindowListDesignModel, IsDesignTimeCreatable=True}"
-		d:DesignHeight="350" d:DesignWidth="500" Background="{DynamicResource Main.Background}">
+<UserControl x:Class="MouseTrap.Views.WindowListView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:controls="clr-namespace:MouseTrap.Controls"
+	xmlns:design="clr-namespace:MouseTrap.DesignTime"
+	mc:Ignorable="d"
+	Background="{DynamicResource Main.Background}"
+	d:DataContext="{d:DesignInstance design:WindowList, IsDesignTimeCreatable=True}" d:DesignWidth="464" d:DesignHeight="344"
+>
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/MouseTrap;component/Colours.xaml" />
-			</ResourceDictionary.MergedDictionaries>
 			<Style x:Key="GridText" TargetType="{x:Type TextBlock}">
 				<Setter Property="VerticalAlignment" Value="Center" />
 			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
-
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -100,6 +97,5 @@
 		</DataGrid>
 
 		<controls:WindowListDetails DataContext="{Binding SelectedWindow}" Grid.Row="1" />
-
 	</Grid>
 </UserControl>

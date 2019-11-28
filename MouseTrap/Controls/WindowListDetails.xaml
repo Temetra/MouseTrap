@@ -3,17 +3,16 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-		xmlns:viewmodels="clr-namespace:MouseTrap.ViewModels"
 		xmlns:binding="clr-namespace:MouseTrap.Binding"
+		xmlns:design="clr-namespace:MouseTrap.DesignTime"
 		mc:Ignorable="d" 
-		d:DataContext="{d:DesignInstance viewmodels:WindowListDetailsDesignModel, IsDesignTimeCreatable=True}"
-		d:DesignHeight="100" d:DesignWidth="400" Background="{DynamicResource Main.Background}">
+		Background="{DynamicResource Main.Background}"
+		d:DataContext="{d:DesignInstance design:WindowListDetails, IsDesignTimeCreatable=True}" d:DesignWidth="500" d:DesignHeight="48">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/MouseTrap;component/Colours.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Colours.xaml" />
 			</ResourceDictionary.MergedDictionaries>
-			<binding:IntToHexConverter x:Key="IntToHexConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -32,30 +31,18 @@
 				</Style.Triggers>
 			</Style>
 		</Border.Resources>
-		<Grid>
-			<Grid.Resources>
+		<DockPanel LastChildFill="False">
+			<DockPanel.Resources>
 				<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
 					<Setter Property="HorizontalAlignment" Value="Left"/>
 					<Setter Property="VerticalAlignment" Value="Center"/>
 					<Setter Property="TextTrimming" Value="CharacterEllipsis"/>
 				</Style>
-			</Grid.Resources>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="4" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="4" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="{Binding ShortPath}" ToolTip="{Binding ProcessPath}" Grid.Column="0" />
-			<!--<TextBlock Text="{Binding Handle, Converter={StaticResource IntToHexConverter}, StringFormat={}({0})}" Grid.Column="2" Foreground="Gray" />-->
-			<TextBlock Text="{Binding Width}" Grid.Column="4" />
-			<TextBlock Text="x" Grid.Column="6" />
-			<TextBlock Text="{Binding Height}" Grid.Column="8" />
-		</Grid>
+			</DockPanel.Resources>
+			<TextBlock Text="{Binding ShortPath}" ToolTip="{Binding ProcessPath}" />
+			<TextBlock Text="{Binding Height}" DockPanel.Dock="Right" />
+			<TextBlock Text="x" DockPanel.Dock="Right" Margin="4,0" />
+			<TextBlock Text="{Binding Width}" DockPanel.Dock="Right" />
+		</DockPanel>
 	</Border>
 </UserControl>

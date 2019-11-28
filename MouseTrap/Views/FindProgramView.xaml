@@ -1,19 +1,16 @@
 ﻿<UserControl x:Class="MouseTrap.Views.FindProgramView"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-		xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"	
-		xmlns:viewmodels="clr-namespace:MouseTrap.ViewModels"
-		xmlns:controls="clr-namespace:MouseTrap.Controls"
-		mc:Ignorable="d" 
-		d:DataContext="{d:DesignInstance viewmodels:FindProgramDesignModel, IsDesignTimeCreatable=True}"
-		d:DesignHeight="261" d:DesignWidth="478" Background="{DynamicResource Main.Background}">
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:design="clr-namespace:MouseTrap.DesignTime"
+	xmlns:controls="clr-namespace:MouseTrap.Controls"
+	mc:Ignorable="d" 
+	Background="{DynamicResource Main.Background}"
+	d:DataContext="{d:DesignInstance design:FindProgram, IsDesignTimeCreatable=True}" d:DesignHeight="261" d:DesignWidth="478" 
+>
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/MouseTrap;component/Colours.xaml" />
-			</ResourceDictionary.MergedDictionaries>
 			<Style TargetType="{x:Type controls:BarButtonControl}">
 				<Setter Property="ImageMargin" Value="0,8" />
 				<Setter Property="BorderThickness" Value="1" />
@@ -30,50 +27,55 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid Margin="8,0,8,16">
+	<Grid Margin="8">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="32" />
-			<RowDefinition Height="38" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="38" />
-		</Grid.ColumnDefinitions>
 
-		<TextBlock Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center">
-			Path to executable:
-		</TextBlock>
+		<StackPanel>
+			<TextBlock Margin="0,0,0,8">
+				Find a program to lock:
+			</TextBlock>
 
-		<TextBox Grid.Row="1" Grid.Column="0" Width="Auto" Padding="4,0" FontSize="14" 
-				 PreviewDragOver="TextBox_PreviewDragOver"
-				 PreviewDragEnter="TextBox_PreviewDragOver"
-				 PreviewDrop="TextBox_PreviewDrop" 
-				 VerticalContentAlignment="Center" Text="{Binding Filename, UpdateSourceTrigger=PropertyChanged}" />
+			<Grid Height="38">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="8" />
+					<ColumnDefinition Width="38" />
+				</Grid.ColumnDefinitions>
 
-		<controls:BarButtonControl 
-			Grid.Row="1"
-			Grid.Column="2"
-			IsTabStop="True"
-			Text=""
-			Image="/MouseTrap;component/Resources/find-rgb.png"
-			DisabledImage="/MouseTrap;component/Resources/find-bw.png"
-			Command="{Binding FindFileCommand}"
-			/>
+				<TextBox Grid.Row="1" Grid.Column="0" Width="Auto" Padding="4,0" FontSize="14" 
+					 PreviewDragOver="TextBox_PreviewDragOver"
+					 PreviewDragEnter="TextBox_PreviewDragOver"
+					 PreviewDrop="TextBox_PreviewDrop" 
+					 VerticalContentAlignment="Center" Text="{Binding Filename, UpdateSourceTrigger=PropertyChanged}" />
 
-		<emoji:TextBlock Grid.Row="2" Grid.ColumnSpan="3" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<emoji:TextBlock.Style>
-				<Style TargetType="emoji:TextBlock">
-					<Setter Property="Text" Value="❌" />
+				<controls:BarButtonControl 
+					Grid.Row="1"
+					Grid.Column="2"
+					IsTabStop="True"
+					Text=""
+					ToolTip="Browse for program"
+					Image="{StaticResource 1f4c2-open_file_folder}"
+					Command="{Binding FindFileCommand}"
+					/>
+			</Grid>
+		</StackPanel>
+		
+		<TextBlock Margin="0,0,0,8" Grid.Row="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<TextBlock.Style>
+				<Style TargetType="TextBlock">
+					<Setter Property="Text" Value="❎ Program not found" />
 					<Style.Triggers>
 						<DataTrigger Binding="{Binding IsFilenameValid}" Value="True">
-							<Setter Property="Text" Value="✔" />
+							<Setter Property="FontSize" Value="16" />
+							<Setter Property="Text" Value="✅ Program found" />
 						</DataTrigger>
 					</Style.Triggers>
 				</Style>
-			</emoji:TextBlock.Style>
-		</emoji:TextBlock>
+			</TextBlock.Style>
+		</TextBlock>
 
 	</Grid>
 </UserControl>

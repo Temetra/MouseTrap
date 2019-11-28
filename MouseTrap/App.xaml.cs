@@ -1,6 +1,7 @@
-﻿using MouseTrap.Data;
-using MouseTrap.Models;
-using MouseTrap.ViewModels;
+﻿using MouseTrap.Core;
+using MouseTrap.Data;
+using MouseTrap.Hooks;
+using MouseTrap.UserInterface;
 using System.Windows;
 
 namespace MouseTrap
@@ -10,44 +11,39 @@ namespace MouseTrap
 	/// </summary>
 	public partial class App : Application
 	{
-		private IApplicationSystem ApplicationSystem { get; set; }
+		private readonly IForegroundWindowHook foregroundWindowHook;
+		private readonly IWindowUpdateHook windowUpdateHook;
+		private readonly IMouseHook mouseHook;
+		private readonly IAppSystem appSystem;
+
+		private readonly IWindowEnumerator windowEnumerator;
+		private readonly IInterfaceSystem interfaceSystem;
 
 		public App()
 		{
+			foregroundWindowHook = new ForegroundWindowHook();
+			windowUpdateHook = new WindowUpdateHook();
+			mouseHook = new MouseHook();
+			windowEnumerator = new WindowEnumerator();
+
+			appSystem = new AppSystem(foregroundWindowHook, windowUpdateHook, mouseHook);
+			interfaceSystem = new InterfaceSystem(windowEnumerator, appSystem);
+
 			Startup += App_Startup;
 			Exit += App_Exit;
 		}
 
 		private void App_Startup(object sender, StartupEventArgs e)
 		{
-			// Show window
-			var mainWindow = new MainWindow();
-			mainWindow.Show();
-
-			// Create system
-			ApplicationSystem = ApplicationSystemFactory.GetApplicationSystem();
-
-			// Initialise padding
-			ApplicationSystem.ApplicationState.SetPadding(8, 8, 8, 8);
-
-			// Create factories
-			WindowListViewModel windowListLiveModelFactory() { return new WindowListLiveModel(new WindowCatalogue()); }
-			FindProgramViewModel findProgramViewModelFactory() { return new FindProgramLiveModel(); }
-			LockWindowViewModel lockWindowViewModelFactory() { return new LockWindowLiveModel(ApplicationSystem.ApplicationState, ApplicationSystem.TargetWindowDetails); }
-			ToolBarViewModel toolBarViewModelFactory() { return new ToolBarLiveModel(ApplicationSystem.ApplicationState); }
-
-			// Create main view model
-			mainWindow.DataContext = new MainWindowLiveModel(
-				ApplicationSystem, 
-				windowListLiveModelFactory, 
-				findProgramViewModelFactory,
-				lockWindowViewModelFactory,
-				toolBarViewModelFactory);
+			interfaceSystem.Startup();
 		}
 
 		private void App_Exit(object sender, ExitEventArgs e)
 		{
-			ApplicationSystem.ApplicationState.CancelWatch();
+			Logging.Logger.Write("App", "Exit");
+			foregroundWindowHook.StopHook();
+			windowUpdateHook.StopHook();
+			mouseHook.StopHook();
 		}
 	}
 }

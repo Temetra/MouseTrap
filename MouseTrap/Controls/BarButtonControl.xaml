@@ -1,0 +1,117 @@
+<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:MouseTrap.Controls"
+	xmlns:effects="clr-namespace:MouseTrap.Effects">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Colours.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+	<Style TargetType="{x:Type local:BarButtonControl}">
+		<Style.Resources>
+			<Style x:Key="FocusVisual">
+				<Setter Property="Control.Template">
+					<Setter.Value>
+						<ControlTemplate>
+							<Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</Style.Resources>
+
+		<Setter Property="Margin" Value="0" />
+		<Setter Property="Padding" Value="8,0" />
+		<Setter Property="Height" Value="Auto" />
+		<Setter Property="ImageMargin" Value="0,10,8,10" />
+		<Setter Property="BorderThickness" Value="0,0,0,2" />
+		<Setter Property="Foreground" Value="{StaticResource MenuButton.Foreground}" />
+		<Setter Property="Background" Value="{StaticResource MenuButton.Background}" />
+		<Setter Property="BorderBrush" Value="{StaticResource MenuButton.BorderBrush}" />
+		<Setter Property="HighlightedBackground" Value="{StaticResource MenuButton.HighlightedBackground}" />
+		<Setter Property="HoverBackground" Value="{StaticResource MenuButton.HoverBackground}" />
+		<Setter Property="HoverBorder" Value="{StaticResource MenuButton.HoverBorder}" />
+		<Setter Property="HoverHighlightedBackground" Value="{StaticResource MenuButton.HoverHighlightedBackground}" />
+		<Setter Property="DisabledForeground" Value="{StaticResource MenuButton.DisabledForeground}" />
+		<Setter Property="DisabledBackground" Value="{StaticResource MenuButton.DisabledBackground}" />
+		<Setter Property="DisabledBorder" Value="{StaticResource MenuButton.DisabledBorder}" />
+		<Setter Property="PressedForeground" Value="{StaticResource MenuButton.PressedForeground}" />
+		<Setter Property="PressedBackground" Value="{StaticResource MenuButton.PressedBackground}" />
+		<Setter Property="PressedBorder" Value="{StaticResource MenuButton.PressedBorder}" />
+
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:BarButtonControl}">
+					<Border x:Name="buttonBorder"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							Padding="{TemplateBinding Padding}"
+							SnapsToDevicePixels="True">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Image 
+								x:Name="buttonImage" 
+								Source="{TemplateBinding Image}" 
+								Margin="{TemplateBinding ImageMargin}" 
+								VerticalAlignment="Center" 
+								Stretch="Uniform"
+								SnapsToDevicePixels="True"
+								UseLayoutRounding="True"
+								/>
+							<TextBlock 
+								x:Name="buttonText" 
+								Foreground="{TemplateBinding Foreground}" 
+								Text="{TemplateBinding Text}" 
+								VerticalAlignment="Center" 
+								/>
+						</StackPanel>
+					</Border>
+					<ControlTemplate.Triggers>
+						<!-- Button is toggled on -->
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+						</Trigger>
+
+						<!-- Cursor is over button -->
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding HoverBorder, RelativeSource={RelativeSource TemplatedParent}}" />
+						</Trigger>
+
+						<!-- Button is toggled on and cursor is over button -->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsHighlighted" Value="true" />
+								<Condition Property="IsMouseOver" Value="True" />
+							</MultiTrigger.Conditions>
+							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverHighlightedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+						</MultiTrigger>
+
+						<!-- Button is pressed -->
+						<Trigger Property="IsPressed" Value="true">
+							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding PressedBorder, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonText" Property="Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+						</Trigger>
+
+						<!-- Button is disabled -->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsHighlighted" Value="false" />
+								<Condition Property="IsEnabled" Value="false" />
+							</MultiTrigger.Conditions>
+							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding DisabledBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding DisabledBorder, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonText" Property="Foreground" Value="{Binding DisabledForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter TargetName="buttonImage" Property="Effect">
+								<Setter.Value>
+									<effects:GrayscaleEffect />
+								</Setter.Value>
+							</Setter>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

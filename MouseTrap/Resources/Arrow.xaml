@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<DrawingImage x:Key="Arrow">
+		<DrawingImage.Drawing>
+			<GeometryDrawing Brush="Black" Geometry="M 0 60 50 0 100 60 H 60 v 40 H 40 V 60 Z"/>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+</ResourceDictionary>
