@@ -11,7 +11,7 @@ namespace MouseTrap.Binding
 			var subtitle = (string)value;
 			var title = (string)parameter;
 			if (string.IsNullOrWhiteSpace(subtitle)) return title;
-			return $"{title} - {subtitle}";
+			return $"{subtitle} - {title}";
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
