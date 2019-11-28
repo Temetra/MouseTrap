@@ -22,7 +22,7 @@
 		<Setter Property="Margin" Value="0" />
 		<Setter Property="Padding" Value="8,0" />
 		<Setter Property="Height" Value="Auto" />
-		<Setter Property="ImageMargin" Value="0,10,8,10" />
+		<Setter Property="ImageMargin" Value="0,10,8,9" />
 		<Setter Property="BorderThickness" Value="0,0,0,2" />
 		<Setter Property="Foreground" Value="{StaticResource MenuButton.Foreground}" />
 		<Setter Property="Background" Value="{StaticResource MenuButton.Background}" />
