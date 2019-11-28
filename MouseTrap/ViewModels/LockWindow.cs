@@ -16,6 +16,7 @@ namespace MouseTrap.ViewModels
 		private double _topOffset;
 		private double _bottomOffset;
 		private bool _elevationRequired;
+		private ViewType _lockType;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -122,6 +123,16 @@ namespace MouseTrap.ViewModels
 			{
 				_elevationRequired = value;
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ElevationRequired)));
+			}
+		}
+
+		public ViewType LockType
+		{
+			get => _lockType;
+			set
+			{
+				_lockType = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LockType)));
 			}
 		}
 

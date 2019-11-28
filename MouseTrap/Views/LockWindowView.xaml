@@ -12,6 +12,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<binding:DimensionsToThicknessConverter x:Key="DimensionsConverter" />
+			<binding:ViewTypeToBoolConverter x:Key="ViewBoolConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid>
@@ -62,11 +63,32 @@
 			<Border x:Name="winBox" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
 					Margin="8" BorderThickness="2" BorderBrush="Black" SnapsToDevicePixels="True">
 				<Image VerticalAlignment="Center" HorizontalAlignment="Center">
+					<Image.Resources>
+						<Pen x:Key="Icon.Outline" Thickness="3" Brush="Black"/>
+					</Image.Resources>
 					<Image.Style>
 						<Style TargetType="{x:Type Image}">
 							<Setter Property="Source" Value="{StaticResource Hourglass}" />
 							<Setter Property="Margin" Value="16"/>
 							<Style.Triggers>
+								<DataTrigger Value="True">
+									<DataTrigger.Binding>
+										<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
+											<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="WindowList" /></Binding.ConverterParameter>
+										</Binding>
+									</DataTrigger.Binding>
+									<Setter Property="Source" Value="{StaticResource 1f4bb-computer}" />
+									<Setter Property="Margin" Value="20"/>
+								</DataTrigger>
+								<DataTrigger Value="True">
+									<DataTrigger.Binding>
+										<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
+											<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="FindProgram" /></Binding.ConverterParameter>
+										</Binding>
+									</DataTrigger.Binding>
+									<Setter Property="Source" Value="{StaticResource 1f4c2-open_file_folder}" />
+									<Setter Property="Margin" Value="20"/>
+								</DataTrigger>
 								<MultiDataTrigger>
 									<MultiDataTrigger.Conditions>
 										<Condition Binding="{Binding WindowIsFocused, Mode=OneWay}" Value="True"/>

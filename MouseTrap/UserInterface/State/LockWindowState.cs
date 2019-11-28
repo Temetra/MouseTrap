@@ -25,6 +25,7 @@ namespace MouseTrap.UserInterface.State
 			_model.BottomOffset = context.Padding.Bottom;
 			_model.PropertyChanged += _modelChangeHandler;
 			_model.ElevationRequired = false;
+			_model.LockType = context.PreviousView;
 
 			// Update context
 			context.SetWindowLockState(true);
