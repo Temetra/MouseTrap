@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Windows;
 
 namespace MouseTrap.Views
 {
@@ -10,7 +13,11 @@ namespace MouseTrap.Views
 		public AboutWindowControl()
 		{
 			InitializeComponent();
+			Version = Assembly.GetEntryAssembly().GetName().Version.Major;
+			DataContext = this;
 		}
+
+		public int Version { get; }
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{

@@ -36,7 +36,7 @@
 					<Run BaselineAlignment="Center">Mouse Trap</Run>
 				</TextBlock>
 				<TextBlock>
-					Version 5. Copyright (c) 2019 Temetra. 
+					Version <Run Text="{Binding Version, Mode=OneWay}" />. Copyright (c) 2019 Temetra. 
 					<LineBreak/>This project is licensed under the <c:Link Uri="https://github.com/Temetra/MouseTrap/blob/master/Docs/LICENSE.md">MIT License</c:Link>.
 				</TextBlock>
 				<TextBlock Style="{StaticResource Subheading}">
