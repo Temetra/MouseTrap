@@ -40,7 +40,7 @@ namespace MouseTrap
 
 		private void App_Exit(object sender, ExitEventArgs e)
 		{
-			Logging.Logger.Write("App", "Exit");
+			Logging.Logger.Write();
 			foregroundWindowHook.StopHook();
 			windowUpdateHook.StopHook();
 			mouseHook.StopHook();

@@ -1,6 +1,7 @@
 ﻿using MouseTrap.Data;
 using MouseTrap.ViewModels;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace MouseTrap.UserInterface.State
 {
@@ -94,8 +95,16 @@ namespace MouseTrap.UserInterface.State
 			
 			if (_model.ElevationRequired == false)
 			{
-				if (isInForeground) context.SetAppTitlePostfix("Locked");
-				else context.SetAppTitlePostfix("Waiting");
+				if (isInForeground)
+				{
+					context.SetAppTitlePostfix("Locked");
+					AudioFeedbackGainedForeground();
+				}
+				else
+				{
+					context.SetAppTitlePostfix("Waiting");
+					AudioFeedbackLostForeground();
+				}
 			}
 		}
 
@@ -120,5 +129,11 @@ namespace MouseTrap.UserInterface.State
 					break;
 			}
 		}
+
+		[Conditional("DEBUG")]
+		private void AudioFeedbackGainedForeground() => System.Media.SystemSounds.Beep.Play();
+
+		[Conditional("DEBUG")]
+		private void AudioFeedbackLostForeground() => System.Media.SystemSounds.Asterisk.Play();
 	}
 }

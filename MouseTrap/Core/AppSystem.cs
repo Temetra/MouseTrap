@@ -56,63 +56,63 @@ namespace MouseTrap.Core
 		// Lock to a specific window
 		public void Lock(IntPtr handle)
 		{
-			Logging.Logger.Write("AppSystem", $"Lock Handle {handle.ToString()}");
+			Logging.Logger.Write($"Handle {handle.ToString()}");
 			_state.Lock(_stateContext, handle);
 		}
 
 		// Lock to a specific application path
 		public void Lock(string path)
 		{
-			Logging.Logger.Write("AppSystem", $"Lock Path {path}");
+			Logging.Logger.Write($"Path {path}");
 			_state.Lock(_stateContext, path);
 		}
 
 		// Unlock system
 		public void Unlock()
 		{
-			Logging.Logger.Write("AppSystem", "Unlock");
+			Logging.Logger.Write();
 			_state.Unlock(_stateContext);
 		}
 
 		// Set padding
 		public void SetPadding(double left, double top, double right, double bottom)
 		{
-			Logging.Logger.Write("AppSystem", "Set Padding");
+			Logging.Logger.Write($"{left} {top} {right} {bottom}");
 			_state.PaddingChanged(_stateContext, new Dimensions(left, top, right, bottom));
 		}
 
 		// Sets current state
 		private void SetCurrentState(IAppState nextState)
 		{
-			Logging.Logger.Write("AppSystem", $"Set State from {_state.GetType().Name} to {nextState.GetType().Name}");
+			Logging.Logger.Write($"From {_state.GetType().Name} to {nextState.GetType().Name}");
 			_state = nextState;
 		}
 
 		// Foreground hook event handler
 		private void ForegroundHook_ForegroundWindowChanged(object sender, Hooks.Events.ForegroundWindowChangedEventArgs e)
 		{
-			Logging.Logger.Write("AppSystem", $"Foreground {e.ProcessPath}");
+			Logging.Logger.Write($"{e.ProcessPath}");
 			_state.ForegroundChanged(_stateContext, e.Handle, e.WindowThreadProcId, e.ProcessPath);
 		}
 
 		// Window hook closed event handler
 		private void WindowHook_WindowClosed(object sender, EventArgs e)
 		{
-			Logging.Logger.Write("AppSystem", $"Closed {_stateContext.ProcessPath}");
+			Logging.Logger.Write($"{_stateContext.ProcessPath}");
 			_state.WindowClosed(_stateContext);
 		}
 
 		// Window hook dimensions event handler
 		private void WindowHook_DimensionsChanged(object sender, Hooks.Events.DimensionsChangedEventArgs e)
 		{
-			Logging.Logger.Write("AppSystem", $"Dimensions {e.Dimensions}");
+			Logging.Logger.Write($"{e.Dimensions}");
 			_state.WindowDimensionsChanged(_stateContext, e.Dimensions);
 		}
 
 		// Window hook title change event handler
 		private void WindowHook_TitleChanged(object sender, Hooks.Events.TitleChangedEventArgs e)
 		{
-			Logging.Logger.Write("AppSystem", $"Dimensions {e.Title}");
+			Logging.Logger.Write($"{e.Title}");
 			_state.WindowTitleChanged(_stateContext, e.Title);
 		}
 	}

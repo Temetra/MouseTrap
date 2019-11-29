@@ -1,6 +1,7 @@
 ﻿using MouseTrap.Hooks.Events;
 using MouseTrap.Interop;
 using System;
+using System.Diagnostics;
 
 namespace MouseTrap.Hooks
 {
@@ -27,6 +28,8 @@ namespace MouseTrap.Hooks
 
 		protected override void WinEventCallback(WinEventConstant eventType, IntPtr handle, int objectId, int childId)
 		{
+			LogWinEventCallback(eventType, handle, objectId, childId);
+
 			// Only process events related to FG capture
 			if (eventType != WinEventConstant.EVENT_SYSTEM_FOREGROUND && eventType != WinEventConstant.EVENT_SYSTEM_MINIMIZEEND)
 			{
@@ -54,6 +57,14 @@ namespace MouseTrap.Hooks
 				WindowThreadProcId = windowThreadProcId,
 				ProcessPath = processName
 			});
+		}
+
+		[Conditional("DEBUG")]
+		private void LogWinEventCallback(WinEventConstant eventType, IntPtr handle, int objectId, int childId)
+		{
+			NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
+			string processName = NativeMethods.GetFullProcessName((int)windowThreadProcId);
+			Logging.Logger.Write($"{eventType} {processName}");
 		}
 	}
 }
