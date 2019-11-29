@@ -91,24 +91,28 @@ namespace MouseTrap.Core
 		// Foreground hook event handler
 		private void ForegroundHook_ForegroundWindowChanged(object sender, Hooks.Events.ForegroundWindowChangedEventArgs e)
 		{
+			Logging.Logger.Write("AppSystem", $"Foreground {e.ProcessPath}");
 			_state.ForegroundChanged(_stateContext, e.Handle, e.WindowThreadProcId, e.ProcessPath);
 		}
 
 		// Window hook closed event handler
 		private void WindowHook_WindowClosed(object sender, EventArgs e)
 		{
+			Logging.Logger.Write("AppSystem", $"Closed {_stateContext.ProcessPath}");
 			_state.WindowClosed(_stateContext);
 		}
 
 		// Window hook dimensions event handler
 		private void WindowHook_DimensionsChanged(object sender, Hooks.Events.DimensionsChangedEventArgs e)
 		{
+			Logging.Logger.Write("AppSystem", $"Dimensions {e.Dimensions}");
 			_state.WindowDimensionsChanged(_stateContext, e.Dimensions);
 		}
 
 		// Window hook title change event handler
 		private void WindowHook_TitleChanged(object sender, Hooks.Events.TitleChangedEventArgs e)
 		{
+			Logging.Logger.Write("AppSystem", $"Dimensions {e.Title}");
 			_state.WindowTitleChanged(_stateContext, e.Title);
 		}
 	}
