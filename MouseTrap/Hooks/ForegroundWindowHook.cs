@@ -15,7 +15,8 @@ namespace MouseTrap.Hooks
 		{
 			if (!HasEventHookInstance)
 			{
-				StartWinEventHook(WinEventConstant.EVENT_SYSTEM_FOREGROUND);
+				// Capture range of events
+				StartWinEventHook(WinEventConstant.EVENT_SYSTEM_FOREGROUND, WinEventConstant.EVENT_SYSTEM_MINIMIZEEND);
 			}
 		}
 
@@ -26,24 +27,33 @@ namespace MouseTrap.Hooks
 
 		protected override void WinEventCallback(WinEventConstant eventType, IntPtr handle, int objectId, int childId)
 		{
-			if (handle != null && objectId == 0)
+			// Only process events related to FG capture
+			if (eventType != WinEventConstant.EVENT_SYSTEM_FOREGROUND && eventType != WinEventConstant.EVENT_SYSTEM_MINIMIZEEND)
 			{
-				// Ignore these windows
-				var windowStyle = NativeMethods.GetWindowStyleEx(handle);
-				if ((windowStyle & WindowStylesEx.WS_EX_NOACTIVATE) == WindowStylesEx.WS_EX_NOACTIVATE) return;
-
-				// Get process ID and name
-				NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
-				string processName = NativeMethods.GetFullProcessName((int)windowThreadProcId);
-
-				// Send event
-				ForegroundWindowChanged?.Invoke(this, new ForegroundWindowChangedEventArgs
-				{
-					Handle = handle,
-					WindowThreadProcId = windowThreadProcId,
-					ProcessPath = processName
-				});
+				return;
 			}
+
+			// Only process events with valid parameters
+			if (handle == null || objectId != 0)
+			{
+				return;
+			}
+
+			// Ignore these windows
+			var windowStyle = NativeMethods.GetWindowStyleEx(handle);
+			if ((windowStyle & WindowStylesEx.WS_EX_NOACTIVATE) == WindowStylesEx.WS_EX_NOACTIVATE) return;
+
+			// Get process ID and name
+			NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
+			string processName = NativeMethods.GetFullProcessName((int)windowThreadProcId);
+
+			// Send event
+			ForegroundWindowChanged?.Invoke(this, new ForegroundWindowChangedEventArgs
+			{
+				Handle = handle,
+				WindowThreadProcId = windowThreadProcId,
+				ProcessPath = processName
+			});
 		}
 	}
 }
