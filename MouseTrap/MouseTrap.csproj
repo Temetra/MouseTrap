@@ -139,6 +139,7 @@
     <Compile Include="UserInterface\InterfaceSystem.cs" />
     <Compile Include="UserInterface\ViewType.cs" />
     <Compile Include="UserInterface\State\WindowListState.cs" />
+    <Compile Include="ViewModels\AboutWindow.cs" />
     <Compile Include="ViewModels\AppToolbar.cs" />
     <Compile Include="ViewModels\FindProgram.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />

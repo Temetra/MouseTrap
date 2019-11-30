@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MouseTrap.Views
 {
@@ -13,15 +10,12 @@ namespace MouseTrap.Views
 		public AboutWindowControl()
 		{
 			InitializeComponent();
-			Version = Assembly.GetEntryAssembly().GetName().Version.Major;
-			DataContext = this;
+			Closed += AboutWindowControl_Closed;
 		}
 
-		public int Version { get; }
-
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void AboutWindowControl_Closed(object sender, System.EventArgs e)
 		{
-			Close();
+			(DataContext as ViewModels.AboutWindow)?.HasClosedCommand.Execute(sender);
 		}
 	}
 }

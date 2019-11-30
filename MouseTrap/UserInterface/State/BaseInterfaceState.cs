@@ -1,4 +1,5 @@
-﻿using MouseTrap.Data;
+﻿using MouseTrap.Binding;
+using MouseTrap.Data;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,23 +33,31 @@ namespace MouseTrap.UserInterface.State
 			contextMenu.IsOpen = true;
 		}
 
+		public void MainWindowClosing(IInterfaceStateContext context)
+		{
+			if (context.AboutWindow != null) context.AboutWindow.Close();
+		}
+
 		public void ShowAboutWindow(IInterfaceStateContext context, object sender)
 		{
 			if (context.AboutWindow == null)
 			{
-				context.AboutWindow = new Views.AboutWindowControl();
-				context.AboutWindow.Closed += (w, a) => context.AboutWindow = null;
+				context.AboutWindow = new Views.AboutWindowControl
+				{
+					DataContext = new ViewModels.AboutWindow
+					{
+						Version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.Major,
+						CloseWindowCommand = new RelayCommand(param => (param as Window).Close()),
+						HasClosedCommand = new RelayCommand(param => context.AboutWindow = null)
+					}
+				};
+				
 				context.AboutWindow.Show();
 			}
 			else
 			{
 				context.AboutWindow.Activate();
 			}
-		}
-
-		public void MainWindowClosing(IInterfaceStateContext context)
-		{
-			if (context.AboutWindow != null) context.AboutWindow.Close();
 		}
 	}
 }

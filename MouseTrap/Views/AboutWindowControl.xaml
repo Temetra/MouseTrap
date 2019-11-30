@@ -56,6 +56,12 @@
 				</TextBlock>
 			</StackPanel>
 		</ScrollViewer>
-		<Button Grid.Row="1" Margin="0,16,0,0" Height="24" Width="64" HorizontalAlignment="Right" Click="Button_Click">Close</Button>
+		<Button 
+			Command="{Binding CloseWindowCommand}"
+			CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+			Grid.Row="1" 
+			Margin="0,16,0,0" 
+			Height="24" Width="64" 
+			HorizontalAlignment="Right">Close</Button>
 	</Grid>
 </Window>
