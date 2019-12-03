@@ -11,7 +11,6 @@ namespace MouseTrap.Hooks
 	internal sealed class ForegroundWindowHook : WinEventHook, IForegroundWindowHook
 	{
 		private string _lastTitle;
-		private uint _lastProcessId;
 		public event EventHandler<ForegroundWindowChangedEventArgs> ForegroundWindowChanged;
 
 		public void StartHook()
@@ -45,39 +44,34 @@ namespace MouseTrap.Hooks
 			// Get process ID
 			NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
 
-			// Check new foreground window is different process
-			if (windowThreadProcId != _lastProcessId)
+			// Ignore these windows
+			var windowStyle = NativeMethods.GetWindowStyleEx(handle);
+			if ((windowStyle & WindowStylesEx.WS_EX_NOACTIVATE) == WindowStylesEx.WS_EX_NOACTIVATE) return;
+
+			// Ignore ghost window when target is unresponsive
+			// Ghost windows take foreground but target window doesn't trigger EVENT_SYSTEM_FOREGROUND
+			// when responsive again.
+			var className = NativeMethods.GetClassName(handle);
+			var currentTitle = NativeMethods.GetWindowText(handle);
+			if (className == "Ghost" && _lastTitle == currentTitle)
 			{
-				// Ignore these windows
-				var windowStyle = NativeMethods.GetWindowStyleEx(handle);
-				if ((windowStyle & WindowStylesEx.WS_EX_NOACTIVATE) == WindowStylesEx.WS_EX_NOACTIVATE) return;
-
-				// Ignore ghost window when target is unresponsive
-				// Ghost windows take foreground but target window doesn't trigger EVENT_SYSTEM_FOREGROUND
-				// when responsive again.
-				var className = NativeMethods.GetClassName(handle);
-				var currentTitle = NativeMethods.GetWindowText(handle);
-				if (className == "Ghost" && _lastTitle == currentTitle)
-				{
-					LogWinEventCallback(eventType, className, currentTitle);
-					return;
-				}
-
-				// Get process path
-				string processName = NativeMethods.GetFullProcessName((int)windowThreadProcId);
-
-				// Send event
-				ForegroundWindowChanged?.Invoke(this, new ForegroundWindowChangedEventArgs
-				{
-					Handle = handle,
-					WindowThreadProcId = windowThreadProcId,
-					ProcessPath = processName
-				});
-
-				// Store values
-				_lastTitle = currentTitle;
-				_lastProcessId = windowThreadProcId;
+				LogWinEventCallback(eventType, className, currentTitle);
+				return;
 			}
+
+			// Get process path
+			string processName = NativeMethods.GetFullProcessName((int)windowThreadProcId);
+
+			// Send event
+			ForegroundWindowChanged?.Invoke(this, new ForegroundWindowChangedEventArgs
+			{
+				Handle = handle,
+				WindowThreadProcId = windowThreadProcId,
+				ProcessPath = processName
+			});
+
+			// Store title
+			_lastTitle = currentTitle;
 		}
 
 		[Conditional("DEBUG")]
