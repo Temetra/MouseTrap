@@ -97,10 +97,11 @@ namespace MouseTrap.Hooks
 				else if (posY > _yMax) posY = _yMax;
 
 				// Move cursor
-				NativeMethods.SetCursorPos(posX, posY);
-
-				// Done
-				return new IntPtr(1);
+				if (posX != mouseInfo.pt.X || posY != mouseInfo.pt.Y)
+				{
+					NativeMethods.SetCursorPos(posX, posY);
+					return new IntPtr(1);
+				}
 			}
 
 			// Skip
