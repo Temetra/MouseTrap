@@ -112,6 +112,7 @@ namespace MouseTrap.UserInterface.State
 		{
 			_model.ElevationRequired = true;
 			context.SetAppTitlePostfix("Run as admin required");
+			Logging.Logger.Write($"{System.IO.Path.GetFileName(context.ProcessPath)}");
 		}
 
 		private void HandleModelChange(IInterfaceStateContext context, PropertyChangedEventArgs e)

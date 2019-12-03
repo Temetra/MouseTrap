@@ -63,7 +63,7 @@ namespace MouseTrap.Core
 		// Lock to a specific application path
 		public void Lock(string path)
 		{
-			Logging.Logger.Write($"Path {path}");
+			Logging.Logger.Write($"Path {System.IO.Path.GetFileName(path)}");
 			_state.Lock(_stateContext, path);
 		}
 
@@ -91,14 +91,14 @@ namespace MouseTrap.Core
 		// Foreground hook event handler
 		private void ForegroundHook_ForegroundWindowChanged(object sender, Hooks.Events.ForegroundWindowChangedEventArgs e)
 		{
-			Logging.Logger.Write($"{e.ProcessPath}");
+			Logging.Logger.Write($"{System.IO.Path.GetFileName(e.ProcessPath)}");
 			_state.ForegroundChanged(_stateContext, e.Handle, e.WindowThreadProcId, e.ProcessPath);
 		}
 
 		// Window hook closed event handler
 		private void WindowHook_WindowClosed(object sender, EventArgs e)
 		{
-			Logging.Logger.Write($"{_stateContext.ProcessPath}");
+			Logging.Logger.Write($"{System.IO.Path.GetFileName(_stateContext.ProcessPath)}");
 			_state.WindowClosed(_stateContext);
 		}
 
