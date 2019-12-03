@@ -182,5 +182,21 @@ namespace MouseTrap.Interop
 
 			return result;
 		}
+
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+		internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+		internal static string GetClassName(IntPtr handle)
+		{
+			string result = null;
+			var sb = new StringBuilder(256);
+			
+			if (GetClassName(handle, sb, sb.Capacity) != 0)
+			{
+				result = sb.ToString();
+			}
+			
+			return result;
+		}
 	}
 }
