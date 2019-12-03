@@ -4,11 +4,7 @@ namespace MouseTrap.Interop
 {
 	internal abstract class WinEventHook : IDisposable
 	{
-		private uint _processId;
-		private uint _threadId;
 		private IntPtr _eventHookInstance;
-		private WinEventConstant _winEventMin;
-		private WinEventConstant _winEventMax;
 
 		// Ensure delegate is not collected prematurely
 		private WinEventDelegate _winEventDelegate;
@@ -31,17 +27,14 @@ namespace MouseTrap.Interop
 				// zero and idThread is nonzero, the hook function receives the specified events only from 
 				// the thread specified by idThread. If both are zero, the hook function receives the 
 				// specified events from all threads and processes.
-				_processId = 0;
-				_threadId = 0;
-				if (processHandle != IntPtr.Zero) _threadId = NativeMethods.GetWindowThreadProcessId(processHandle, out _processId);
-
-				_winEventMin = winEventMin;
-				_winEventMax = winEventMax > 0 ? winEventMax : winEventMin;
+				uint processId = 0;
+				uint threadId = 0;
+				if (processHandle != IntPtr.Zero) threadId = NativeMethods.GetWindowThreadProcessId(processHandle, out processId);
 
 				_eventHookInstance = NativeMethods.SetWinEventHook(
-					(uint)_winEventMin,
-					(uint)_winEventMax,
-					IntPtr.Zero, _winEventDelegate, _processId, _threadId, (uint)WinEventConstant.WINEVENT_OUTOFCONTEXT);
+					(uint)winEventMin,
+					(uint)(winEventMax > 0 ? winEventMax : winEventMin),
+					IntPtr.Zero, _winEventDelegate, processId, threadId, (uint)WinEventConstant.WINEVENT_OUTOFCONTEXT);
 			}
 		}
 
