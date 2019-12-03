@@ -18,7 +18,7 @@ namespace MouseTrap.Hooks
 			if (handle != IntPtr.Zero && _targetHandle == IntPtr.Zero)
 			{
 				_targetHandle = handle;
-				StartWinEventHook(WinEventConstant.EVENT_OBJECT_DESTROY, WinEventConstant.EVENT_OBJECT_NAMECHANGE, handle);
+				StartWinEventHook(WinEventConstant.EVENT_SYSTEM_MOVESIZEEND, WinEventConstant.EVENT_OBJECT_NAMECHANGE, handle);
 				SendWindowTitle(handle);
 				SendWindowDimensions(handle);
 			}
@@ -34,15 +34,15 @@ namespace MouseTrap.Hooks
 		{
 			if (handle == _targetHandle && objectId == 0)
 			{
-				if (eventType == WinEventConstant.EVENT_OBJECT_DESTROY)
-				{
-					// Target window was closed
-					WindowClosed?.Invoke(this, EventArgs.Empty);
-				}
-				else if (eventType == WinEventConstant.EVENT_OBJECT_LOCATIONCHANGE)
+				if (eventType == WinEventConstant.EVENT_SYSTEM_MOVESIZEEND)
 				{
 					// Target window size has changed
 					SendWindowDimensions(handle);
+				}
+				else if (eventType == WinEventConstant.EVENT_OBJECT_DESTROY)
+				{
+					// Target window was closed
+					WindowClosed?.Invoke(this, EventArgs.Empty);
 				}
 				else if (eventType == WinEventConstant.EVENT_OBJECT_NAMECHANGE)
 				{
