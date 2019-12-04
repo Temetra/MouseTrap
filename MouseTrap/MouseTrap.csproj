@@ -109,6 +109,7 @@
     <Compile Include="Hooks\IWindowUpdateHook.cs" />
     <Compile Include="Hooks\MouseHook.cs" />
     <Compile Include="Hooks\WindowUpdateHook.cs" />
+    <Compile Include="Logging\EventIdTraceFilter.cs" />
     <Compile Include="UserInterface\DummyInterfaceSystem.cs" />
     <Compile Include="Interop\DWMWINDOWATTRIBUTE.cs" />
     <Compile Include="Interop\GWL.cs" />
