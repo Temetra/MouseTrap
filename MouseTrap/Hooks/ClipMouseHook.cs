@@ -49,7 +49,7 @@ namespace MouseTrap.Hooks
 		public void UnrestrictMouse()
 		{
 			_isRestricted = false;
-			_timer.Dispose();
+			_timer?.Dispose();
 			NativeMethods.ClipCursor(IntPtr.Zero);
 		}
 
