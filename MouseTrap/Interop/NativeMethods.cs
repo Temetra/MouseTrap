@@ -145,6 +145,12 @@ namespace MouseTrap.Interop
 		[DllImport("user32.dll")]
 		internal static extern bool SetCursorPos(int X, int Y);
 
+		[DllImport("user32.dll")]
+		internal static extern bool ClipCursor(ref Win32Rect lpRect);
+
+		[DllImport("user32.dll")]
+		internal static extern bool ClipCursor(IntPtr lpRect);
+
 		internal static bool IsCurrentProcessElevated()
 		{
 			var id = WindowsIdentity.GetCurrent();
