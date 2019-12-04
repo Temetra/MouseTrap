@@ -98,7 +98,6 @@
     <Compile Include="DesignTime\LockWindow.cs" />
     <Compile Include="DesignTime\Toolbar.cs" />
     <Compile Include="DesignTime\WindowListDetails.cs" />
-    <Compile Include="Hooks\ClipMouseHook.cs" />
     <Compile Include="Hooks\Events\DimensionsChangedEventArgs.cs" />
     <Compile Include="Core\Events\ForegroundStateChangedEventArgs.cs" />
     <Compile Include="Hooks\Events\ForegroundWindowChangedEventArgs.cs" />

@@ -23,7 +23,7 @@ namespace MouseTrap
 		{
 			foregroundWindowHook = new ForegroundWindowHook();
 			windowUpdateHook = new WindowUpdateHook();
-			mouseHook = new ClipMouseHook();
+			mouseHook = new MouseHook();
 			windowEnumerator = new WindowEnumerator();
 
 			appSystem = new AppSystem(foregroundWindowHook, windowUpdateHook, mouseHook);
