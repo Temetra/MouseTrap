@@ -7,7 +7,7 @@ namespace MouseTrap.Hooks
 	/// Interface for a system hook that raises an event
 	/// when a specified window changes title, dimensions, or is closed
 	/// </summary>
-	public interface IWindowUpdateHook
+	public interface IWindowUpdateHook : IDisposable
 	{
 		void StartHook(IntPtr handle);
 		void StopHook();

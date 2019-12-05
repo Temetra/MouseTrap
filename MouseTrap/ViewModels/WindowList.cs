@@ -1,6 +1,5 @@
 using MouseTrap.Binding;
 using MouseTrap.Data;
-using MouseTrap.UserInterface;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -21,8 +20,6 @@ namespace MouseTrap.ViewModels
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		public ViewType ViewType => ViewType.WindowList;
 
 		public ICollectionView DataSource { get; }
 

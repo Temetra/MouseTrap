@@ -2,6 +2,8 @@
 using MouseTrap.Data;
 using MouseTrap.Hooks;
 using MouseTrap.UserInterface;
+using MouseTrap.UserInterface.Components;
+using System;
 using System.Windows;
 
 namespace MouseTrap
@@ -9,33 +11,57 @@ namespace MouseTrap
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class App : Application
+	public partial class App : Application, IDisposable
 	{
-		private readonly IForegroundWindowHook foregroundWindowHook;
-		private readonly IWindowUpdateHook windowUpdateHook;
-		private readonly IMouseHook mouseHook;
-		private readonly IAppSystem appSystem;
+		// Fields
+		private bool _isDisposed;
 
-		private readonly IWindowEnumerator windowEnumerator;
-		private readonly IInterfaceSystem interfaceSystem;
+		// System
+		private IForegroundWindowHook foregroundWindowHook;
+		private IWindowUpdateHook windowUpdateHook;
+		private IMouseHook mouseHook;
+		private IAppSystem appSystem;
+		private IWindowEnumerator windowEnumerator;
+		private IGuiSystem guiSystem;
 
+		// Components
+		private ILockingComponent lockingComponent;
+		private IToolbarComponent toolbarComponent;
+		private IWindowListComponent windowListComponent;
+		private IFindProgramComponent findProgramComponent;
+		private ILockWindowComponent lockWindowComponent;
+		private IAboutComponent aboutComponent;
+		private IMainWindowComponent mainWindowComponent;
+
+		// Constructor
 		public App()
 		{
-			foregroundWindowHook = new ForegroundWindowHook();
-			windowUpdateHook = new WindowUpdateHook();
-			mouseHook = new ClipMouseHook();
-			windowEnumerator = new WindowEnumerator();
-
-			appSystem = new AppSystem(foregroundWindowHook, windowUpdateHook, mouseHook);
-			interfaceSystem = new InterfaceSystem(windowEnumerator, appSystem);
-
 			Startup += App_Startup;
 			Exit += App_Exit;
 		}
 
+		// Event handlers
 		private void App_Startup(object sender, StartupEventArgs e)
 		{
-			interfaceSystem.Startup();
+			// Create system objects
+			foregroundWindowHook = new ForegroundWindowHook();
+			windowUpdateHook = new WindowUpdateHook();
+			mouseHook = new ClipMouseHook();
+			appSystem = new AppSystem(foregroundWindowHook, windowUpdateHook, mouseHook);
+			windowEnumerator = new WindowEnumerator();
+
+			// Create components
+			lockingComponent = new LockingComponent(appSystem);
+			toolbarComponent = new ToolbarComponent();
+			windowListComponent = new WindowListComponent(windowEnumerator);
+			findProgramComponent = new FindProgramComponent();
+			lockWindowComponent = new LockWindowComponent(appSystem);
+			aboutComponent = new AboutComponent();
+			mainWindowComponent = new MainWindowComponent(appSystem);
+
+			// Create gui system
+			guiSystem = new GuiSystem(lockingComponent, toolbarComponent, windowListComponent, findProgramComponent, lockWindowComponent, aboutComponent, mainWindowComponent);
+			guiSystem.Startup();
 		}
 
 		private void App_Exit(object sender, ExitEventArgs e)
@@ -44,6 +70,39 @@ namespace MouseTrap
 			foregroundWindowHook.StopHook();
 			windowUpdateHook.StopHook();
 			mouseHook.StopHook();
+		}
+
+		// IDisposable
+		~App()
+		{
+			Dispose(false);
+		}
+		
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (_isDisposed) return;
+
+			if (disposing)
+			{
+				// Free any other managed objects here.
+				mainWindowComponent.Dispose();
+				lockWindowComponent.Dispose();
+				lockingComponent.Dispose();
+			}
+
+			// Free any unmanaged objects here.
+			foregroundWindowHook.Dispose();
+			windowUpdateHook.Dispose();
+			mouseHook.Dispose();
+
+			// Done
+			_isDisposed = true;
 		}
 	}
 }

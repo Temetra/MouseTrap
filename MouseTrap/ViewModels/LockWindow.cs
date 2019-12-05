@@ -20,8 +20,6 @@ namespace MouseTrap.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public ViewType ViewType => ViewType.LockWindow;
-
 		public string Title
 		{
 			get => _title;

@@ -27,7 +27,7 @@ namespace MouseTrap.Data
 			NativeMethods.EnumWindows((hWnd, lParam) =>
 			{
 				// Get process ID
-				NativeMethods.GetWindowThreadProcessId(hWnd, out uint processId);
+				_ = NativeMethods.GetWindowThreadProcessId(hWnd, out uint processId);
 
 				// Get title
 				var title = NativeMethods.GetWindowText(hWnd);

@@ -1,6 +1,6 @@
 ﻿namespace MouseTrap.UserInterface
 {
-	public interface IInterfaceSystem
+	public interface IGuiSystem
 	{
 		void Startup();
 	}

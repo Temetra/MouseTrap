@@ -13,7 +13,8 @@ namespace MouseTrap.Logging
 			StackFrame frame = new StackFrame(1);
 			var method = frame.GetMethod();
 			var id = $"{method.DeclaringType.FullName}.{method.Name}".GetHashCode();
-			_source.Value.TraceEvent(TraceEventType.Verbose, id, $"{method.Name}: {msg}");
+			var sep = string.IsNullOrEmpty(msg) ? "" : ": ";
+			_source.Value.TraceEvent(TraceEventType.Verbose, id, $"{method.Name}{sep}{msg}");
 		}
 	}
 }

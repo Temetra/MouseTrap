@@ -26,7 +26,7 @@ namespace MouseTrap.Interop
 			var sb = new StringBuilder(1024);
 
 			// Get window text
-			GetWindowText(hWnd, sb, sb.Capacity);
+			_ = GetWindowText(hWnd, sb, sb.Capacity);
 			var result = sb.ToString();
 
 			// Return result
@@ -167,7 +167,7 @@ namespace MouseTrap.Interop
 			try
 			{
 				// Get process handle
-				GetWindowThreadProcessId(handle, out uint processId);
+				_ = GetWindowThreadProcessId(handle, out uint processId);
 				processHandle = OpenProcess(ProcessAccessFlags.QueryInformation, false, (int)processId);
 				int errorCode = Marshal.GetLastWin32Error();
 

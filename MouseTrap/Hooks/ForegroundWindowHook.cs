@@ -42,7 +42,7 @@ namespace MouseTrap.Hooks
 			}
 
 			// Get process ID
-			NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
+			_ = NativeMethods.GetWindowThreadProcessId(handle, out uint windowThreadProcId);
 
 			// Ignore these windows
 			var windowStyle = NativeMethods.GetWindowStyleEx(handle);

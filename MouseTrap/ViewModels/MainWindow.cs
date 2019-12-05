@@ -2,15 +2,15 @@ using System.ComponentModel;
 
 namespace MouseTrap.ViewModels
 {
-	public class MainWindow : INotifyPropertyChanged
+	public class MainWindow : IViewModel, INotifyPropertyChanged
 	{
-		private AppToolbar _toolbarViewModel;
+		private IViewModel _toolbarViewModel;
 		private IViewModel _currentViewModel;
 		private string _windowSubtitle;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public AppToolbar ToolbarViewModel
+		public IViewModel ToolbarViewModel
 		{
 			get => _toolbarViewModel;
 			set
@@ -26,12 +26,6 @@ namespace MouseTrap.ViewModels
 			set
 			{
 				_currentViewModel = value;
-				
-				if (_toolbarViewModel != null)
-				{
-					_toolbarViewModel.CurrentView = _currentViewModel.ViewType;
-				}
-
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentViewModel)));
 			}
 		}

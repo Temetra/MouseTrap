@@ -23,7 +23,7 @@ namespace MouseTrap.Core.SpecificWindow
 			}
 
 			// Get process id
-			NativeMethods.GetWindowThreadProcessId(handle, out uint procId);
+			_ = NativeMethods.GetWindowThreadProcessId(handle, out uint procId);
 
 			// Get process path
 			string procPath = NativeMethods.GetFullProcessName((int)procId);

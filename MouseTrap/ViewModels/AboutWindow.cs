@@ -15,11 +15,5 @@ namespace MouseTrap.ViewModels
 			get;
 			set;
 		}
-
-		public ICommand HasClosedCommand
-		{
-			get;
-			set;
-		}
 	}
 }

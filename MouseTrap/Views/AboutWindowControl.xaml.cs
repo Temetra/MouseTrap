@@ -10,12 +10,6 @@ namespace MouseTrap.Views
 		public AboutWindowControl()
 		{
 			InitializeComponent();
-			Closed += AboutWindowControl_Closed;
-		}
-
-		private void AboutWindowControl_Closed(object sender, System.EventArgs e)
-		{
-			(DataContext as ViewModels.AboutWindow)?.HasClosedCommand.Execute(sender);
 		}
 	}
 }

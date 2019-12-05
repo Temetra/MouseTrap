@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +26,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>ConcurrencyRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,7 +80,6 @@
     <Compile Include="Core\AppState\BaseAppState.cs" />
     <Compile Include="Core\AppState\InitialState.cs" />
     <Compile Include="Core\AppSystem.cs" />
-    <Compile Include="Core\DummyAppSystem.cs" />
     <Compile Include="Core\Events\DimensionsChangedEventArgs.cs" />
     <Compile Include="Core\Events\LockStateChangedEventArgs.cs" />
     <Compile Include="Core\Events\TitleChangedEventArgs.cs" />
@@ -111,7 +116,7 @@
     <Compile Include="Hooks\MouseHook.cs" />
     <Compile Include="Hooks\WindowUpdateHook.cs" />
     <Compile Include="Logging\EventIdTraceFilter.cs" />
-    <Compile Include="UserInterface\DummyInterfaceSystem.cs" />
+    <Compile Include="UserInterface\Components\AboutComponent.cs" />
     <Compile Include="Interop\DWMWINDOWATTRIBUTE.cs" />
     <Compile Include="Interop\GWL.cs" />
     <Compile Include="Interop\HookType.cs" />
@@ -125,22 +130,21 @@
     <Compile Include="Interop\WinEventHook.cs" />
     <Compile Include="Data\IWindowListItem.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="UserInterface\IInterfaceSystem.cs" />
-    <Compile Include="UserInterface\State\BaseInterfaceState.cs" />
-    <Compile Include="UserInterface\State\FindProgramState.cs" />
+    <Compile Include="UserInterface\Components\FindProgramComponent.cs" />
+    <Compile Include="UserInterface\IGuiSystem.cs" />
+    <Compile Include="UserInterface\Components\LockWindowComponent.cs" />
+    <Compile Include="UserInterface\Components\MainWindowComponent.cs" />
+    <Compile Include="UserInterface\GuiSystem.cs" />
     <Compile Include="Data\IconGenerator.cs" />
     <Compile Include="DesignTime\FindProgram.cs" />
     <Compile Include="DesignTime\MainWindow.cs" />
     <Compile Include="DesignTime\WindowList.cs" />
     <Compile Include="Effects\GrayscaleEffect.cs" />
-    <Compile Include="UserInterface\IInterfaceState.cs" />
-    <Compile Include="UserInterface\IInterfaceStateContext.cs" />
-    <Compile Include="UserInterface\State\InitialState.cs" />
     <Compile Include="DesignTime\WindowListItem.cs" />
-    <Compile Include="UserInterface\State\LockWindowState.cs" />
-    <Compile Include="UserInterface\InterfaceSystem.cs" />
+    <Compile Include="UserInterface\Components\ToolbarComponent.cs" />
+    <Compile Include="UserInterface\Components\LockingComponent.cs" />
     <Compile Include="UserInterface\ViewType.cs" />
-    <Compile Include="UserInterface\State\WindowListState.cs" />
+    <Compile Include="UserInterface\Components\WindowListComponent.cs" />
     <Compile Include="ViewModels\AboutWindow.cs" />
     <Compile Include="ViewModels\AppToolbar.cs" />
     <Compile Include="ViewModels\FindProgram.cs" />
@@ -287,6 +291,5 @@
   <ItemGroup>
     <Resource Include="Resources\DefaultListIcon.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

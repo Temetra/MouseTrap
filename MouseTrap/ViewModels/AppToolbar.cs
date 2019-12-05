@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace MouseTrap.ViewModels
 {
-	public class AppToolbar : INotifyPropertyChanged
+	public class AppToolbar : IViewModel, INotifyPropertyChanged
 	{
 		private ViewType _currentView;
 		private bool _windowLockEnabled;
