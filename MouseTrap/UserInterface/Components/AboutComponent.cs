@@ -4,9 +4,12 @@ using System.Windows;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Responsible for the About window
+	/// </summary>
 	public interface IAboutComponent
 	{
-		// Commmands
+		// Commands
 		void ShowWindow();
 		void CloseWindow();
 	}
@@ -21,9 +24,9 @@ namespace MouseTrap.UserInterface.Components
 		{
 			if (_aboutWindow == null)
 			{
-				_aboutWindow = new AboutWindowControl
+				_aboutWindow = new Views.AboutWindow
 				{
-					DataContext = new AboutWindow
+					DataContext = new ViewModels.AboutWindow
 					{
 						Version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.Major,
 						CloseWindowCommand = new Binding.RelayCommand(CloseWindow)

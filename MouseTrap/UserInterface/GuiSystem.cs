@@ -1,6 +1,5 @@
 ﻿using MouseTrap.UserInterface.Components;
 using MouseTrap.ViewModels;
-using MouseTrap.Views;
 using System;
 using System.ComponentModel;
 
@@ -12,7 +11,7 @@ namespace MouseTrap.UserInterface
 		private Action<IViewModel> SetModeViewModel { get; set; }
 		
 		// Main window
-		private MainWindowControl _mainWindowControl;
+		private Views.MainWindow _mainWindow;
 
 		// Components
 		private readonly IToolbarComponent _toolbarComponent;
@@ -45,14 +44,14 @@ namespace MouseTrap.UserInterface
 		public void Startup()
 		{
 			// Show window
-			_mainWindowControl = new MainWindowControl();
-			_mainWindowControl.Show();
+			_mainWindow = new Views.MainWindow();
+			_mainWindow.Show();
 
 			// Initialise components
 			_toolbarComponent.SwitchView = _lockingComponent.SwitchView;
 			_toolbarComponent.RefreshWindowList = _windowListComponent.RefreshViewModel;
 			_toolbarComponent.ShowAboutWindow = _aboutComponent.ShowWindow;
-			_toolbarComponent.QuitProgram = _mainWindowControl.Close;
+			_toolbarComponent.QuitProgram = _mainWindow.Close;
 			_windowListComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_findProgramComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_lockingComponent.GetTargetHandle = _windowListComponent.GetTargetHandle;
@@ -64,11 +63,11 @@ namespace MouseTrap.UserInterface
 			SetModeViewModel += _toolbarComponent.SetModeViewModel;
 
 			// Subscribe to events
-			_mainWindowControl.Closing += MainWindowControl_Closing;
+			_mainWindow.Closing += MainWindowControl_Closing;
 
 			// Update window
 			_mainWindowComponent.SetToolbarViewModel(_toolbarComponent.GetViewModel());
-			_mainWindowControl.DataContext = _mainWindowComponent.GetViewModel();
+			_mainWindow.DataContext = _mainWindowComponent.GetViewModel();
 
 			// Switch to main state
 			_lockingComponent.SwitchView(ViewType.WindowList);
