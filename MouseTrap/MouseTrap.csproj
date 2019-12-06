@@ -100,6 +100,7 @@
     <Compile Include="Data\LiveIconGenerator.cs" />
     <Compile Include="Data\WindowDetails.cs" />
     <Compile Include="Data\WindowEnumerator.cs" />
+    <Compile Include="DesignTime\AboutWindow.cs" />
     <Compile Include="DesignTime\LockWindow.cs" />
     <Compile Include="DesignTime\Toolbar.cs" />
     <Compile Include="DesignTime\WindowListDetails.cs" />

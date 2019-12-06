@@ -4,12 +4,13 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:c="clr-namespace:MouseTrap.Controls"
-	mc:Ignorable="d"
+	xmlns:design="clr-namespace:MouseTrap.DesignTime"
 	Title="About Mouse Trap" 
 	Width="450" Height="460"
 	MinWidth="450" MinHeight="350"
 	WindowStartupLocation="CenterScreen"
-	ShowInTaskbar="False">
+	ShowInTaskbar="False"
+	mc:Ignorable="d" d:DataContext="{d:DesignInstance design:AboutWindow, IsDesignTimeCreatable=True}">
 
 	<Grid Margin="16,8,16,16">
 		<Grid.RowDefinitions>
