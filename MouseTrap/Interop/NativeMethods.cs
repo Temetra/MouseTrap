@@ -133,61 +133,11 @@ namespace MouseTrap.Interop
 		[DllImport("user32.dll")]
 		public static extern bool IsWindow(IntPtr hWnd);
 
-		[DllImport("user32.dll", SetLastError = true)]
-		internal static extern IntPtr SetWindowsHookEx(HookType hookType, HookProc lpfn, IntPtr hMod, uint dwThreadId);
-
-		[DllImport("user32.dll", SetLastError = true)]
-		internal static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-		[DllImport("user32.dll")]
-		internal static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-
-		[DllImport("user32.dll")]
-		internal static extern bool SetCursorPos(int X, int Y);
-
 		[DllImport("user32.dll")]
 		internal static extern bool ClipCursor(ref Win32Rect lpRect);
 
 		[DllImport("user32.dll")]
 		internal static extern bool ClipCursor(IntPtr lpRect);
-
-		internal static bool IsCurrentProcessElevated()
-		{
-			var id = WindowsIdentity.GetCurrent();
-			return id.Owner != id.User;
-		}
-
-		// Call IsProcessElevated first to potentially avoid this method
-		// Works by attempting to access query information, doesn't check privileges 
-		internal static bool IsElevationRequired(IntPtr handle)
-		{
-			bool result = true;
-			IntPtr processHandle = IntPtr.Zero;
-
-			try
-			{
-				// Get process handle
-				_ = GetWindowThreadProcessId(handle, out uint processId);
-				processHandle = OpenProcess(ProcessAccessFlags.QueryInformation, false, (int)processId);
-				int errorCode = Marshal.GetLastWin32Error();
-
-				// Check status
-				if (errorCode != 5 && processHandle != IntPtr.Zero)
-				{
-					// Successfully opened process handle, most likely don't need elevation
-					result = false;
-				}
-			}
-			catch (Exception)
-			{
-			}
-			finally
-			{
-				if (processHandle != IntPtr.Zero) CloseHandle(processHandle);
-			}
-
-			return result;
-		}
 
 		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);

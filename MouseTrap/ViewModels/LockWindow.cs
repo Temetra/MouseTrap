@@ -14,7 +14,6 @@ namespace MouseTrap.ViewModels
 		private double _rightOffset;
 		private double _topOffset;
 		private double _bottomOffset;
-		private bool _elevationRequired;
 		private ViewType _lockType;
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -112,16 +111,6 @@ namespace MouseTrap.ViewModels
 				_bottomOffset = value;
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BottomOffset)));
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BoundaryOffset)));
-			}
-		}
-
-		public bool ElevationRequired
-		{
-			get => _elevationRequired;
-			set
-			{
-				_elevationRequired = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ElevationRequired)));
 			}
 		}
 

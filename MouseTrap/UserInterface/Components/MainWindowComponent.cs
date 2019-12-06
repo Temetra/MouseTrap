@@ -2,6 +2,7 @@
 using MouseTrap.Core.Events;
 using MouseTrap.Data;
 using MouseTrap.ViewModels;
+using MouseTrap.Properties;
 using System;
 
 namespace MouseTrap.UserInterface.Components
@@ -25,14 +26,13 @@ namespace MouseTrap.UserInterface.Components
 		private bool _isDisposed;
 		private readonly IAppSystem _appSystem;
 		private readonly MainWindow _viewModel;
-		private bool _elevationRequired;
+		private bool _inForeground;
 
 		// Constructor
 		public MainWindowComponent(IAppSystem appSystem)
 		{
 			_appSystem = appSystem;
 			_appSystem.ForegroundChanged += AppSystem_ForegroundChanged;
-			_appSystem.ElevationCheckFailed += AppSystem_ElevationCheckFailed;
 			_viewModel = new MainWindow();
 		}
 
@@ -41,8 +41,8 @@ namespace MouseTrap.UserInterface.Components
 
 		public void SetModeViewModel(IViewModel viewModel)
 		{
-			_elevationRequired = false;
 			_viewModel.CurrentViewModel = viewModel;
+			UpdateWindowSubtitle();
 		}
 
 		public void SetToolbarViewModel(IViewModel viewModel)
@@ -53,30 +53,33 @@ namespace MouseTrap.UserInterface.Components
 		// App system event handlers
 		private void AppSystem_ForegroundChanged(object sender, ForegroundStateChangedEventArgs e)
 		{
-			if (_elevationRequired == false)
+			if (_inForeground = e.InForeground)
 			{
-				if (e.InForeground)
-				{
-					_viewModel.WindowSubtitle = "Locked";
-					AudioFeedbackGainedForeground();
-				}
-				else
-				{
-					_viewModel.WindowSubtitle = "Waiting";
-					AudioFeedbackLostForeground();
-				}
+				AudioFeedback.Play(Settings.Default.AudioFeedbackGainedForeground);
+			}
+			else
+			{
+				AudioFeedback.Play(Settings.Default.AudioFeedbackLostForeground);
+			}
+
+			UpdateWindowSubtitle();
+		}
+		
+		private void UpdateWindowSubtitle()
+		{
+			if (_viewModel.CurrentViewModel?.ViewType != ViewType.LockWindow)
+			{
+				_viewModel.WindowSubtitle = string.Empty;
+			}
+			else if (_inForeground)
+			{
+				_viewModel.WindowSubtitle = "Locked";
+			}
+			else
+			{
+				_viewModel.WindowSubtitle = "Waiting";
 			}
 		}
-
-		private void AppSystem_ElevationCheckFailed(object sender, EventArgs e)
-		{
-			_elevationRequired = true;
-			_viewModel.WindowSubtitle = "Run as admin required";
-		}
-
-		private void AudioFeedbackGainedForeground() => AudioFeedback.Play(Properties.Settings.Default.AudioFeedbackGainedForeground);
-
-		private void AudioFeedbackLostForeground() => AudioFeedback.Play(Properties.Settings.Default.AudioFeedbackLostForeground);
 
 		// IDisposable
 		~MainWindowComponent()
@@ -98,7 +101,6 @@ namespace MouseTrap.UserInterface.Components
 			{
 				// Free any other managed objects here.
 				_appSystem.ForegroundChanged -= AppSystem_ForegroundChanged;
-				_appSystem.ElevationCheckFailed -= AppSystem_ElevationCheckFailed;
 			}
 
 			// Free any unmanaged objects here.

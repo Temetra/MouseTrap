@@ -6,9 +6,6 @@ namespace MouseTrap.Core
 {
 	public class AppStateContext : IAppStateContext
 	{
-		// System state
-		public bool WeAreElevated { get; set; }
-		
 		// Context state vars
 		public IntPtr Handle { get; set; }
 		public uint ProcessId { get; set; }
@@ -29,6 +26,5 @@ namespace MouseTrap.Core
 		public Action<string> SendTitleChange { get; set; }
 		public Action<Dimensions> SendDimensionsChange { get; set; }
 		public Action<bool> SendForegroundChange { get; set; }
-		public Action SendElevationRequired { get; set; }
 	}
 }

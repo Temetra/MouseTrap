@@ -89,16 +89,9 @@
 									<Setter Property="Source" Value="{StaticResource 1f4c2-open_file_folder}" />
 									<Setter Property="Margin" Value="20"/>
 								</DataTrigger>
-								<MultiDataTrigger>
-									<MultiDataTrigger.Conditions>
-										<Condition Binding="{Binding WindowIsFocused, Mode=OneWay}" Value="True"/>
-										<Condition Binding="{Binding ElevationRequired, Mode=OneWay}" Value="False"/>
-									</MultiDataTrigger.Conditions>
+								<DataTrigger Value="True" Binding="{Binding WindowIsFocused, Mode=OneWay}">
 									<Setter Property="Source" Value="{StaticResource ForegroundIndicator}" />
 									<Setter Property="Margin" Value="0"/>
-								</MultiDataTrigger>
-								<DataTrigger Binding="{Binding ElevationRequired, Mode=OneWay}" Value="True">
-									<Setter Property="Source" Value="{StaticResource Shield}" />
 								</DataTrigger>
 							</Style.Triggers>
 						</Style>
@@ -196,22 +189,5 @@
 				Adjust Padding
 			</TextBlock>
 		</Grid>
-
-		<!-- Message -->
-		<Border Grid.Row="3" Margin="0" Padding="8" Background="{StaticResource Warning.Background}">
-			<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource Warning.Foreground}">
-				To lock this window, you must run Mouse Trap as administrator.
-			</TextBlock>
-			<Border.Style>
-				<Style TargetType="{x:Type Border}">
-					<Setter Property="Visibility" Value="Collapsed" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding ElevationRequired, Mode=OneWay}" Value="True">
-							<Setter Property="Visibility" Value="Visible" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</Border.Style>
-		</Border>
 	</Grid>
 </UserControl>

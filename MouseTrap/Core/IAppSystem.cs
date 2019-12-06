@@ -29,6 +29,5 @@ namespace MouseTrap.Core
 		event EventHandler<TitleChangedEventArgs> TitleChanged;
 		event EventHandler<DimensionsChangedEventArgs> DimensionsChanged;
 		event EventHandler<ForegroundStateChangedEventArgs> ForegroundChanged;
-		event EventHandler ElevationCheckFailed;
 	}
 }

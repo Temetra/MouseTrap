@@ -9,9 +9,6 @@ namespace MouseTrap.Core
 	/// </summary>
 	public interface IAppStateContext
 	{
-		// System state
-		bool WeAreElevated { get; }
-		
 		// Context state vars
 		IntPtr Handle { get; set; }
 		uint ProcessId { get; set; }
@@ -54,10 +51,5 @@ namespace MouseTrap.Core
 		/// True if window is in foreground
 		/// </summary>
 		Action<bool> SendForegroundChange { get; }
-
-		/// <summary>
-		/// Sent if target window needs elevation for mouse hook
-		/// </summary>
-		Action SendElevationRequired { get; }
 	}
 }

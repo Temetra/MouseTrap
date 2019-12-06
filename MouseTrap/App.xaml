@@ -8,7 +8,6 @@
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Hourglass.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Arrow.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/ForegroundIndicator.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Shield.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Hamdots.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/AppIcon.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/1f4bb-computer.xaml" />

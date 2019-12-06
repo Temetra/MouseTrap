@@ -13,7 +13,6 @@
 			TopOffset = 6;
 			BottomOffset = 8;
 			WindowIsFocused = false;
-			ElevationRequired = true;
 		}
 	}
 }

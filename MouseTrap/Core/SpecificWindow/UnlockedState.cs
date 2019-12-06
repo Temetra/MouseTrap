@@ -16,12 +16,6 @@ namespace MouseTrap.Core.SpecificWindow
 				return;
 			}
 
-			// Check elevation
-			if (context.WeAreElevated == false && NativeMethods.IsElevationRequired(handle))
-			{
-				context.SendElevationRequired();
-			}
-
 			// Get process id
 			_ = NativeMethods.GetWindowThreadProcessId(handle, out uint procId);
 
@@ -41,7 +35,6 @@ namespace MouseTrap.Core.SpecificWindow
 				Right = rect.Right,
 				Bottom = rect.Bottom
 			};
-			Dimensions region = context.Padding + context.WindowDimensions;
 
 			// Update state
 			context.Handle = handle;
@@ -52,7 +45,7 @@ namespace MouseTrap.Core.SpecificWindow
 			// Start hooks
 			context.ForegroundHook.StartHook();
 			context.WindowHook.StartHook(handle);
-			context.MouseHook.StartHook(region);
+			context.MouseHook.StartHook(context.Padding + context.WindowDimensions);
 
 			// Update UI
 			context.SendLockStateChange();

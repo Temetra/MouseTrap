@@ -32,7 +32,6 @@ namespace MouseTrap.UserInterface.Components
 			_appSystem.ForegroundChanged += AppSystem_ForegroundChanged;
 			_appSystem.TitleChanged += AppSystem_TitleChanged;
 			_appSystem.DimensionsChanged += AppSystem_DimensionsChanged;
-			_appSystem.ElevationCheckFailed += AppSystem_ElevationCheckFailed;
 
 			// Create view model
 			_viewModel = new LockWindow
@@ -60,7 +59,6 @@ namespace MouseTrap.UserInterface.Components
 			_viewModel.WindowHeight = 0;
 			_viewModel.WindowWidth = 0;
 			_viewModel.WindowIsFocused = false;
-			_viewModel.ElevationRequired = false;
 			_viewModel.LockType = lockType;
 		}
 
@@ -102,11 +100,6 @@ namespace MouseTrap.UserInterface.Components
 			_viewModel.WindowWidth = e.Dimensions.Width;
 		}
 
-		private void AppSystem_ElevationCheckFailed(object sender, EventArgs e)
-		{
-			_viewModel.ElevationRequired = true;
-		}
-
 		// IDisposable
 		~LockWindowComponent()
 		{
@@ -130,7 +123,6 @@ namespace MouseTrap.UserInterface.Components
 				_appSystem.ForegroundChanged -= AppSystem_ForegroundChanged;
 				_appSystem.TitleChanged -= AppSystem_TitleChanged;
 				_appSystem.DimensionsChanged -= AppSystem_DimensionsChanged;
-				_appSystem.ElevationCheckFailed -= AppSystem_ElevationCheckFailed;
 			}
 
 			// Free any unmanaged objects here.

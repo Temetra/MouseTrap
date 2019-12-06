@@ -10,12 +10,6 @@ namespace MouseTrap.Core.SpecificPath
 		{
 			if (context.ProcessPath == processPath)
 			{
-				// Check elevation
-				if (context.WeAreElevated == false && NativeMethods.IsElevationRequired(handle))
-				{
-					context.SendElevationRequired();
-				}
-
 				// Get title
 				string title = NativeMethods.GetWindowText(handle);
 
@@ -28,7 +22,6 @@ namespace MouseTrap.Core.SpecificPath
 					Right = rect.Right,
 					Bottom = rect.Bottom
 				};
-				Dimensions region = context.Padding + context.WindowDimensions;
 
 				// Update state
 				context.Handle = handle;
@@ -37,7 +30,7 @@ namespace MouseTrap.Core.SpecificPath
 
 				// Start hooks
 				context.WindowHook.StartHook(handle);
-				context.MouseHook.StartHook(region);
+				context.MouseHook.StartHook(context.Padding + context.WindowDimensions);
 				context.MouseHook.RestrictMouseToRegion();
 
 				// Update UI

@@ -19,7 +19,6 @@ namespace MouseTrap.Core
 
 			_stateContext = new AppStateContext
 			{
-				WeAreElevated = NativeMethods.IsCurrentProcessElevated(),
 				PathModeLocksToHandle = false,
 				ForegroundHook = fgHook,
 				WindowHook = winHook,
@@ -29,8 +28,7 @@ namespace MouseTrap.Core
 				SendPathChange = (path) => PathChanged.Invoke(this, new Events.PathChangedEventArgs { Path = path }),
 				SendTitleChange = (title) => TitleChanged.Invoke(this, new Events.TitleChangedEventArgs { Title = title }),
 				SendDimensionsChange = (dimensions) => DimensionsChanged.Invoke(this, new Events.DimensionsChangedEventArgs { Dimensions = dimensions }),
-				SendForegroundChange = (inForeground) => ForegroundChanged.Invoke(this, new Events.ForegroundStateChangedEventArgs { InForeground = inForeground }),
-				SendElevationRequired = () => ElevationCheckFailed.Invoke(this, EventArgs.Empty)
+				SendForegroundChange = (inForeground) => ForegroundChanged.Invoke(this, new Events.ForegroundStateChangedEventArgs { InForeground = inForeground })
 			};
 
 			fgHook.ForegroundWindowChanged += ForegroundHook_ForegroundWindowChanged;
@@ -45,7 +43,6 @@ namespace MouseTrap.Core
 		public event EventHandler<Events.TitleChangedEventArgs> TitleChanged;
 		public event EventHandler<Events.DimensionsChangedEventArgs> DimensionsChanged;
 		public event EventHandler<Events.ForegroundStateChangedEventArgs> ForegroundChanged;
-		public event EventHandler ElevationCheckFailed;
 
 		// Accessor for lock state
 		public bool IsLocked

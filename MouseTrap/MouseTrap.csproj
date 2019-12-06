@@ -116,16 +116,12 @@
     <Compile Include="Hooks\IForegroundWindowHook.cs" />
     <Compile Include="Hooks\IMouseHook.cs" />
     <Compile Include="Hooks\IWindowUpdateHook.cs" />
-    <Compile Include="Hooks\MouseHook.cs" />
     <Compile Include="Hooks\WindowUpdateHook.cs" />
     <Compile Include="Logging\EventIdTraceFilter.cs" />
     <Compile Include="UserInterface\Components\AboutComponent.cs" />
     <Compile Include="Interop\DWMWINDOWATTRIBUTE.cs" />
     <Compile Include="Interop\GWL.cs" />
-    <Compile Include="Interop\HookType.cs" />
-    <Compile Include="Interop\MSLLHOOKSTRUCT.cs" />
     <Compile Include="Interop\NativeMethods.cs" />
-    <Compile Include="Interop\Point.cs" />
     <Compile Include="Interop\ProcessAccessFlags.cs" />
     <Compile Include="Interop\Win32Rect.cs" />
     <Compile Include="Interop\WindowStylesEx.cs" />
@@ -211,10 +207,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\AppIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Shield.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
