@@ -76,7 +76,7 @@ namespace MouseTrap.UserInterface.Components
 			SetLockableState?.Invoke(_viewModel.IsFilenameValid);
 		}
 
-		private bool CheckProcessPath(string filepath)
+		private static bool CheckProcessPath(string filepath)
 		{
 			// Basic check for string
 			if (string.IsNullOrEmpty(filepath)) return false;

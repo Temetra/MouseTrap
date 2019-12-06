@@ -1,6 +1,6 @@
 ﻿namespace MouseTrap.Interop
 {
-	internal enum GWL : int
+	internal enum GWLFlags : int
 	{
 		GWL_WNDPROC = (-4),
 		GWL_HINSTANCE = (-6),

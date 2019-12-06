@@ -61,7 +61,7 @@ namespace MouseTrap.Interop
 
 		internal static WindowStylesEx GetWindowStyleEx(IntPtr hWnd)
 		{
-			return (WindowStylesEx)GetWindowLong(hWnd, (int)GWL.GWL_EXSTYLE).ToInt32();
+			return (WindowStylesEx)GetWindowLong(hWnd, (int)GWLFlags.GWL_EXSTYLE).ToInt32();
 		}
 
 		[DllImport("user32.dll", SetLastError = true)]

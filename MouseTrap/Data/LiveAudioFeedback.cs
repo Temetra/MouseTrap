@@ -51,7 +51,7 @@ namespace MouseTrap.Data
 				{
 					sound.Play();
 				}
-				catch (TimeoutException)
+				catch (System.ServiceProcess.TimeoutException)
 				{
 					Logging.Logger.Write($"Timed out attempting to play {source}");
 				}

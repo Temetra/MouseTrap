@@ -7,7 +7,7 @@ namespace MouseTrap.Interop
 		private IntPtr _eventHookInstance;
 
 		// Ensure delegate is not collected prematurely
-		private WinEventDelegate _winEventDelegate;
+		private readonly WinEventDelegate _winEventDelegate;
 
 		protected bool HasEventHookInstance { get => (_eventHookInstance != IntPtr.Zero); }
 
