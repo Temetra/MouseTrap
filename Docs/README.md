@@ -54,12 +54,6 @@ If the window is closed, the application returns to the list or file tab.
 
 <p align="center"><img src="img/lock-screen-foreground.png"></p>
 
-### Administrator notification
-
-If the target program is run as administrator, Mouse Trap will also need to be run as administrator for the mouse hook to work. The lock screen will warn you if you need to take action.
-
-<p align="center"><img src="img/lock-screen-warning.png"></p>
-
 ### Hotkeys
 
 * <kbd>F1</kbd> - Choose Window
