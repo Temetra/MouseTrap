@@ -5,10 +5,11 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:c="clr-namespace:MouseTrap.Controls"
 	xmlns:design="clr-namespace:MouseTrap.DesignTime"
-	Title="About Mouse Trap" 
+	Title="About - Mouse Trap" 
 	Width="450" Height="460"
 	MinWidth="450" MinHeight="350"
-	WindowStartupLocation="CenterScreen"
+	WindowStartupLocation="CenterOwner"
+	ResizeMode="NoResize"
 	ShowInTaskbar="False"
 	mc:Ignorable="d" d:DataContext="{d:DesignInstance design:AboutWindow, IsDesignTimeCreatable=True}">
 

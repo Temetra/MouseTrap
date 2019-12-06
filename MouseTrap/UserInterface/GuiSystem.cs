@@ -113,7 +113,6 @@ namespace MouseTrap.UserInterface
 		private void MainWindowControl_Closing(object sender, CancelEventArgs e)
 		{
 			_lockingComponent.Unlock();
-			_aboutComponent.CloseWindow();
 		}
 	}
 }

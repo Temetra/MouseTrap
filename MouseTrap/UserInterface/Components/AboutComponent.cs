@@ -1,5 +1,4 @@
-﻿using MouseTrap.ViewModels;
-using MouseTrap.Views;
+﻿using System;
 using System.Windows;
 
 namespace MouseTrap.UserInterface.Components
@@ -11,7 +10,6 @@ namespace MouseTrap.UserInterface.Components
 	{
 		// Commands
 		void ShowWindow();
-		void CloseWindow();
 	}
 
 	public class AboutComponent : IAboutComponent
@@ -26,6 +24,7 @@ namespace MouseTrap.UserInterface.Components
 			{
 				_aboutWindow = new Views.AboutWindow
 				{
+					Owner = Application.Current.MainWindow,
 					DataContext = new ViewModels.AboutWindow
 					{
 						Version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.Major,
@@ -42,12 +41,6 @@ namespace MouseTrap.UserInterface.Components
 			}
 		}
 
-		// Component interface
-		public void CloseWindow()
-		{
-			CloseWindow(null);
-		}
-
 		// Command handler
 		private void CloseWindow(object parameter)
 		{
@@ -55,7 +48,7 @@ namespace MouseTrap.UserInterface.Components
 		}
 
 		// Event handler
-		private void AboutWindow_Closed(object sender, System.EventArgs e)
+		private void AboutWindow_Closed(object sender, EventArgs e)
 		{
 			_aboutWindow = null;
 		}
