@@ -5,12 +5,15 @@ using System;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Responsible for the Lock Window view
+	/// </summary>
 	public interface ILockWindowComponent : IDisposable
 	{
 		// Queries
 		IViewModel GetViewModel();
 
-		// Commmands
+		// Commands
 		void RefreshViewModel(ViewType lockType);
 	}
 	

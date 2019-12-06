@@ -1,4 +1,4 @@
-﻿using MouseTrap.UserInterface;
+﻿using MouseTrap.ViewModels;
 
 namespace MouseTrap.DesignTime
 {

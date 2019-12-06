@@ -1,9 +1,13 @@
 ﻿using MouseTrap.Core;
 using MouseTrap.Core.Events;
+using MouseTrap.ViewModels;
 using System;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Handles the view state of the UI, and is responsible for locking
+	/// </summary>
 	public interface ILockingComponent : IDisposable
 	{
 		// System query delegates
@@ -16,7 +20,7 @@ namespace MouseTrap.UserInterface.Components
 		ViewType GetPreviousView();
 		ViewType GetLockType();
 
-		// Commmands
+		// Commands
 		void SwitchView(ViewType viewType);
 		void Unlock();
 	}

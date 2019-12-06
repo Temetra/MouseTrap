@@ -6,6 +6,9 @@ using System.IO;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Responsible for the Find Program view
+	/// </summary>
 	public interface IFindProgramComponent
 	{
 		// System query delegates
@@ -15,7 +18,7 @@ namespace MouseTrap.UserInterface.Components
 		string GetTargetPath();
 		IViewModel GetViewModel();
 
-		// Commmands
+		// Commands
 		void RefreshViewModel(ViewType previousView, ViewType lastLockType, string suggestedPath);
 	}
 

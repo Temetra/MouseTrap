@@ -5,6 +5,9 @@ using System.Windows.Controls;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Handles main window toolbar interaction
+	/// </summary>
 	public interface IToolbarComponent
 	{
 		// System query delegates
@@ -16,8 +19,8 @@ namespace MouseTrap.UserInterface.Components
 		// Queries
 		IViewModel GetViewModel();
 
-		// Commmands
-		void ModeSwitched(ViewType viewType);
+		// Commands
+		void SetModeViewModel(IViewModel viewModel);
 		void WindowLockEnabled(bool state);
 	}
 
@@ -49,9 +52,9 @@ namespace MouseTrap.UserInterface.Components
 
 		public IViewModel GetViewModel() => _viewModel;
 
-		public void ModeSwitched(ViewType viewType)
+		public void SetModeViewModel(IViewModel viewModel)
 		{
-			_viewModel.CurrentView = viewType;
+			_viewModel.CurrentView = viewModel.ViewType;
 		}
 
 		public void WindowLockEnabled(bool state)

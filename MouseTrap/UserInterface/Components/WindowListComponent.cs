@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Responsible for the Window List view
+	/// </summary>
 	public interface IWindowListComponent
 	{
 		// System query delegates
@@ -15,7 +18,7 @@ namespace MouseTrap.UserInterface.Components
 		string GetTargetPath();
 		IViewModel GetViewModel();
 
-		// Commmands
+		// Commands
 		void RefreshViewModel();
 	}
 	

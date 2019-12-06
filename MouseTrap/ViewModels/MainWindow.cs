@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace MouseTrap.ViewModels
 {
-	public class MainWindow : IViewModel, INotifyPropertyChanged
+	public class MainWindow : INotifyPropertyChanged
 	{
 		private IViewModel _toolbarViewModel;
 		private IViewModel _currentViewModel;

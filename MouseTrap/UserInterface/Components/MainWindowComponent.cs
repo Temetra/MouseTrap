@@ -6,12 +6,15 @@ using System;
 
 namespace MouseTrap.UserInterface.Components
 {
+	/// <summary>
+	/// Responsible for the main window and audio feedback
+	/// </summary>
 	public interface IMainWindowComponent : IDisposable
 	{
 		// Queries
-		IViewModel GetViewModel();
+		MainWindow GetViewModel();
 
-		// Commmands
+		// Commands
 		void SetModeViewModel(IViewModel viewModel);
 		void SetToolbarViewModel(IViewModel viewModel);
 	}
@@ -34,7 +37,7 @@ namespace MouseTrap.UserInterface.Components
 		}
 
 		// Component interface
-		public IViewModel GetViewModel() => _viewModel;
+		public MainWindow GetViewModel() => _viewModel;
 
 		public void SetModeViewModel(IViewModel viewModel)
 		{

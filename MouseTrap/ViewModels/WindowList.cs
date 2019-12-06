@@ -21,6 +21,8 @@ namespace MouseTrap.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public ViewType ViewType => ViewType.WindowList;
+		
 		public ICollectionView DataSource { get; }
 
 		public ObservableCollection<IWindowListItem> WindowListItems

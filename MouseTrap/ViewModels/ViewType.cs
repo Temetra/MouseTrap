@@ -1,4 +1,4 @@
-namespace MouseTrap.UserInterface
+namespace MouseTrap.ViewModels
 {
 	public enum ViewType
 	{

@@ -146,7 +146,7 @@
     <Compile Include="DesignTime\WindowListItem.cs" />
     <Compile Include="UserInterface\Components\ToolbarComponent.cs" />
     <Compile Include="UserInterface\Components\LockingComponent.cs" />
-    <Compile Include="UserInterface\ViewType.cs" />
+    <Compile Include="ViewModels\ViewType.cs" />
     <Compile Include="UserInterface\Components\WindowListComponent.cs" />
     <Compile Include="ViewModels\AboutWindow.cs" />
     <Compile Include="ViewModels\AppToolbar.cs" />

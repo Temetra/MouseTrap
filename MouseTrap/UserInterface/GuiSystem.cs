@@ -1,12 +1,16 @@
 ﻿using MouseTrap.UserInterface.Components;
 using MouseTrap.ViewModels;
 using MouseTrap.Views;
+using System;
 using System.ComponentModel;
 
 namespace MouseTrap.UserInterface
 {
 	public class GuiSystem : IGuiSystem
 	{
+		// Delegates
+		private Action<IViewModel> SetModeViewModel { get; set; }
+		
 		// Main window
 		private MainWindowControl _mainWindowControl;
 
@@ -55,6 +59,10 @@ namespace MouseTrap.UserInterface
 			_lockingComponent.GetTargetPath = _findProgramComponent.GetTargetPath;
 			_lockingComponent.SetViewModel = SetViewModel;
 
+			// Configure delegates
+			SetModeViewModel += _mainWindowComponent.SetModeViewModel;
+			SetModeViewModel += _toolbarComponent.SetModeViewModel;
+
 			// Subscribe to events
 			_mainWindowControl.Closing += MainWindowControl_Closing;
 
@@ -98,8 +106,7 @@ namespace MouseTrap.UserInterface
 
 			if (viewModel != null)
 			{
-				_mainWindowComponent.SetModeViewModel(viewModel);
-				_toolbarComponent.ModeSwitched(targetViewType);
+				SetModeViewModel?.Invoke(viewModel);
 			}
 		}
 

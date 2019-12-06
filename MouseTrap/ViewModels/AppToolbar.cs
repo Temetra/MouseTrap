@@ -1,4 +1,3 @@
-using MouseTrap.UserInterface;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -15,6 +14,8 @@ namespace MouseTrap.ViewModels
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		public ViewType ViewType => ViewType.None;
 
 		public ViewType CurrentView
 		{

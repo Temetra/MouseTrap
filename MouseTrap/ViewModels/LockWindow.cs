@@ -1,5 +1,4 @@
 ﻿using MouseTrap.Data;
-using MouseTrap.UserInterface;
 using System.ComponentModel;
 
 namespace MouseTrap.ViewModels
@@ -20,6 +19,8 @@ namespace MouseTrap.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public ViewType ViewType => ViewType.LockWindow;
+		
 		public string Title
 		{
 			get => _title;

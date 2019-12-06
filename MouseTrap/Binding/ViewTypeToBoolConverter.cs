@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using MouseTrap.UserInterface;
+using MouseTrap.ViewModels;
 
 namespace MouseTrap.Binding
 {

@@ -11,6 +11,8 @@ namespace MouseTrap.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public ViewType ViewType => ViewType.FindProgram;
+
 		public string Filename
 		{
 			get => _filename;
