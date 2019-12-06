@@ -94,10 +94,8 @@ namespace MouseTrap.UserInterface
 				break;
 				case ViewType.FindProgram:
 				{
-					var previousView = _lockingComponent.GetPreviousView();
-					var lastLockType = _lockingComponent.GetLockType();
 					var suggestedPath = _windowListComponent.GetTargetPath();
-					_findProgramComponent.RefreshViewModel(previousView, lastLockType, suggestedPath);
+					_findProgramComponent.RefreshViewModel(suggestedPath);
 					viewModel = _findProgramComponent.GetViewModel();
 				}
 				break;

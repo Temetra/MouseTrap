@@ -19,7 +19,7 @@ namespace MouseTrap.UserInterface.Components
 		IViewModel GetViewModel();
 
 		// Commands
-		void RefreshViewModel(ViewType previousView, ViewType lastLockType, string suggestedPath);
+		void RefreshViewModel(string suggestedPath);
 	}
 
 	public class FindProgramComponent : IFindProgramComponent
@@ -45,11 +45,9 @@ namespace MouseTrap.UserInterface.Components
 
 		public IViewModel GetViewModel() => _viewModel;
 
-		public void RefreshViewModel(ViewType previousView, ViewType lastLockType, string suggestedPath)
+		public void RefreshViewModel(string suggestedPath)
 		{
-			bool useSuggestedPath = previousView == ViewType.WindowList && lastLockType != ViewType.FindProgram;
-			string path = useSuggestedPath ? suggestedPath : null;
-			_viewModel.Filename = string.IsNullOrEmpty(path) ? _viewModel.Filename : path;
+			_viewModel.Filename = string.IsNullOrEmpty(suggestedPath) ? _viewModel.Filename : suggestedPath;
 		}
 
 		// Command handler

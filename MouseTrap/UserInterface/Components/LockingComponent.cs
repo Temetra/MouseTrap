@@ -16,8 +16,6 @@ namespace MouseTrap.UserInterface.Components
 		Action<ViewType> SetViewModel { get; set; }
 
 		// Queries
-		ViewType GetCurrentView();
-		ViewType GetPreviousView();
 		ViewType GetLockType();
 
 		// Commands
@@ -46,8 +44,6 @@ namespace MouseTrap.UserInterface.Components
 		public Func<string> GetTargetPath { get; set; }
 		public Action<ViewType> SetViewModel { get; set; }
 
-		public ViewType GetCurrentView() => _currentView;
-		public ViewType GetPreviousView() => _previousView;
 		public ViewType GetLockType() => _lockType;
 
 		public void SwitchView(ViewType viewType)
