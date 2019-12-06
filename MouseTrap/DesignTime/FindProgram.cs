@@ -1,6 +1,4 @@
-﻿using MouseTrap.ViewModels;
-
-namespace MouseTrap.DesignTime
+﻿namespace MouseTrap.DesignTime
 {
 	public class FindProgram : ViewModels.FindProgram
 	{

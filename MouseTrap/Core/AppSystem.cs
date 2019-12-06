@@ -1,8 +1,7 @@
-﻿using MouseTrap.Data;
+﻿using MouseTrap.Core.AppState;
+using MouseTrap.Data;
 using MouseTrap.Hooks;
-using MouseTrap.Core.AppState;
 using System;
-using MouseTrap.Interop;
 
 namespace MouseTrap.Core
 {

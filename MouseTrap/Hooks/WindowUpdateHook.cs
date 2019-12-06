@@ -1,8 +1,7 @@
 ﻿using MouseTrap.Data;
+using MouseTrap.Hooks.Events;
 using MouseTrap.Interop;
 using System;
-using System.Diagnostics;
-using MouseTrap.Hooks.Events;
 
 namespace MouseTrap.Hooks
 {

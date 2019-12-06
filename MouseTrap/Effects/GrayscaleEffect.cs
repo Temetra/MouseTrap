@@ -19,7 +19,7 @@ namespace MouseTrap.Effects
 			UpdateShaderValue(InputProperty);
 		}
 
-  		public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(GrayscaleEffect), 0);
+		public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(GrayscaleEffect), 0);
 
 		public Brush Input
 		{

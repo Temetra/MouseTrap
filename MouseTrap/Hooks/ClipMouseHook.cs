@@ -37,7 +37,7 @@ namespace MouseTrap.Hooks
 		{
 			_region = new Win32Rect
 			{
-				Left = (int) region.Left,
+				Left = (int)region.Left,
 				Top = (int)region.Top,
 				Right = (int)region.Right,
 				Bottom = (int)region.Bottom

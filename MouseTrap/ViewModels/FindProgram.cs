@@ -1,5 +1,4 @@
-﻿using MouseTrap.UserInterface;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 
 namespace MouseTrap.ViewModels

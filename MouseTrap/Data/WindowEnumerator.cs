@@ -1,7 +1,6 @@
 ﻿using MouseTrap.Interop;
 using System;
 using System.Diagnostics;
-using System.IO;
 
 namespace MouseTrap.Data
 {
