@@ -32,7 +32,8 @@ namespace MouseTrap.Data
 					};
 
 					IconCache.Set(processPath, result, policy);
-					
+					Logging.Logger.Write($"Added {processPath} to cache");
+
 					return result;
 				}
 			}
