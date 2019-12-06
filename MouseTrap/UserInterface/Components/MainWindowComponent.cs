@@ -1,8 +1,8 @@
 ﻿using MouseTrap.Core;
 using MouseTrap.Core.Events;
+using MouseTrap.Data;
 using MouseTrap.ViewModels;
 using System;
-using System.Diagnostics;
 
 namespace MouseTrap.UserInterface.Components
 {
@@ -71,11 +71,9 @@ namespace MouseTrap.UserInterface.Components
 			_viewModel.WindowSubtitle = "Run as admin required";
 		}
 
-		[Conditional("DEBUG")]
-		private void AudioFeedbackGainedForeground() => System.Media.SystemSounds.Beep.Play();
+		private void AudioFeedbackGainedForeground() => AudioFeedback.Play(Properties.Settings.Default.AudioFeedbackGainedForeground);
 
-		[Conditional("DEBUG")]
-		private void AudioFeedbackLostForeground() => System.Media.SystemSounds.Asterisk.Play();
+		private void AudioFeedbackLostForeground() => AudioFeedback.Play(Properties.Settings.Default.AudioFeedbackLostForeground);
 
 		// IDisposable
 		~MainWindowComponent()

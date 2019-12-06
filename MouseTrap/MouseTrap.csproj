@@ -95,8 +95,10 @@
     <Compile Include="Core\SpecificWindow\LockedState.cs" />
     <Compile Include="Core\SpecificWindow\UnlockedState.cs" />
     <Compile Include="Core\SpecificWindow\WaitingState.cs" />
+    <Compile Include="Data\AudioFeedback.cs" />
     <Compile Include="Data\Dimensions.cs" />
     <Compile Include="Data\IWindowEnumerator.cs" />
+    <Compile Include="Data\LiveAudioFeedback.cs" />
     <Compile Include="Data\LiveIconGenerator.cs" />
     <Compile Include="Data\WindowDetails.cs" />
     <Compile Include="Data\WindowEnumerator.cs" />
