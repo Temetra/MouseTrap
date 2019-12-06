@@ -72,8 +72,8 @@ namespace MouseTrap.UserInterface.Components
 				// Lock
 				if (viewType == ViewType.LockWindow)
 				{
-					if (_lockType == ViewType.WindowList) _appSystem.Lock(GetTargetHandle());
-					else _appSystem.Lock(GetTargetPath());
+					if (_lockType == ViewType.WindowList && GetTargetHandle != default) _appSystem.Lock(GetTargetHandle());
+					else if (GetTargetPath != default) _appSystem.Lock(GetTargetPath());
 				}
 			}
 		}
@@ -93,7 +93,7 @@ namespace MouseTrap.UserInterface.Components
 			if (targetViewType == ViewType.LockWindow) _lockType = _previousView;
 
 			// Update view
-			SetViewModel(targetViewType);
+			SetViewModel?.Invoke(targetViewType);
 		}
 
 		// AppSystem events
