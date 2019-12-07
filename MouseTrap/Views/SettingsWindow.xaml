@@ -53,11 +53,25 @@
 
 				<TextBlock Style="{StaticResource Subheading}">Foreground audio alert</TextBlock>
 				<TextBlock>Change the sound played when the target window has been found</TextBlock>
-				<ComboBox IsEditable="True" ItemsSource="{Binding SoundSources}" Text="{Binding ForegroundSource}"></ComboBox>
+				<ComboBox x:Name="ForegroundBox" 
+					PreviewDragEnter="ComboBox_PreviewDragOver" 
+					PreviewDragOver="ComboBox_PreviewDragOver"
+					PreviewDrop="ComboBox_PreviewDrop"
+					IsEditable="True" 
+					ItemsSource="{Binding SoundSources}" 
+					Text="{Binding ForegroundSource}"
+					/>
 
 				<TextBlock Style="{StaticResource Subheading}">Background audio alert</TextBlock>
 				<TextBlock>Change the sound played when the target window has been lost</TextBlock>
-				<ComboBox IsEditable="True" ItemsSource="{Binding SoundSources}" Text="{Binding BackgroundSource}"></ComboBox>
+				<ComboBox x:Name="BackgroundBox" 
+					PreviewDragEnter="ComboBox_PreviewDragOver" 
+					PreviewDragOver="ComboBox_PreviewDragOver"
+					PreviewDrop="ComboBox_PreviewDrop"
+					IsEditable="True" 
+					ItemsSource="{Binding SoundSources}" 
+					Text="{Binding BackgroundSource}" 
+					/>
 			</StackPanel>
 		</ScrollViewer>
 		<Button 
