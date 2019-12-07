@@ -25,7 +25,7 @@ namespace MouseTrap.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
         public string AudioFeedbackGainedForeground {
             get {
                 return ((string)(this["AudioFeedbackGainedForeground"]));
@@ -37,7 +37,7 @@ namespace MouseTrap.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
         public string AudioFeedbackLostForeground {
             get {
                 return ((string)(this["AudioFeedbackLostForeground"]));

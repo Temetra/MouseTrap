@@ -31,6 +31,7 @@ namespace MouseTrap
 		private IFindProgramComponent findProgramComponent;
 		private ILockWindowComponent lockWindowComponent;
 		private IAboutComponent aboutComponent;
+		private ISettingsComponent settingsComponent;
 		private IMainWindowComponent mainWindowComponent;
 
 		// Constructor
@@ -57,10 +58,11 @@ namespace MouseTrap
 			findProgramComponent = new FindProgramComponent();
 			lockWindowComponent = new LockWindowComponent(appSystem);
 			aboutComponent = new AboutComponent();
+			settingsComponent = new SettingsComponent();
 			mainWindowComponent = new MainWindowComponent(appSystem);
 
 			// Create gui system
-			guiSystem = new GuiSystem(lockingComponent, toolbarComponent, windowListComponent, findProgramComponent, lockWindowComponent, aboutComponent, mainWindowComponent);
+			guiSystem = new GuiSystem(lockingComponent, toolbarComponent, windowListComponent, findProgramComponent, lockWindowComponent, aboutComponent, settingsComponent, mainWindowComponent);
 			guiSystem.Startup();
 		}
 

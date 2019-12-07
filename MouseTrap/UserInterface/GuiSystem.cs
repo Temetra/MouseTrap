@@ -19,6 +19,7 @@ namespace MouseTrap.UserInterface
 		private readonly IFindProgramComponent _findProgramComponent;
 		private readonly ILockWindowComponent _lockWindowComponent;
 		private readonly IAboutComponent _aboutComponent;
+		private readonly ISettingsComponent _settingsComponent;
 		private readonly IMainWindowComponent _mainWindowComponent;
 		private readonly ILockingComponent _lockingComponent;
 
@@ -29,6 +30,7 @@ namespace MouseTrap.UserInterface
 			IFindProgramComponent findProgramComponent,
 			ILockWindowComponent lockWindowComponent,
 			IAboutComponent aboutComponent,
+			ISettingsComponent settingsComponent,
 			IMainWindowComponent mainWindowComponent)
 		{
 			_lockingComponent = lockingComponent;
@@ -37,6 +39,7 @@ namespace MouseTrap.UserInterface
 			_findProgramComponent = findProgramComponent;
 			_lockWindowComponent = lockWindowComponent;
 			_aboutComponent = aboutComponent;
+			_settingsComponent = settingsComponent;
 			_mainWindowComponent = mainWindowComponent;
 		}
 
@@ -51,6 +54,7 @@ namespace MouseTrap.UserInterface
 			_toolbarComponent.SwitchView = _lockingComponent.SwitchView;
 			_toolbarComponent.RefreshWindowList = _windowListComponent.RefreshViewModel;
 			_toolbarComponent.ShowAboutWindow = _aboutComponent.ShowWindow;
+			_toolbarComponent.ShowSettingsWindow = _settingsComponent.ShowWindow;
 			_toolbarComponent.QuitProgram = _mainWindow.Close;
 			_windowListComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_findProgramComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;

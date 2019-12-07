@@ -118,6 +118,7 @@
 							</Binding>
 						</MenuItem.IsEnabled>
 					</MenuItem>
+					<MenuItem Header="Settings" Command="{Binding MenuSettingsCommand}" />
 					<MenuItem Header="About" Command="{Binding MenuAboutCommand}" />
 					<MenuItem Header="Exit" InputGestureText="Alt+F4" Command="{Binding MenuQuitCommand}" />
 				</ContextMenu>

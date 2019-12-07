@@ -42,6 +42,7 @@ namespace MouseTrap.ViewModels
 		public ICommand ToggleLockCommand { get; set; }
 		public ICommand RefreshListCommand { get; set; }
 		public ICommand ShowContextMenuCommand { get; set; }
+		public ICommand MenuSettingsCommand { get; set; }
 		public ICommand MenuAboutCommand { get; set; }
 		public ICommand MenuQuitCommand { get; set; }
 	}

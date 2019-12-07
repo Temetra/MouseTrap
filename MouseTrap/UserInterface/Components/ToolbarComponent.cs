@@ -13,6 +13,7 @@ namespace MouseTrap.UserInterface.Components
 		// System query delegates
 		Action<ViewType> SwitchView { get; set; }
 		Action RefreshWindowList { get; set; }
+		Action ShowSettingsWindow { get; set; }
 		Action ShowAboutWindow { get; set; }
 		Action QuitProgram { get; set; }
 
@@ -38,6 +39,7 @@ namespace MouseTrap.UserInterface.Components
 				FindProgramCommand = new Binding.RelayCommand(p => SwitchView?.Invoke(ViewType.FindProgram)),
 				ToggleLockCommand = new Binding.RelayCommand(p => SwitchView?.Invoke(ViewType.LockWindow)),
 				RefreshListCommand = new Binding.RelayCommand(p => RefreshWindowList?.Invoke()),
+				MenuSettingsCommand = new Binding.RelayCommand(p => ShowSettingsWindow?.Invoke()),
 				MenuAboutCommand = new Binding.RelayCommand(p => ShowAboutWindow?.Invoke()),
 				MenuQuitCommand = new Binding.RelayCommand(p => QuitProgram?.Invoke()),
 				ShowContextMenuCommand = new Binding.RelayCommand(ShowContextMenu)
@@ -47,6 +49,7 @@ namespace MouseTrap.UserInterface.Components
 		// Component interface
 		public Action<ViewType> SwitchView { get; set; }
 		public Action RefreshWindowList { get; set; }
+		public Action ShowSettingsWindow { get; set; }
 		public Action ShowAboutWindow { get; set; }
 		public Action QuitProgram { get; set; }
 

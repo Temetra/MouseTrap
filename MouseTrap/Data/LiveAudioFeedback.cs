@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Media;
 using System.Runtime.Caching;
@@ -8,6 +9,21 @@ namespace MouseTrap.Data
 	public static class LiveAudioFeedback
 	{
 		private static readonly MemoryCache SoundCache = MemoryCache.Default;
+
+		private static readonly IDictionary<string, SystemSound> StockSounds = new Dictionary<string, SystemSound>
+		{
+			{ "None", null },
+			{ "Asterisk", SystemSounds.Asterisk },
+			{ "Beep", SystemSounds.Beep },
+			{ "Exclamation", SystemSounds.Exclamation },
+			{ "Hand", SystemSounds.Hand },
+			{ "Question", SystemSounds.Question },
+		};
+
+		public static ICollection<string> GetStockSounds()
+		{
+			return StockSounds.Keys;
+		}
 
 		public static void Play(string source)
 		{
@@ -21,26 +37,14 @@ namespace MouseTrap.Data
 
 		private static bool PlaySystemSound(string source)
 		{
-			switch (source)
+			if (StockSounds.ContainsKey(source))
 			{
-				case "Asterisk":
-					SystemSounds.Asterisk.Play();
-					return true;
-				case "Beep":
-					SystemSounds.Beep.Play();
-					return true;
-				case "Exclamation":
-					SystemSounds.Exclamation.Play();
-					return true;
-				case "Hand":
-					SystemSounds.Hand.Play();
-					return true;
-				case "Question":
-					SystemSounds.Question.Play();
-					return true;
-				default:
-					return false;
+				Logging.Logger.Write($"Playing {source}");
+				StockSounds[source]?.Play();
+				return true;
 			}
+
+			return false;
 		}
 
 		private static void PlayCustomSound(string source)
@@ -49,6 +53,7 @@ namespace MouseTrap.Data
 			{
 				try
 				{
+					Logging.Logger.Write($"Playing {source}");
 					sound.Play();
 				}
 				catch (System.ServiceProcess.TimeoutException)

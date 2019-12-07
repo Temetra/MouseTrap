@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -105,6 +105,7 @@
     <Compile Include="Data\WindowEnumerator.cs" />
     <Compile Include="DesignTime\AboutWindow.cs" />
     <Compile Include="DesignTime\LockWindow.cs" />
+    <Compile Include="DesignTime\SettingsWindow.cs" />
     <Compile Include="DesignTime\Toolbar.cs" />
     <Compile Include="DesignTime\WindowListDetails.cs" />
     <Compile Include="Hooks\ClipMouseHook.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Data\IWindowListItem.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="UserInterface\Components\FindProgramComponent.cs" />
+    <Compile Include="UserInterface\Components\SettingsComponent.cs" />
     <Compile Include="UserInterface\IGuiSystem.cs" />
     <Compile Include="UserInterface\Components\LockWindowComponent.cs" />
     <Compile Include="UserInterface\Components\MainWindowComponent.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="DesignTime\WindowListItem.cs" />
     <Compile Include="UserInterface\Components\ToolbarComponent.cs" />
     <Compile Include="UserInterface\Components\LockingComponent.cs" />
+    <Compile Include="ViewModels\SettingsWindow.cs" />
     <Compile Include="ViewModels\ViewType.cs" />
     <Compile Include="UserInterface\Components\WindowListComponent.cs" />
     <Compile Include="ViewModels\AboutWindow.cs" />
@@ -163,6 +166,9 @@
     </Compile>
     <Compile Include="Views\LockWindowView.xaml.cs">
       <DependentUpon>LockWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowListView.xaml.cs">
       <DependentUpon>WindowListView.xaml</DependentUpon>
@@ -244,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LockWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

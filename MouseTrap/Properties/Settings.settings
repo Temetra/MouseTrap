@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="AudioFeedbackGainedForeground" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">None</Value>
     </Setting>
     <Setting Name="AudioFeedbackLostForeground" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">None</Value>
     </Setting>
   </Settings>
 </SettingsFile>
