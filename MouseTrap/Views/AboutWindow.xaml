@@ -53,7 +53,7 @@
 				</TextBlock>
 				<TextBlock Margin="0">
 					<c:Link Uri="https://pixabay.com/en/mouse-mouse-icon-symbol-pc-cursor-2487884/">denizimo01 on Pixabay</c:Link> for the logo.
-					<LineBreak /><c:Link Uri="https://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030">Patterns - WPF Apps With The Model-View-ViewModel Design Pattern</c:Link> for RelayCommand class.
+					<LineBreak /><c:Link Uri="https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/february/patterns-wpf-apps-with-the-model-view-viewmodel-design-pattern">Patterns - WPF Apps With The Model-View-ViewModel Design Pattern</c:Link> for RelayCommand class.
 					<LineBreak /><c:Link Uri="https://github.com/twitter/twemoji">Twitter Emoji glyphs</c:Link> (modified) licensed under <c:Link Uri="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</c:Link>.
 				</TextBlock>
 			</StackPanel>
