@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Documents;
 
 namespace MouseTrap.Controls
@@ -19,7 +20,30 @@ namespace MouseTrap.Controls
 
 		private void ExtLink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
 		{
-			Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+			try
+			{
+				if (e.Uri.Scheme == "control")
+				{
+					Process.Start(e.Uri.Scheme, e.Uri.LocalPath);
+				}
+				else
+				{
+					Process.Start(e.Uri.OriginalString);
+				}
+			}
+			catch (InvalidOperationException ex)
+			{
+				Logging.Logger.Write($"{ex.Message}");
+			}
+			catch (FileNotFoundException ex)
+			{
+				Logging.Logger.Write($"{ex.Message}");
+			}
+			catch (System.ComponentModel.Win32Exception ex)
+			{
+				Logging.Logger.Write($"{ex.Message}");
+			}
+
 			e.Handled = true;
 		}
 	}

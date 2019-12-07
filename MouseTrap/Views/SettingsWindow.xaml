@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:c="clr-namespace:MouseTrap.Controls"
 	xmlns:design="clr-namespace:MouseTrap.DesignTime"
 	Title="Settings - Mouse Trap" 
 	Width="450" Height="380"
@@ -32,6 +33,10 @@
 						<Setter Property="FontWeight" Value="Medium"/>
 						<Setter Property="Margin" Value="0,16,0,8"/>
 					</Style>
+					<Style x:Key="Description" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseText}">
+						<Setter Property="Margin" Value="0,0,0,16"/>
+						<Setter Property="Foreground" Value="Gray"/>
+					</Style>
 					<Style BasedOn="{StaticResource BaseText}" TargetType="{x:Type TextBlock}" />
 					<Style TargetType="{x:Type ComboBox}">
 						<Setter Property="FontSize" Value="14" />
@@ -51,8 +56,9 @@
 
 				<TextBlock Style="{StaticResource Heading}">Settings</TextBlock>
 
-				<TextBlock Style="{StaticResource Subheading}">Foreground audio alert</TextBlock>
-				<TextBlock>Change the sound played when the target window has been found</TextBlock>
+				<TextBlock Style="{StaticResource Subheading}">Audio feedback</TextBlock>
+
+				<TextBlock>Change the sound when the cursor has locked to the window</TextBlock>
 				<ComboBox x:Name="ForegroundBox" 
 					PreviewDragEnter="ComboBox_PreviewDragOver" 
 					PreviewDragOver="ComboBox_PreviewDragOver"
@@ -62,8 +68,7 @@
 					Text="{Binding ForegroundSource}"
 					/>
 
-				<TextBlock Style="{StaticResource Subheading}">Background audio alert</TextBlock>
-				<TextBlock>Change the sound played when the target window has been lost</TextBlock>
+				<TextBlock>Change the sound when the lock has ended</TextBlock>
 				<ComboBox x:Name="BackgroundBox" 
 					PreviewDragEnter="ComboBox_PreviewDragOver" 
 					PreviewDragOver="ComboBox_PreviewDragOver"
@@ -72,6 +77,10 @@
 					ItemsSource="{Binding SoundSources}" 
 					Text="{Binding BackgroundSource}" 
 					/>
+
+				<TextBlock Style="{StaticResource Description}">System event sounds must first be set in the 
+					<c:Link Uri="control:/name Microsoft.Sound /page Sounds">Sound Control Panel</c:Link>. 
+					Alternatively, type the path or drag a wave file into the text box.</TextBlock>
 			</StackPanel>
 		</ScrollViewer>
 		<Button 
