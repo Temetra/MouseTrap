@@ -78,6 +78,7 @@ namespace MouseTrap.UserInterface.Components
 		{
 			_settingsWindow = null;
 			Properties.Settings.Default.Save();
+			Application.Current.MainWindow.Focus();
 		}
 	}
 }

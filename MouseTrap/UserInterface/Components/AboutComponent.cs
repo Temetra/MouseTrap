@@ -51,6 +51,7 @@ namespace MouseTrap.UserInterface.Components
 		private void AboutWindow_Closed(object sender, EventArgs e)
 		{
 			_aboutWindow = null;
+			Application.Current.MainWindow.Focus();
 		}
 	}
 }
