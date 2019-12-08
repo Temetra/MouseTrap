@@ -8,7 +8,7 @@
 		xmlns:views="clr-namespace:MouseTrap.Views"
 		xmlns:design="clr-namespace:MouseTrap.DesignTime"
 		mc:Ignorable="d"
-		Width="500" Height="380"
+		Width="500" Height="390"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="CanMinimize" 
 		d:DataContext="{d:DesignInstance design:MainWindow, IsDesignTimeCreatable=True}"
