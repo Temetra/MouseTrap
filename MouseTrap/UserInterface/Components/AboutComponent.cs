@@ -24,7 +24,6 @@ namespace MouseTrap.UserInterface.Components
 			{
 				_aboutWindow = new Views.AboutWindow
 				{
-					Owner = Application.Current.MainWindow,
 					DataContext = new ViewModels.AboutWindow
 					{
 						Version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.Major,
@@ -51,7 +50,6 @@ namespace MouseTrap.UserInterface.Components
 		private void AboutWindow_Closed(object sender, EventArgs e)
 		{
 			_aboutWindow = null;
-			Application.Current.MainWindow.Focus();
 		}
 	}
 }

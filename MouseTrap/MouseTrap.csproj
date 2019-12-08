@@ -108,6 +108,7 @@
     <Compile Include="DesignTime\SettingsWindow.cs" />
     <Compile Include="DesignTime\Toolbar.cs" />
     <Compile Include="DesignTime\WindowListDetails.cs" />
+    <Compile Include="Extensions\ForEachIEnumerableExtension.cs" />
     <Compile Include="Hooks\ClipMouseHook.cs" />
     <Compile Include="Hooks\Events\DimensionsChangedEventArgs.cs" />
     <Compile Include="Core\Events\ForegroundStateChangedEventArgs.cs" />

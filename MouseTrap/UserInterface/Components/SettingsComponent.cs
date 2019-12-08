@@ -38,7 +38,6 @@ namespace MouseTrap.UserInterface.Components
 				// Create window
 				_settingsWindow = new Views.SettingsWindow
 				{
-					Owner = Application.Current.MainWindow,
 					DataContext = _viewModel
 				};
 
@@ -78,7 +77,6 @@ namespace MouseTrap.UserInterface.Components
 		{
 			_settingsWindow = null;
 			Properties.Settings.Default.Save();
-			Application.Current.MainWindow.Focus();
 		}
 	}
 }

@@ -1,9 +1,12 @@
 ﻿using MouseTrap.Core;
 using MouseTrap.Core.Events;
 using MouseTrap.Data;
-using MouseTrap.ViewModels;
 using MouseTrap.Properties;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 
 namespace MouseTrap.UserInterface.Components
 {
@@ -12,12 +15,14 @@ namespace MouseTrap.UserInterface.Components
 	/// </summary>
 	public interface IMainWindowComponent : IDisposable
 	{
-		// Queries
-		MainWindow GetViewModel();
+		// System query delegates
+		Action Unlock { get; set; }
 
 		// Commands
-		void SetModeViewModel(IViewModel viewModel);
-		void SetToolbarViewModel(IViewModel viewModel);
+		void ShowWindow();
+		void CloseWindow();
+		void SetModeViewModel(ViewModels.IViewModel viewModel);
+		void SetToolbarViewModel(ViewModels.IViewModel viewModel);
 	}
 	
 	public class MainWindowComponent : IMainWindowComponent
@@ -25,7 +30,8 @@ namespace MouseTrap.UserInterface.Components
 		// Fields
 		private bool _isDisposed;
 		private readonly IAppSystem _appSystem;
-		private readonly MainWindow _viewModel;
+		private readonly ViewModels.MainWindow _viewModel;
+		private Views.MainWindow _mainWindow;
 		private bool _inForeground;
 
 		// Constructor
@@ -33,19 +39,35 @@ namespace MouseTrap.UserInterface.Components
 		{
 			_appSystem = appSystem;
 			_appSystem.ForegroundChanged += AppSystem_ForegroundChanged;
-			_viewModel = new MainWindow();
+			_viewModel = new ViewModels.MainWindow();
 		}
 
 		// Component interface
-		public MainWindow GetViewModel() => _viewModel;
+		public Action Unlock { get; set; }
 
-		public void SetModeViewModel(IViewModel viewModel)
+		public void ShowWindow()
+		{
+			if (_mainWindow == null)
+			{
+				_mainWindow = new Views.MainWindow { DataContext = _viewModel };
+				_mainWindow.Closing += MainWindow_Closing;
+				_mainWindow.StateChanged += MainWindow_StateChanged;
+				_mainWindow.Show();
+			}
+		}
+
+		public void CloseWindow()
+		{
+			_mainWindow?.Close();
+		}
+
+		public void SetModeViewModel(ViewModels.IViewModel viewModel)
 		{
 			_viewModel.CurrentViewModel = viewModel;
 			UpdateWindowSubtitle();
 		}
 
-		public void SetToolbarViewModel(IViewModel viewModel)
+		public void SetToolbarViewModel(ViewModels.IViewModel viewModel)
 		{
 			_viewModel.ToolbarViewModel = viewModel;
 		}
@@ -67,7 +89,7 @@ namespace MouseTrap.UserInterface.Components
 		
 		private void UpdateWindowSubtitle()
 		{
-			if (_viewModel.CurrentViewModel?.ViewType != ViewType.LockWindow)
+			if (_viewModel.CurrentViewModel?.ViewType != ViewModels.ViewType.LockWindow)
 			{
 				_viewModel.WindowSubtitle = string.Empty;
 			}
@@ -78,6 +100,33 @@ namespace MouseTrap.UserInterface.Components
 			else
 			{
 				_viewModel.WindowSubtitle = "Waiting";
+			}
+		}
+
+		// Event handlers
+		private void MainWindow_Closing(object sender, CancelEventArgs e)
+		{
+			Application.Current.Windows
+				.OfType<Window>()
+				.Where(window => window != _mainWindow)
+				.ForEach(window => window.Close());
+			
+			Unlock?.Invoke();
+		}
+
+		private void MainWindow_StateChanged(object sender, EventArgs e)
+		{
+			var windows = Application.Current.Windows
+				.OfType<Window>()
+				.Where(window => window != _mainWindow);
+
+			if (_mainWindow.WindowState == WindowState.Minimized)
+			{
+				windows.ForEach(window => window.Hide());
+			}
+			else if (_mainWindow.WindowState == WindowState.Normal)
+			{
+				windows.ForEach(window => window.Show());
 			}
 		}
 

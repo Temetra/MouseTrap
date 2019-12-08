@@ -1,7 +1,6 @@
 ﻿using MouseTrap.UserInterface.Components;
 using MouseTrap.ViewModels;
 using System;
-using System.ComponentModel;
 
 namespace MouseTrap.UserInterface
 {
@@ -9,9 +8,6 @@ namespace MouseTrap.UserInterface
 	{
 		// Delegates
 		private Action<IViewModel> SetModeViewModel { get; set; }
-		
-		// Main window
-		private Views.MainWindow _mainWindow;
 
 		// Components
 		private readonly IToolbarComponent _toolbarComponent;
@@ -47,15 +43,15 @@ namespace MouseTrap.UserInterface
 		public void Startup()
 		{
 			// Show window
-			_mainWindow = new Views.MainWindow();
-			_mainWindow.Show();
+			_mainWindowComponent.ShowWindow();
 
 			// Initialise components
+			_mainWindowComponent.Unlock = _lockingComponent.Unlock;
 			_toolbarComponent.SwitchView = _lockingComponent.SwitchView;
 			_toolbarComponent.RefreshWindowList = _windowListComponent.RefreshViewModel;
 			_toolbarComponent.ShowAboutWindow = _aboutComponent.ShowWindow;
 			_toolbarComponent.ShowSettingsWindow = _settingsComponent.ShowWindow;
-			_toolbarComponent.QuitProgram = _mainWindow.Close;
+			_toolbarComponent.QuitProgram = _mainWindowComponent.CloseWindow;
 			_windowListComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_findProgramComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_lockingComponent.GetTargetHandle = _windowListComponent.GetTargetHandle;
@@ -66,12 +62,8 @@ namespace MouseTrap.UserInterface
 			SetModeViewModel += _mainWindowComponent.SetModeViewModel;
 			SetModeViewModel += _toolbarComponent.SetModeViewModel;
 
-			// Subscribe to events
-			_mainWindow.Closing += MainWindowControl_Closing;
-
 			// Update window
 			_mainWindowComponent.SetToolbarViewModel(_toolbarComponent.GetViewModel());
-			_mainWindow.DataContext = _mainWindowComponent.GetViewModel();
 
 			// Switch to main state
 			_lockingComponent.SwitchView(ViewType.WindowList);
@@ -109,12 +101,6 @@ namespace MouseTrap.UserInterface
 			{
 				SetModeViewModel?.Invoke(viewModel);
 			}
-		}
-
-		// Main window events
-		private void MainWindowControl_Closing(object sender, CancelEventArgs e)
-		{
-			_lockingComponent.Unlock();
 		}
 	}
 }
