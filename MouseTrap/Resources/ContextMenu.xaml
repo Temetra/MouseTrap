@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:s="clr-namespace:System;assembly=mscorlib">
+	<Style TargetType="ContextMenu">
+		<Setter Property="BorderBrush" Value="{StaticResource ContextMenu.BorderBrush}"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Margin" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ContextMenu">
+					<Border BorderThickness="{TemplateBinding Border.BorderThickness}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="ContextMenuBorder">
+						<ScrollViewer Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=FrameworkElement, ResourceId=MenuScrollViewer}}" Name="ContextMenuScrollViewer" Margin="0" Grid.ColumnSpan="2">
+							<Grid>
+								<Canvas Width="0" Height="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+									<Rectangle Fill="{x:Null}" Name="OpaqueRect" Width="Auto" Height="Auto" />
+								</Canvas>
+								<ItemsPresenter Name="ItemsPresenter" Margin="{TemplateBinding Control.Padding}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" KeyboardNavigation.DirectionalNavigation="Cycle" />
+							</Grid>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="ScrollViewer.CanContentScroll" SourceName="ContextMenuScrollViewer">
+							<Setter Property="Canvas.Top" TargetName="OpaqueRect">
+								<Setter.Value>
+									<Binding Path="VerticalOffset" ElementName="ContextMenuScrollViewer" />
+								</Setter.Value>
+							</Setter>
+							<Setter Property="Canvas.Left" TargetName="OpaqueRect">
+								<Setter.Value>
+									<Binding Path="HorizontalOffset" ElementName="ContextMenuScrollViewer" />
+								</Setter.Value>
+							</Setter>
+							<Trigger.Value>
+								<s:Boolean>False</s:Boolean>
+							</Trigger.Value>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

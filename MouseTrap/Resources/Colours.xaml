@@ -18,5 +18,9 @@
 	<SolidColorBrush x:Key="MenuButton.PressedBorder" Color="#FF33A4FF" />
 	<SolidColorBrush x:Key="Warning.Background" Color="#FFFEBD38" />
 	<SolidColorBrush x:Key="Warning.Foreground" Color="Black" />
+	<SolidColorBrush x:Key="ContextMenu.BorderBrush" Color="#FF707070" />
+	<SolidColorBrush x:Key="MenuItem.IsHighlighted.Foreground" Color="White" />
+	<SolidColorBrush x:Key="MenuItem.IsHighlighted.Background" Color="#FF0078D7" />
+	<SolidColorBrush x:Key="MenuItem.IsHighlighted.BorderBrush" Color="#FF0078D7" />
 	<Pen x:Key="Icon.Outline" Thickness="4" Brush="Black"/>
 </ResourceDictionary>

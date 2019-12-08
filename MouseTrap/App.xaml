@@ -1,10 +1,12 @@
 ﻿<Application x:Class="MouseTrap.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Application.Resources>
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Colours.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/ContextMenu.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/MenuItem.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Hourglass.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Arrow.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/ForegroundIndicator.xaml" />
