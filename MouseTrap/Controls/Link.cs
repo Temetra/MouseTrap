@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Navigation;
 
 namespace MouseTrap.Controls
 {
@@ -9,7 +12,13 @@ namespace MouseTrap.Controls
 	{
 		public Link()
 		{
-			RequestNavigate += ExtLink_RequestNavigate;
+			RequestNavigate += Link_RequestNavigate;
+			ContextMenu = new ContextMenu();
+			ContextMenu.Items.Add(new MenuItem
+			{
+				Header = "Copy",
+				Command = new Binding.RelayCommand(CopyLinkToClipboard)
+			});
 		}
 
 		public Uri Uri
@@ -18,7 +27,7 @@ namespace MouseTrap.Controls
 			set => NavigateUri = value;
 		}
 
-		private void ExtLink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+		private void Link_RequestNavigate(object sender, RequestNavigateEventArgs e)
 		{
 			try
 			{
@@ -45,6 +54,11 @@ namespace MouseTrap.Controls
 			}
 
 			e.Handled = true;
+		}
+
+		private void CopyLinkToClipboard(object parameter)
+		{
+			Clipboard.SetText(NavigateUri.OriginalString);
 		}
 	}
 }
