@@ -67,7 +67,7 @@
 					Text="{Binding ForegroundSource}"
 					/>
 
-				<TextBlock>Change the sound when the lock has ended</TextBlock>
+				<TextBlock>Change the sound when the cursor has been unlocked</TextBlock>
 				<ComboBox x:Name="BackgroundBox" 
 					PreviewDragEnter="ComboBox_PreviewDragOver" 
 					PreviewDragOver="ComboBox_PreviewDragOver"
@@ -79,7 +79,7 @@
 
 				<TextBlock Style="{StaticResource Description}">System event sounds must first be set in the 
 					<c:Link Uri="control:/name Microsoft.Sound /page Sounds">Sound Control Panel</c:Link>. 
-					Alternatively, type the path or drag a wave file into the text box.</TextBlock>
+					Alternatively, type a path or drag a wave file into the text box.</TextBlock>
 			</StackPanel>
 		</ScrollViewer>
 		<Button 
