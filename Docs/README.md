@@ -9,7 +9,7 @@ Mouse Trap restricts the mouse cursor to the area of a specific window.
 
 Full-screen games typically capture the mouse, preventing it from leaving the game area. Sometimes they don't, and clicking or using the mouse wheel can result in the window losing focus, or scrolling in a different window.
 
-Some game examples are; Morrowind, Oblivion, Skyrim, Fallout 3, Fallout: New Vegas and Fallout 4. It can also benefit windowed games and programs where leaving the area is undesirable.
+Games that benefit from this application include Morrowind, Oblivion, Skyrim, Fallout 3, Fallout: New Vegas and Fallout 4. It can also work well for windowed games and programs where leaving the window area is undesirable.
 
 Particularly useful for dual-monitor setups, but can be used for any number of displays greater than zero.
 
@@ -50,7 +50,7 @@ Once the lock is enabled, the mouse will be limited to the boundaries of the win
 
 An indicator appears when the window has focus. The mouse is now locked to the window. To cancel the lock, switch to another window (<kbd>Alt</kbd>+<kbd>Tab</kbd>); or the window can be closed.
 
-If the window is closed, the application returns to the list or file tab.
+If the window is closed, the application returns to the Choose Window view. If the Find Program mode was used, the application continues looking for a matching window.
 
 <p align="center"><img src="img/lock-screen-foreground.png"></p>
 
