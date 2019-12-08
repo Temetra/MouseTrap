@@ -8,7 +8,6 @@
 	Title="About - Mouse Trap" 
 	Width="450" Height="460"
 	MinWidth="450" MinHeight="350"
-	WindowStartupLocation="CenterOwner"
 	ResizeMode="NoResize"
 	ShowInTaskbar="False"
 	mc:Ignorable="d" d:DataContext="{d:DesignInstance design:AboutWindow, IsDesignTimeCreatable=True}">

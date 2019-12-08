@@ -22,6 +22,7 @@ namespace MouseTrap.UserInterface.Components
 		{
 			if (_aboutWindow == null)
 			{
+				// Create window
 				_aboutWindow = new Views.AboutWindow
 				{
 					DataContext = new ViewModels.AboutWindow
@@ -31,6 +32,12 @@ namespace MouseTrap.UserInterface.Components
 					}
 				};
 
+				// Center on main window
+				var mainWindow = Application.Current.MainWindow;
+				_aboutWindow.Top = mainWindow.Top + (mainWindow.Height - _aboutWindow.Height) / 2;
+				_aboutWindow.Left = mainWindow.Left + (mainWindow.Width - _aboutWindow.Width) / 2;
+
+				// Bind events and show window
 				_aboutWindow.Closed += AboutWindow_Closed;
 				_aboutWindow.Show();
 			}

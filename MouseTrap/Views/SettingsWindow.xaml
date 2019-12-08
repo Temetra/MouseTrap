@@ -8,7 +8,6 @@
 	Title="Settings - Mouse Trap" 
 	Width="450" Height="380"
 	ResizeMode="NoResize"
-	WindowStartupLocation="CenterOwner"
 	ShowInTaskbar="False"
 	mc:Ignorable="d" d:DataContext="{d:DesignInstance design:SettingsWindow, IsDesignTimeCreatable=True}">
 

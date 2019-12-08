@@ -41,6 +41,11 @@ namespace MouseTrap.UserInterface.Components
 					DataContext = _viewModel
 				};
 
+				// Center on main window
+				var mainWindow = Application.Current.MainWindow;
+				_settingsWindow.Top = mainWindow.Top + (mainWindow.Height - _settingsWindow.Height) / 2;
+				_settingsWindow.Left = mainWindow.Left + (mainWindow.Width - _settingsWindow.Width) / 2;
+
 				// Bind events and show window
 				_settingsWindow.Closed += SettingsWindow_Closed;
 				_settingsWindow.Show();
