@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Runtime.Caching;
 using System.Windows;
 using System.Windows.Interop;
@@ -19,28 +20,27 @@ namespace MouseTrap.Data
 				// Return cached value
 				return result;
 			}
-			else if (processPath != null && processPath.Length > 0 && System.IO.File.Exists(processPath))
+			else if (CheckPathIsValid(processPath))
 			{
 				// Get icon and cache before returning
-				try
+				using (var ico = Icon.ExtractAssociatedIcon(processPath))
 				{
-					using (var ico = Icon.ExtractAssociatedIcon(processPath))
-					{
-						result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-						AddToCache(processPath, result);
-
-						return result;
-					}
-				}
-				catch (UriFormatException)
-				{
-					AddToCache(processPath, DefaultIcon);
+					result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+					AddToCache(processPath, result);
+					return result;
 				}
 			}
 
+
 			// Not found, return default icon
 			return DefaultIcon;
+		}
+
+		private static bool CheckPathIsValid(string path)
+		{
+			return !string.IsNullOrWhiteSpace(path) &&	// Not null or empty
+				!path.StartsWith("\\") &&				// Not UNC path
+				File.Exists(path);						// File exists
 		}
 
 		private static void AddToCache(string processPath, BitmapSource result)
