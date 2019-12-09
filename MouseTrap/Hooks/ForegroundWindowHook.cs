@@ -77,7 +77,7 @@ namespace MouseTrap.Hooks
 		[Conditional("DEBUG")]
 		private void LogWinEventCallback(WinEventConstant eventType, string className, string currentTitle)
 		{
-			Logging.Logger.Write($"{eventType},{className},{currentTitle},{_lastTitle}");
+			Logging.Logger.DebugWrite($"{eventType},{className},{currentTitle},{_lastTitle}");
 		}
 	}
 }

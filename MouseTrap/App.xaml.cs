@@ -5,6 +5,7 @@ using MouseTrap.UserInterface;
 using MouseTrap.UserInterface.Components;
 using System;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace MouseTrap
 {
@@ -39,6 +40,7 @@ namespace MouseTrap
 		{
 			Startup += App_Startup;
 			Exit += App_Exit;
+			DispatcherUnhandledException += App_DispatcherUnhandledException;
 		}
 
 		// Event handlers
@@ -68,10 +70,17 @@ namespace MouseTrap
 
 		private void App_Exit(object sender, ExitEventArgs e)
 		{
-			Logging.Logger.Write();
+			Logging.Logger.DebugWrite();
 			foregroundWindowHook.StopHook();
 			windowUpdateHook.StopHook();
 			mouseHook.StopHook();
+		}
+
+		private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+		{
+			Logging.Logger.Write(e.Exception.Message);
+			Logging.Logger.Write(e.Exception.StackTrace);
+			Views.ErrorWindow.ShowWindow();
 		}
 
 		// IDisposable

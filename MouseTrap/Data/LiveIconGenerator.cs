@@ -29,7 +29,7 @@ namespace MouseTrap.Data
 						result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
 						AddToCache(processPath, result);
-						Logging.Logger.Write($"Added {processPath} to cache");
+						Logging.Logger.DebugWrite($"Added {processPath} to cache");
 
 						return result;
 					}

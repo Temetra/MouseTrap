@@ -8,6 +8,11 @@ namespace MouseTrap.Logging
 		private static readonly Lazy<TraceSource> _source = new Lazy<TraceSource>(() => new TraceSource("MouseTrap"));
 
 		[Conditional("DEBUG")]
+		public static void DebugWrite(string msg = "")
+		{
+			Write(msg);
+		}
+
 		public static void Write(string msg = "")
 		{
 			StackFrame frame = new StackFrame(1);

@@ -42,15 +42,15 @@ namespace MouseTrap.Controls
 			}
 			catch (InvalidOperationException ex)
 			{
-				Logging.Logger.Write($"{ex.Message}");
+				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
 			catch (FileNotFoundException ex)
 			{
-				Logging.Logger.Write($"{ex.Message}");
+				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
 			catch (System.ComponentModel.Win32Exception ex)
 			{
-				Logging.Logger.Write($"{ex.Message}");
+				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
 
 			e.Handled = true;

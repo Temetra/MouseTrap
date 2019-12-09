@@ -39,7 +39,7 @@ namespace MouseTrap.Data
 		{
 			if (StockSounds.ContainsKey(source))
 			{
-				Logging.Logger.Write($"Playing {source}");
+				Logging.Logger.DebugWrite($"Playing {source}");
 				StockSounds[source]?.Play();
 				return true;
 			}
@@ -53,12 +53,12 @@ namespace MouseTrap.Data
 			{
 				try
 				{
-					Logging.Logger.Write($"Playing {source}");
+					Logging.Logger.DebugWrite($"Playing {source}");
 					sound.Play();
 				}
 				catch (System.ServiceProcess.TimeoutException)
 				{
-					Logging.Logger.Write($"Timed out attempting to play {source}");
+					Logging.Logger.DebugWrite($"Timed out attempting to play {source}");
 				}
 			}
 		}
@@ -79,7 +79,7 @@ namespace MouseTrap.Data
 				};
 
 				SoundCache.Set(source, result, policy);
-				Logging.Logger.Write($"Added {source} to cache");
+				Logging.Logger.DebugWrite($"Added {source} to cache");
 
 				return result;
 			}
