@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace MouseTrap.Views
 {
@@ -20,7 +9,9 @@ namespace MouseTrap.Views
 	/// </summary>
 	public partial class ErrorWindow : Window
 	{
-		public ErrorWindow()
+		private static ErrorWindow _errorWindow;
+
+		private ErrorWindow()
 		{
 			InitializeComponent();
 		}
@@ -30,15 +21,18 @@ namespace MouseTrap.Views
 			Close();
 		}
 
-		private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+		private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
 		{
 			Process.Start(e.Uri.OriginalString);
 		}
 
 		public static void ShowWindow()
 		{
-			var window = new ErrorWindow();
-			window.ShowDialog();
+			if (_errorWindow == null)
+			{
+				_errorWindow = new ErrorWindow();
+				_errorWindow.ShowDialog();
+			}
 		}
 	}
 }
