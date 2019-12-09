@@ -67,26 +67,10 @@ namespace MouseTrap.UserInterface.Components
 		// Event handler
 		private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == nameof(_viewModel.Filename)) UpdateSystemTarget();
-		}
-
-		private void UpdateSystemTarget()
-		{
-			_viewModel.IsFilenameValid = CheckProcessPath(_viewModel.Filename);
-			SetLockableState?.Invoke(_viewModel.IsFilenameValid);
-		}
-
-		private static bool CheckProcessPath(string filepath)
-		{
-			// Basic check for string
-			if (string.IsNullOrEmpty(filepath)) return false;
-
-			// Check filename has a valid directory
-			try { if (string.IsNullOrEmpty(Path.GetDirectoryName(filepath))) return false; }
-			catch (Exception) { return false; }
-
-			// Check file exists
-			return File.Exists(filepath);
+			if (e.PropertyName == nameof(_viewModel.IsFilenameValid))
+			{
+				SetLockableState?.Invoke(_viewModel.IsFilenameValid);
+			}
 		}
 	}
 }

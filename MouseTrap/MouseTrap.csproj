@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Binding\DimensionsToThicknessConverter.cs" />
+    <Compile Include="Binding\FindProgramFilenameRule.cs" />
     <Compile Include="Binding\MergeTitleConverter.cs" />
     <Compile Include="Binding\MinimizedValueConverter.cs" />
     <Compile Include="Binding\RelayCommand.cs" />

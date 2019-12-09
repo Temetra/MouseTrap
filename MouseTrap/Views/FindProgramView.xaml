@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:binding="clr-namespace:MouseTrap.Binding"
 	xmlns:design="clr-namespace:MouseTrap.DesignTime"
 	xmlns:controls="clr-namespace:MouseTrap.Controls"
 	mc:Ignorable="d" 
@@ -45,33 +46,26 @@
 		<TextBox Grid.Row="1" Grid.Column="0" 
 				Width="Auto" Padding="4,0" Margin="0,0,8,0" 
 				FontSize="14" VerticalContentAlignment="Center" 
-				Text="{Binding Filename, UpdateSourceTrigger=PropertyChanged}" 
 				PreviewDragOver="TextBox_PreviewDragOver"
 				PreviewDragEnter="TextBox_PreviewDragOver"
-				PreviewDrop="TextBox_PreviewDrop" />
+				PreviewDrop="TextBox_PreviewDrop">
+			<TextBox.Text>
+				<Binding Path="Filename" 
+						 UpdateSourceTrigger="PropertyChanged"
+						 ValidatesOnNotifyDataErrors="True"
+						 ValidatesOnDataErrors="True"
+						 NotifyOnValidationError="True">
+					<Binding.ValidationRules>
+						<binding:FindProgramFilenameRule ValidatesOnTargetUpdated="True" />
+					</Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</TextBox>
 
 		<controls:BarButtonControl Grid.Row="1" Grid.Column="1"
 			Text="" ToolTip="Browse for program"
 			Image="{StaticResource 1f4c2-open_file_folder}"
 			Command="{Binding FindFileCommand}" />
-
-		<TextBlock Grid.Row="2" Grid.ColumnSpan="2" 
-				Margin="0,0,0,8" 
-				FontSize="16" 
-				VerticalAlignment="Center" 
-				HorizontalAlignment="Center">
-			<TextBlock.Style>
-				<Style TargetType="TextBlock">
-					<Setter Property="Text" Value="❎ Program not found" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding IsFilenameValid}" Value="True">
-							<Setter Property="FontSize" Value="16" />
-							<Setter Property="Text" Value="✅ Program found" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</TextBlock.Style>
-		</TextBlock>
 
 	</Grid>
 </UserControl>
