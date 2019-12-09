@@ -22,26 +22,37 @@ namespace MouseTrap.Data
 			else if (processPath != null && processPath.Length > 0 && System.IO.File.Exists(processPath))
 			{
 				// Get icon and cache before returning
-				using (var ico = Icon.ExtractAssociatedIcon(processPath))
+				try
 				{
-					result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-					CacheItemPolicy policy = new CacheItemPolicy
+					using (var ico = Icon.ExtractAssociatedIcon(processPath))
 					{
-						SlidingExpiration = TimeSpan.FromMinutes(10)
-					};
+						result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
-					IconCache.Set(processPath, result, policy);
-					Logging.Logger.Write($"Added {processPath} to cache");
+						AddToCache(processPath, result);
+						Logging.Logger.Write($"Added {processPath} to cache");
 
-					return result;
+						return result;
+					}
+				}
+				catch (UriFormatException fex)
+				{
+					AddToCache(processPath, DefaultIcon);
+					Logging.Logger.Write($"{fex.Message} {processPath}");
 				}
 			}
-			else
+
+			// Not found, return default icon
+			return DefaultIcon;
+		}
+
+		private static void AddToCache(string processPath, BitmapSource result)
+		{
+			CacheItemPolicy policy = new CacheItemPolicy
 			{
-				// Not found, return default icon
-				return DefaultIcon;
-			}
+				SlidingExpiration = TimeSpan.FromMinutes(10)
+			};
+
+			IconCache.Set(processPath, result, policy);
 		}
 	}
 }
