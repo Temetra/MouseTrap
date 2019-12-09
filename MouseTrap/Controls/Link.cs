@@ -29,26 +29,24 @@ namespace MouseTrap.Controls
 
 		private void Link_RequestNavigate(object sender, RequestNavigateEventArgs e)
 		{
-			try
+			string filename;
+			string arguments;
+
+			// Using a custom scheme to open the Control Panel from a link
+			// eg control:/name Microsoft.Sound /page Sounds
+			if (e.Uri.Scheme == "control")
 			{
-				if (e.Uri.Scheme == "control")
-				{
-					Process.Start(e.Uri.Scheme, e.Uri.LocalPath);
-				}
-				else
-				{
-					Process.Start(e.Uri.OriginalString);
-				}
+				filename = e.Uri.Scheme;
+				arguments = e.Uri.LocalPath;
 			}
-			catch (InvalidOperationException)
+			else
 			{
+				filename = e.Uri.OriginalString;
+				arguments = string.Empty;
 			}
-			catch (FileNotFoundException)
-			{
-			}
-			catch (System.ComponentModel.Win32Exception)
-			{
-			}
+
+			// Get the OS to open the link
+			Process.Start(filename, arguments);
 
 			e.Handled = true;
 		}
