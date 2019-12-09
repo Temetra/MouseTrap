@@ -29,15 +29,13 @@ namespace MouseTrap.Data
 						result = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
 						AddToCache(processPath, result);
-						Logging.Logger.DebugWrite($"Added {processPath} to cache");
 
 						return result;
 					}
 				}
-				catch (UriFormatException fex)
+				catch (UriFormatException)
 				{
 					AddToCache(processPath, DefaultIcon);
-					Logging.Logger.Write($"{fex.Message} {processPath}");
 				}
 			}
 

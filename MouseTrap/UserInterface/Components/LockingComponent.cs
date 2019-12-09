@@ -85,8 +85,6 @@ namespace MouseTrap.UserInterface.Components
 
 		private void PerformViewSwitch(ViewType targetViewType)
 		{
-			Logging.Logger.DebugWrite($"From {_currentView} to {targetViewType}");
-
 			// Set view state
 			_previousView = _currentView;
 			_currentView = targetViewType;

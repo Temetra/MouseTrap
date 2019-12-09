@@ -55,7 +55,6 @@ namespace MouseTrap.Hooks
 			var currentTitle = NativeMethods.GetWindowText(handle);
 			if (className == "Ghost" && _lastTitle == currentTitle)
 			{
-				LogWinEventCallback(eventType, className, currentTitle);
 				return;
 			}
 
@@ -72,12 +71,6 @@ namespace MouseTrap.Hooks
 
 			// Store title
 			_lastTitle = currentTitle;
-		}
-
-		[Conditional("DEBUG")]
-		private void LogWinEventCallback(WinEventConstant eventType, string className, string currentTitle)
-		{
-			Logging.Logger.DebugWrite($"{eventType},{className},{currentTitle},{_lastTitle}");
 		}
 	}
 }

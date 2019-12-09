@@ -40,17 +40,14 @@ namespace MouseTrap.Controls
 					Process.Start(e.Uri.OriginalString);
 				}
 			}
-			catch (InvalidOperationException ex)
+			catch (InvalidOperationException)
 			{
-				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
-			catch (FileNotFoundException ex)
+			catch (FileNotFoundException)
 			{
-				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
-			catch (System.ComponentModel.Win32Exception ex)
+			catch (System.ComponentModel.Win32Exception)
 			{
-				Logging.Logger.DebugWrite($"{ex.Message}");
 			}
 
 			e.Handled = true;

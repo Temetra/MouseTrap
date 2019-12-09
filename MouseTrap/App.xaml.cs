@@ -4,6 +4,7 @@ using MouseTrap.Hooks;
 using MouseTrap.UserInterface;
 using MouseTrap.UserInterface.Components;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -70,7 +71,6 @@ namespace MouseTrap
 
 		private void App_Exit(object sender, ExitEventArgs e)
 		{
-			Logging.Logger.DebugWrite();
 			foregroundWindowHook.StopHook();
 			windowUpdateHook.StopHook();
 			mouseHook.StopHook();
@@ -78,8 +78,11 @@ namespace MouseTrap
 
 		private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
 		{
-			Logging.Logger.Write(e.Exception.Message);
-			Logging.Logger.Write(e.Exception.StackTrace);
+			var listener = new TextWriterTraceListener("error.txt") { TraceOutputOptions = TraceOptions.Timestamp };
+			Trace.AutoFlush = true;
+			Trace.Listeners.Clear();
+			Trace.Listeners.Add(listener);
+			Trace.TraceError($"{e.Exception.Message}\n{e.Exception.StackTrace}");
 			Views.ErrorWindow.ShowWindow();
 		}
 

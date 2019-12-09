@@ -120,7 +120,6 @@
     <Compile Include="Hooks\IMouseHook.cs" />
     <Compile Include="Hooks\IWindowUpdateHook.cs" />
     <Compile Include="Hooks\WindowUpdateHook.cs" />
-    <Compile Include="Logging\EventIdTraceFilter.cs" />
     <Compile Include="UserInterface\Components\AboutComponent.cs" />
     <Compile Include="Interop\DWMWINDOWATTRIBUTE.cs" />
     <Compile Include="Interop\GWLFlags.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Interop\WinEventConstant.cs" />
     <Compile Include="Interop\WinEventHook.cs" />
     <Compile Include="Data\IWindowListItem.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="UserInterface\Components\FindProgramComponent.cs" />
     <Compile Include="UserInterface\Components\SettingsComponent.cs" />
     <Compile Include="UserInterface\IGuiSystem.cs" />
@@ -296,7 +294,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.debug.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
