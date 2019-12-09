@@ -54,6 +54,7 @@ namespace MouseTrap.UserInterface
 			_toolbarComponent.QuitProgram = _mainWindowComponent.CloseWindow;
 			_windowListComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
 			_findProgramComponent.SetLockableState = _toolbarComponent.WindowLockEnabled;
+			_findProgramComponent.GetPreviousView = _lockingComponent.GetPreviousView;
 			_lockingComponent.GetTargetHandle = _windowListComponent.GetTargetHandle;
 			_lockingComponent.GetTargetPath = _findProgramComponent.GetTargetPath;
 			_lockingComponent.SetViewModel = SetViewModel;

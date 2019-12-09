@@ -13,6 +13,7 @@ namespace MouseTrap.UserInterface.Components
 	{
 		// System query delegates
 		Action<bool> SetLockableState { get; set; }
+		Func<ViewType> GetPreviousView { get; set; }
 
 		// Queries
 		string GetTargetPath();
@@ -40,14 +41,16 @@ namespace MouseTrap.UserInterface.Components
 
 		// Component interface
 		public Action<bool> SetLockableState { get; set; }
-
+		public Func<ViewType> GetPreviousView { get; set; }
 		public string GetTargetPath() => _viewModel.Filename;
-
 		public IViewModel GetViewModel() => _viewModel;
 
 		public void RefreshViewModel(string suggestedPath)
 		{
-			_viewModel.Filename = string.IsNullOrEmpty(suggestedPath) ? _viewModel.Filename : suggestedPath;
+			if (GetPreviousView() != ViewType.LockWindow || string.IsNullOrEmpty(_viewModel.Filename))
+			{
+				_viewModel.Filename = string.IsNullOrEmpty(suggestedPath) ? _viewModel.Filename : suggestedPath;
+			}
 		}
 
 		// Command handler

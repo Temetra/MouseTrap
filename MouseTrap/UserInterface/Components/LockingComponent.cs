@@ -17,6 +17,7 @@ namespace MouseTrap.UserInterface.Components
 
 		// Queries
 		ViewType GetLockType();
+		ViewType GetPreviousView();
 
 		// Commands
 		void SwitchView(ViewType viewType);
@@ -45,6 +46,7 @@ namespace MouseTrap.UserInterface.Components
 		public Action<ViewType> SetViewModel { get; set; }
 
 		public ViewType GetLockType() => _lockType;
+		public ViewType GetPreviousView() => _previousView;
 
 		public void SwitchView(ViewType viewType)
 		{
