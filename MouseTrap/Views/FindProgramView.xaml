@@ -7,8 +7,8 @@
 	xmlns:controls="clr-namespace:MouseTrap.Controls"
 	mc:Ignorable="d" 
 	Background="{DynamicResource Main.Background}"
-	d:DataContext="{d:DesignInstance design:FindProgram, IsDesignTimeCreatable=True}" d:DesignHeight="261" d:DesignWidth="478" 
->
+	d:DataContext="{d:DesignInstance design:FindProgram, IsDesignTimeCreatable=True}" 
+	d:DesignHeight="300" d:DesignWidth="478">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style TargetType="{x:Type controls:BarButtonControl}">
@@ -28,42 +28,38 @@
 	</UserControl.Resources>
 
 	<Grid Margin="8">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="38" />
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="38"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<StackPanel>
-			<TextBlock Margin="0,0,0,8">
-				Find a program to lock:
-			</TextBlock>
+		<TextBlock Margin="0,0,0,8">
+			Find a program to lock:
+		</TextBlock>
 
-			<Grid Height="38">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="8" />
-					<ColumnDefinition Width="38" />
-				</Grid.ColumnDefinitions>
+		<TextBox Grid.Row="1" Grid.Column="0" 
+				Width="Auto" Padding="4,0" Margin="0,0,8,0" 
+				FontSize="14" VerticalContentAlignment="Center" 
+				Text="{Binding Filename, UpdateSourceTrigger=PropertyChanged}" 
+				PreviewDragOver="TextBox_PreviewDragOver"
+				PreviewDragEnter="TextBox_PreviewDragOver"
+				PreviewDrop="TextBox_PreviewDrop" />
 
-				<TextBox Grid.Row="1" Grid.Column="0" Width="Auto" Padding="4,0" FontSize="14" 
-					 PreviewDragOver="TextBox_PreviewDragOver"
-					 PreviewDragEnter="TextBox_PreviewDragOver"
-					 PreviewDrop="TextBox_PreviewDrop" 
-					 VerticalContentAlignment="Center" Text="{Binding Filename, UpdateSourceTrigger=PropertyChanged}" />
+		<controls:BarButtonControl Grid.Row="1" Grid.Column="1"
+			Text="" ToolTip="Browse for program"
+			Image="{StaticResource 1f4c2-open_file_folder}"
+			Command="{Binding FindFileCommand}" />
 
-				<controls:BarButtonControl 
-					Grid.Row="1"
-					Grid.Column="2"
-					IsTabStop="True"
-					Text=""
-					ToolTip="Browse for program"
-					Image="{StaticResource 1f4c2-open_file_folder}"
-					Command="{Binding FindFileCommand}"
-					/>
-			</Grid>
-		</StackPanel>
-		
-		<TextBlock Margin="0,0,0,8" Grid.Row="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">
+		<TextBlock Grid.Row="2" Grid.ColumnSpan="2" 
+				Margin="0,0,0,8" 
+				FontSize="16" 
+				VerticalAlignment="Center" 
+				HorizontalAlignment="Center">
 			<TextBlock.Style>
 				<Style TargetType="TextBlock">
 					<Setter Property="Text" Value="❎ Program not found" />
