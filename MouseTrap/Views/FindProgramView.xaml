@@ -13,7 +13,6 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style TargetType="{x:Type controls:BarButtonControl}">
-				<Setter Property="ImageMargin" Value="0,8" />
 				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="Background" Value="#FFDDDDDD" />
 				<Setter Property="BorderBrush" Value="#FF707070" />
@@ -31,11 +30,10 @@
 	<Grid Margin="8">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="38" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="38"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
@@ -44,8 +42,10 @@
 		</TextBlock>
 
 		<TextBox Grid.Row="1" Grid.Column="0" 
-				Width="Auto" Padding="4,0" Margin="0,0,8,0" 
-				FontSize="14" VerticalContentAlignment="Center" 
+				Width="Auto" Height="Auto" 
+				MinHeight="38" MaxHeight="200" 
+				Padding="8" Margin="0" 
+				FontSize="14" TextWrapping="Wrap"
 				PreviewDragOver="TextBox_PreviewDragOver"
 				PreviewDragEnter="TextBox_PreviewDragOver"
 				PreviewDrop="TextBox_PreviewDrop">
@@ -62,8 +62,9 @@
 			</TextBox.Text>
 		</TextBox>
 
-		<controls:BarButtonControl Grid.Row="1" Grid.Column="1"
-			Text="" ToolTip="Browse for program"
+		<controls:BarButtonControl Grid.Row="2"
+			Width="96" Height="40"
+			Text="Browse" ToolTip="Browse for program"
 			Image="{StaticResource 1f4c2-open_file_folder}"
 			Command="{Binding FindFileCommand}" />
 

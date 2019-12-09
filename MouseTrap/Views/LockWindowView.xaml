@@ -24,10 +24,16 @@
 		</Grid.RowDefinitions>
 
 		<!-- Title -->
-		<TextBlock Grid.Row="0" Margin="8,0,8,0" FontSize="24" TextTrimming="CharacterEllipsis" Text="{Binding Title}" />
+		<TextBlock Grid.Row="0" 
+				Margin="8,0,8,0" 
+				FontSize="24" TextTrimming="CharacterEllipsis" 
+				Text="{Binding Title}" />
 
 		<!-- ProcessPath -->
-		<TextBlock Grid.Row="1" Margin="8,4,8,0" TextWrapping="Wrap" Text="{Binding ProcessPath}" />
+		<TextBlock Grid.Row="1" 
+				Margin="8,4,8,0" MaxHeight="40" 
+				TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+				Text="{Binding ProcessPath}" />
 
 		<!-- Dimensions layout -->
 		<Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
