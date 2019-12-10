@@ -20,8 +20,10 @@
 				<Setter Property="Text" Value="" />
 				<Style.Resources>
 					<SolidColorBrush x:Key="Enabled.BorderBrush" Color="White"/>
-					<SolidColorBrush x:Key="Hover.BorderBrush" Color="#FFD2EBFF" />
-					<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="#FFD2EBFF" />
+					<SolidColorBrush x:Key="Hover.Background" Color="#FFCCCCCC" />
+					<SolidColorBrush x:Key="Hover.BorderBrush" Color="#FFCCCCCC" />
+					<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="#FFCCCCCC" />
+					<SolidColorBrush x:Key="Pressed.Enabled.BorderBrush" Color="Gray" />
 				</Style.Resources>
 			</Style>
 			<Style x:Key="LockButton" TargetType="{x:Type controls:BarButtonControl}">

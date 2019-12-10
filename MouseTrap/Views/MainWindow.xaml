@@ -38,7 +38,7 @@
 			</Style.Triggers>
 		</Style>
 	</Window.Style>
-	<DockPanel Margin="8">
+	<DockPanel Margin="8,0,8,8">
 		<ContentControl Content="{Binding ToolbarViewModel}" DockPanel.Dock="Top" Margin="0,0,0,8" IsTabStop="False" />
 		<ContentControl>
 			<ContentControl.Style>
