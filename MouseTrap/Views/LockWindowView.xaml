@@ -7,193 +7,239 @@
 	xmlns:design="clr-namespace:MouseTrap.DesignTime"
 	mc:Ignorable="d" 
 	Background="{DynamicResource Main.Background}"
-	d:DataContext="{d:DesignInstance design:LockWindow, IsDesignTimeCreatable=True}" d:DesignWidth="500" d:DesignHeight="350"
->
+	d:DataContext="{d:DesignInstance design:LockWindow, IsDesignTimeCreatable=True}" 
+	d:DesignHeight="300" d:DesignWidth="478">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<binding:DimensionsToThicknessConverter x:Key="DimensionsConverter" />
 			<binding:ViewTypeToBoolConverter x:Key="ViewBoolConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
-	<Grid>
+
+	<Grid Margin="8">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="32" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<!-- Title -->
 		<TextBlock Grid.Row="0" 
-				Margin="8,0,8,0" 
-				FontSize="24" TextTrimming="CharacterEllipsis" 
+				FontSize="20" TextTrimming="CharacterEllipsis" 
 				Text="{Binding Title}" />
 
 		<!-- ProcessPath -->
-		<TextBlock Grid.Row="1" 
-				Margin="8,4,8,0" MaxHeight="40" 
-				TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+		<TextBlock Grid.Row="1" MaxHeight="40"
+				FontSize="14" TextWrapping="Wrap" 
+				TextTrimming="CharacterEllipsis"
 				Text="{Binding ProcessPath}" />
 
-		<!-- Dimensions layout -->
-		<Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="136" />
-				<ColumnDefinition Width="Auto" MinWidth="26" />
-				<ColumnDefinition Width="40" />
-				<ColumnDefinition Width="25" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="25" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="48" />
-				<RowDefinition Height="48" />
-				<RowDefinition Height="16" />
-			</Grid.RowDefinitions>
-			<Grid.Resources>
-				<Style TargetType="{x:Type TextBox}">
-					<Setter Property="Width" Value="40"/>
-					<Setter Property="Height" Value="24"/>
-					<Setter Property="Margin" Value="4,8"/>
-					<Setter Property="HorizontalAlignment" Value="Left"/>
-				</Style>
-			</Grid.Resources>
+		<DockPanel Grid.Row="2" 
+				   Width="350" Margin="0,0,0,8"
+				   HorizontalAlignment="Center" 
+				   VerticalAlignment="Center" 
+				   LastChildFill="False">
 
-			<!-- Padding box display -->
-			<Border x:Name="marginBox" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
-					Margin="{Binding BoundaryOffset, Converter={StaticResource DimensionsConverter}}" 
-					BorderThickness="1" BorderBrush="#FFC3C3C3" SnapsToDevicePixels="True" />
+			<!-- Box display -->
+			<Grid DockPanel.Dock="Left">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="136" />
+					<ColumnDefinition Width="Auto" MinWidth="26" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="96" />
+					<RowDefinition Height="16" />
+				</Grid.RowDefinitions>
 
-			<!-- Foreground indicator -->
-			<Border x:Name="winBox" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
-					Margin="8" BorderThickness="2" BorderBrush="Black" SnapsToDevicePixels="True">
-				<Image VerticalAlignment="Center" HorizontalAlignment="Center">
-					<Image.Resources>
-						<Pen x:Key="Icon.Outline" Thickness="3" Brush="Black"/>
-					</Image.Resources>
-					<Image.Style>
-						<Style TargetType="{x:Type Image}">
-							<Setter Property="Source" Value="{StaticResource Hourglass}" />
-							<Setter Property="Margin" Value="16"/>
-							<Style.Triggers>
-								<DataTrigger Value="True">
-									<DataTrigger.Binding>
-										<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
-											<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="WindowList" /></Binding.ConverterParameter>
-										</Binding>
-									</DataTrigger.Binding>
-									<Setter Property="Source" Value="{StaticResource 1f4bb-computer}" />
-									<Setter Property="Margin" Value="20"/>
-								</DataTrigger>
-								<DataTrigger Value="True">
-									<DataTrigger.Binding>
-										<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
-											<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="FindProgram" /></Binding.ConverterParameter>
-										</Binding>
-									</DataTrigger.Binding>
-									<Setter Property="Source" Value="{StaticResource 1f4c2-open_file_folder}" />
-									<Setter Property="Margin" Value="20"/>
-								</DataTrigger>
-								<DataTrigger Value="True" Binding="{Binding WindowIsFocused, Mode=OneWay}">
-									<Setter Property="Source" Value="{StaticResource ForegroundIndicator}" />
-									<Setter Property="Margin" Value="0"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Image.Style>
+				<!-- Padding box display -->
+				<Border x:Name="marginBox" 
+						Margin="{Binding BoundaryOffset, Converter={StaticResource DimensionsConverter}}" 
+						BorderThickness="1" 
+						BorderBrush="#FFC3C3C3" 
+						SnapsToDevicePixels="True" />
+
+				<!-- Foreground indicator -->
+				<Border x:Name="winBox"
+						Margin="8" 
+						BorderThickness="2" 
+						BorderBrush="Black" 
+						SnapsToDevicePixels="True">
+					<Image VerticalAlignment="Center" HorizontalAlignment="Center">
+						<Image.Resources>
+							<Pen x:Key="Icon.Outline" Thickness="3" Brush="Black"/>
+						</Image.Resources>
+						<Image.Style>
+							<Style TargetType="{x:Type Image}">
+								<Setter Property="Source" Value="{StaticResource Hourglass}" />
+								<Setter Property="Margin" Value="16"/>
+								<Style.Triggers>
+									<DataTrigger Value="True">
+										<DataTrigger.Binding>
+											<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
+												<Binding.ConverterParameter>
+													<binding:ViewTypeToBoolParameter ViewType="WindowList" />
+												</Binding.ConverterParameter>
+											</Binding>
+										</DataTrigger.Binding>
+										<Setter Property="Source" Value="{StaticResource 1f4bb-computer}" />
+										<Setter Property="Margin" Value="20"/>
+									</DataTrigger>
+									<DataTrigger Value="True">
+										<DataTrigger.Binding>
+											<Binding Path="LockType" Converter="{StaticResource ViewBoolConverter}">
+												<Binding.ConverterParameter>
+													<binding:ViewTypeToBoolParameter ViewType="FindProgram" />
+												</Binding.ConverterParameter>
+											</Binding>
+										</DataTrigger.Binding>
+										<Setter Property="Source" Value="{StaticResource 1f4c2-open_file_folder}" />
+										<Setter Property="Margin" Value="20"/>
+									</DataTrigger>
+									<DataTrigger Value="True" Binding="{Binding WindowIsFocused, Mode=OneWay}">
+										<Setter Property="Source" Value="{StaticResource ForegroundIndicator}" />
+										<Setter Property="Margin" Value="0"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Image.Style>
+					</Image>
+				</Border>
+
+				<!-- Window height -->
+				<TextBlock x:Name="winHeight" Grid.Column="1"
+						   HorizontalAlignment="Left" 
+						   VerticalAlignment="Center">
+					<Run Text="{Binding WindowHeight, Mode=OneWay}" />
+				</TextBlock>
+
+				<!-- Window width -->
+				<TextBlock x:Name="winWidth" Grid.Row="1"
+						   HorizontalAlignment="Center" 
+						   VerticalAlignment="Top">
+					<Run Text="{Binding WindowWidth, Mode=OneWay}" />
+				</TextBlock>
+			</Grid>
+
+			<!-- Dimensions layout -->
+			<Grid DockPanel.Dock="Right">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="25" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="25" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="48" />
+					<RowDefinition Height="48" />
+					<RowDefinition Height="16" />
+				</Grid.RowDefinitions>
+				<Grid.Resources>
+					<Style TargetType="{x:Type TextBox}" x:Key="BaseBox">
+						<Setter Property="Width" Value="40"/>
+						<Setter Property="Height" Value="24"/>
+						<Setter Property="VerticalAlignment" Value="Center"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+					</Style>
+					<Style TargetType="{x:Type Image}" x:Key="BaseArrow">
+						<Setter Property="Width" Value="10"/>
+						<Setter Property="Height" Value="10"/>
+						<Setter Property="HorizontalAlignment" Value="Right"/>
+						<Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+					</Style>
+					<Style TargetType="{x:Type TextBox}" x:Key="UpperBox" BasedOn="{StaticResource BaseBox}">
+						<Setter Property="Margin" Value="0,8,8,0"/>
+					</Style>
+					<Style TargetType="{x:Type TextBox}" x:Key="LowerBox" BasedOn="{StaticResource BaseBox}">
+						<Setter Property="Margin" Value="0,0,8,8"/>
+					</Style>
+					<Style TargetType="{x:Type Image}" x:Key="UpperArrow" BasedOn="{StaticResource BaseArrow}">
+						<Setter Property="Margin" Value="0,8,4,0"/>
+					</Style>
+					<Style TargetType="{x:Type Image}" x:Key="LowerArrow" BasedOn="{StaticResource BaseArrow}">
+						<Setter Property="Margin" Value="0,0,4,8"/>
+					</Style>
+				</Grid.Resources>
+
+				<!-- Left arrow -->
+				<Image Grid.Row="0" Grid.Column="0"
+					   Style="{StaticResource UpperArrow}"
+					   Source="{StaticResource Arrow}">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<RotateTransform Angle="-90"/>
+						</TransformGroup>
+					</Image.RenderTransform>
 				</Image>
-			</Border>
 
-			<!-- Window height -->
-			<TextBlock x:Name="winHeight" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-				<Run Text="{Binding WindowHeight, Mode=OneWay}" />
-			</TextBlock>
+				<!-- Left padding -->
+				<TextBox x:Name="leftOffset" 
+						 Grid.Row="0" Grid.Column="1"
+						 Style="{StaticResource UpperBox}"
+						 GotKeyboardFocus="TextBox_GotKeyboardFocus"
+						 Text="{Binding LeftOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<!-- Window width -->
-			<TextBlock x:Name="winWidth" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
-				<Run Text="{Binding WindowWidth, Mode=OneWay}" />
-			</TextBlock>
+				<!-- Right arrow -->
+				<Image Grid.Row="0" Grid.Column="2"
+					   Style="{StaticResource UpperArrow}"
+					   Source="{StaticResource Arrow}">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<RotateTransform Angle="90"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 
-			<!-- Left padding -->
-			<TextBox Grid.Row="0" Grid.Column="4" x:Name="leftOffset"
-					 VerticalAlignment="Bottom" VerticalContentAlignment="Center" 
-					 GotKeyboardFocus="TextBox_GotKeyboardFocus"
-					 Text="{Binding LeftOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+				<!-- Right padding -->
+				<TextBox x:Name="rightOffset" 
+						 Grid.Row="0" Grid.Column="3"
+						 Style="{StaticResource UpperBox}"
+						 GotKeyboardFocus="TextBox_GotKeyboardFocus"
+						 Text="{Binding RightOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<!-- Right padding -->
-			<TextBox Grid.Row="0" Grid.Column="6" x:Name="rightOffset"
-					 VerticalAlignment="Bottom" VerticalContentAlignment="Center" 
-					 GotKeyboardFocus="TextBox_GotKeyboardFocus"
-					 Text="{Binding RightOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+				<!-- Up arrow -->
+				<Image Grid.Row="1" Grid.Column="0"
+					   Style="{StaticResource LowerArrow}"
+					   Source="{StaticResource Arrow}">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<RotateTransform Angle="0"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 
-			<!-- Top padding -->
-			<TextBox Grid.Row="1" Grid.Column="4" x:Name="topOffset"
-					 VerticalAlignment="Top" VerticalContentAlignment="Center" 
-					 GotKeyboardFocus="TextBox_GotKeyboardFocus"
-					 Text="{Binding TopOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+				<!-- Top padding -->
+				<TextBox x:Name="topOffset" 
+						 Grid.Row="1" Grid.Column="1"
+						 Style="{StaticResource LowerBox}"
+						 GotKeyboardFocus="TextBox_GotKeyboardFocus"
+						 Text="{Binding TopOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<!-- Bottom padding -->
-			<TextBox Grid.Row="1" Grid.Column="6" x:Name="bottomOffset"
-					 VerticalAlignment="Top" VerticalContentAlignment="Center" 
-					 GotKeyboardFocus="TextBox_GotKeyboardFocus"
-					 Text="{Binding BottomOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+				<!-- Down arrow -->
+				<Image Grid.Row="1" Grid.Column="2"
+					   Style="{StaticResource LowerArrow}"
+					   Source="{StaticResource Arrow}">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<RotateTransform Angle="180"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 
-			<!-- Left arrow -->
-			<Image Source="{StaticResource Arrow}" Grid.Row="0" Grid.Column="3" Width="10" Height="10" RenderTransformOrigin="0.5,0.5" Margin="15,8,0,0">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-90"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
+				<!-- Bottom padding -->
+				<TextBox x:Name="bottomOffset" 
+						 Grid.Row="1" Grid.Column="3"
+						 Style="{StaticResource LowerBox}"
+						 GotKeyboardFocus="TextBox_GotKeyboardFocus"
+						 Text="{Binding BottomOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<!-- Right arrow -->
-			<Image Source="{StaticResource Arrow}" Grid.Row="0" Grid.Column="5" Width="10" Height="10" RenderTransformOrigin="0.5,0.5" Margin="15,8,0,0">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="90"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-
-			<!-- Up arrow -->
-			<Image Source="{StaticResource Arrow}" Grid.Row="1" Grid.Column="3" Width="10" Height="10" RenderTransformOrigin="0.5,0.5" Margin="15,0,0,6">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="0"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-
-			<!-- Down arrow -->
-			<Image Source="{StaticResource Arrow}" Grid.Row="1" Grid.Column="5" Width="10" Height="10" RenderTransformOrigin="0.5,0.5" Margin="15,0,0,6">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="180"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-
-			<!-- Padding label -->
-			<TextBlock Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" 
-					   Margin="0,0,7,0"
+				<!-- Padding label -->
+				<TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+					   Margin="0,0,8,0"
 					   HorizontalAlignment="Center" 
 					   VerticalAlignment="Top">
 				Adjust Padding
-			</TextBlock>
-		</Grid>
+				</TextBlock>
+			</Grid>
+		</DockPanel>
 	</Grid>
 </UserControl>

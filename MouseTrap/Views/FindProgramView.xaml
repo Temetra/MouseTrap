@@ -9,20 +9,19 @@
 	mc:Ignorable="d" 
 	Background="{DynamicResource Main.Background}"
 	d:DataContext="{d:DesignInstance design:FindProgram, IsDesignTimeCreatable=True}" 
-	d:DesignHeight="300" d:DesignWidth="478">
+	d:DesignHeight="270" d:DesignWidth="478">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style TargetType="{x:Type controls:BarButtonControl}">
-				<Setter Property="BorderThickness" Value="1" />
-				<Setter Property="Background" Value="#FFDDDDDD" />
-				<Setter Property="BorderBrush" Value="#FF707070" />
-				<Setter Property="HoverBackground" Value="#FFBEE6FD" />
-				<Setter Property="HoverBorder" Value="#FF3C7FB1" />
-				<Setter Property="PressedBackground" Value="#FFC4E5F6" />
-				<Setter Property="PressedBorder" Value="#FF2C628B" />
-				<Setter Property="DisabledForeground" Value="#FFF4F4F4" />
-				<Setter Property="DisabledBackground" Value="#FFADB2B5" />
-				<Setter Property="DisabledBorder" Value="#FF838383" />
+				<Setter Property="ImageMargin" Value="0,10,10,10" />
+				<Setter Property="FontSize" Value="14" />
+				<Setter Property="BorderThickness" Value="2" />
+				<Setter Property="Background" Value="#FFCCCCCC" />
+				<Setter Property="BorderBrush" Value="#FFCCCCCC" />
+				<Setter Property="HoverBackground" Value="#FFCCCCCC" />
+				<Setter Property="HoverBorder" Value="Gray" />
+				<Setter Property="PressedBackground" Value="Gray" />
+				<Setter Property="PressedBorder" Value="Gray" />
 			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -32,18 +31,24 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="32"/>
+			<RowDefinition Height="56"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<TextBlock Margin="0,0,0,8">
-			Find a program to lock:
+		<TextBlock FontSize="20">
+			Find a program
 		</TextBlock>
 
-		<TextBox Grid.Row="1" Grid.Column="0" 
+		<TextBlock Grid.Row="1" FontSize="14" TextWrapping="Wrap">
+			To lock the cursor to any window opened by a program, enter the path 
+			to the executable into the box below.
+		</TextBlock>
+
+		<TextBox Grid.Row="2"
 				Width="Auto" Height="Auto" 
-				MinHeight="38" MaxHeight="200" 
+				MinHeight="38" MaxHeight="120" 
 				Padding="8" Margin="0" 
 				FontSize="14" TextWrapping="Wrap"
 				PreviewDragOver="TextBox_PreviewDragOver"
@@ -62,8 +67,8 @@
 			</TextBox.Text>
 		</TextBox>
 
-		<controls:BarButtonControl Grid.Row="2"
-			Width="96" Height="40"
+		<controls:BarButtonControl Grid.Row="3"
+			Width="100" Height="40"
 			Text="Browse" ToolTip="Browse for program"
 			Image="{StaticResource 1f4c2-open_file_folder}"
 			Command="{Binding FindFileCommand}" />
