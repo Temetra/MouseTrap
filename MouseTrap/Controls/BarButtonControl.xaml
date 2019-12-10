@@ -3,9 +3,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:local="clr-namespace:MouseTrap.Controls"
 	xmlns:effects="clr-namespace:MouseTrap.Effects">
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="pack://application:,,,/MouseTrap;component/Resources/Colours.xaml" />
-	</ResourceDictionary.MergedDictionaries>
 	<Style TargetType="{x:Type local:BarButtonControl}">
 		<Style.Resources>
 			<Style x:Key="FocusVisual">
@@ -17,6 +14,24 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
+			<SolidColorBrush x:Key="Disabled.Foreground" Color="#FF838383" />
+			<SolidColorBrush x:Key="Disabled.Background" Color="White" />
+			<SolidColorBrush x:Key="Disabled.BorderBrush" Color="#FFADB2B5"/>
+			<SolidColorBrush x:Key="Enabled.Foreground" Color="Black" />
+			<SolidColorBrush x:Key="Enabled.Background" Color="White" />
+			<SolidColorBrush x:Key="Enabled.BorderBrush" Color="#FF0078D7"/>
+			<SolidColorBrush x:Key="Hover.Foreground" Color="Black" />
+			<SolidColorBrush x:Key="Hover.Background" Color="#FFD2EBFF" />
+			<SolidColorBrush x:Key="Hover.BorderBrush" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Highlighted.Foreground" Color="Black" />
+			<SolidColorBrush x:Key="Highlighted.Background" Color="#FFD2EBFF" />
+			<SolidColorBrush x:Key="Highlighted.BorderBrush" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Highlighted.Hover.Foreground" Color="Black" />
+			<SolidColorBrush x:Key="Highlighted.Hover.Background" Color="#FF82C7FF" />
+			<SolidColorBrush x:Key="Highlighted.Hover.BorderBrush" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Pressed.Foreground" Color="White" />
+			<SolidColorBrush x:Key="Pressed.Background" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Pressed.BorderBrush" Color="#FF0078D7" />
 		</Style.Resources>
 
 		<Setter Property="Margin" Value="0" />
@@ -24,19 +39,9 @@
 		<Setter Property="Height" Value="Auto" />
 		<Setter Property="ImageMargin" Value="0,10,8,9" />
 		<Setter Property="BorderThickness" Value="0,0,0,2" />
-		<Setter Property="Foreground" Value="{StaticResource MenuButton.Foreground}" />
-		<Setter Property="Background" Value="{StaticResource MenuButton.Background}" />
-		<Setter Property="BorderBrush" Value="{StaticResource MenuButton.BorderBrush}" />
-		<Setter Property="HighlightedBackground" Value="{StaticResource MenuButton.HighlightedBackground}" />
-		<Setter Property="HoverBackground" Value="{StaticResource MenuButton.HoverBackground}" />
-		<Setter Property="HoverBorder" Value="{StaticResource MenuButton.HoverBorder}" />
-		<Setter Property="HoverHighlightedBackground" Value="{StaticResource MenuButton.HoverHighlightedBackground}" />
-		<Setter Property="DisabledForeground" Value="{StaticResource MenuButton.DisabledForeground}" />
-		<Setter Property="DisabledBackground" Value="{StaticResource MenuButton.DisabledBackground}" />
-		<Setter Property="DisabledBorder" Value="{StaticResource MenuButton.DisabledBorder}" />
-		<Setter Property="PressedForeground" Value="{StaticResource MenuButton.PressedForeground}" />
-		<Setter Property="PressedBackground" Value="{StaticResource MenuButton.PressedBackground}" />
-		<Setter Property="PressedBorder" Value="{StaticResource MenuButton.PressedBorder}" />
+		<Setter Property="Foreground" Value="{DynamicResource Enabled.Foreground}" />
+		<Setter Property="Background" Value="{DynamicResource Enabled.Background}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource Enabled.BorderBrush}" />
 
 		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
 		<Setter Property="Template">
@@ -69,13 +74,16 @@
 					<ControlTemplate.Triggers>
 						<!-- Button is toggled on -->
 						<Trigger Property="IsHighlighted" Value="true">
-							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter Property="Foreground" Value="{DynamicResource Highlighted.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Highlighted.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Highlighted.BorderBrush}" />
 						</Trigger>
 
 						<!-- Cursor is over button -->
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
-							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding HoverBorder, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter Property="Foreground" Value="{DynamicResource Hover.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Hover.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Hover.BorderBrush}" />
 						</Trigger>
 
 						<!-- Button is toggled on and cursor is over button -->
@@ -84,14 +92,16 @@
 								<Condition Property="IsHighlighted" Value="true" />
 								<Condition Property="IsMouseOver" Value="True" />
 							</MultiTrigger.Conditions>
-							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding HoverHighlightedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter Property="Foreground" Value="{DynamicResource Highlighted.Hover.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Highlighted.Hover.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Highlighted.Hover.BorderBrush}" />
 						</MultiTrigger>
 
 						<!-- Button is pressed -->
 						<Trigger Property="IsPressed" Value="true">
-							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
-							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding PressedBorder, RelativeSource={RelativeSource TemplatedParent}}" />
-							<Setter TargetName="buttonText" Property="Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter Property="Foreground" Value="{DynamicResource Pressed.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Pressed.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Pressed.BorderBrush}" />
 						</Trigger>
 
 						<!-- Button is disabled -->
@@ -100,9 +110,9 @@
 								<Condition Property="IsHighlighted" Value="false" />
 								<Condition Property="IsEnabled" Value="false" />
 							</MultiTrigger.Conditions>
-							<Setter TargetName="buttonBorder" Property="Background" Value="{Binding DisabledBackground, RelativeSource={RelativeSource TemplatedParent}}" />
-							<Setter TargetName="buttonBorder" Property="BorderBrush" Value="{Binding DisabledBorder, RelativeSource={RelativeSource TemplatedParent}}" />
-							<Setter TargetName="buttonText" Property="Foreground" Value="{Binding DisabledForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+							<Setter Property="Foreground" Value="{DynamicResource Disabled.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Disabled.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Disabled.BorderBrush}" />
 							<Setter TargetName="buttonImage" Property="Effect">
 								<Setter.Value>
 									<effects:GrayscaleEffect />

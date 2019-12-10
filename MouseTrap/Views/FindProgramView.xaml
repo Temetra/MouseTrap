@@ -16,12 +16,14 @@
 				<Setter Property="ImageMargin" Value="0,10,10,10" />
 				<Setter Property="FontSize" Value="14" />
 				<Setter Property="BorderThickness" Value="2" />
-				<Setter Property="Background" Value="#FFCCCCCC" />
-				<Setter Property="BorderBrush" Value="#FFCCCCCC" />
-				<Setter Property="HoverBackground" Value="#FFCCCCCC" />
-				<Setter Property="HoverBorder" Value="Gray" />
-				<Setter Property="PressedBackground" Value="Gray" />
-				<Setter Property="PressedBorder" Value="Gray" />
+				<Style.Resources>
+					<SolidColorBrush x:Key="Enabled.Background" Color="#FFCCCCCC" />
+					<SolidColorBrush x:Key="Enabled.BorderBrush" Color="#FFCCCCCC"/>
+					<SolidColorBrush x:Key="Hover.Background" Color="#FFCCCCCC" />
+					<SolidColorBrush x:Key="Hover.BorderBrush" Color="Gray" />
+					<SolidColorBrush x:Key="Pressed.Background" Color="Gray" />
+					<SolidColorBrush x:Key="Pressed.BorderBrush" Color="Gray" />
+				</Style.Resources>
 			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>

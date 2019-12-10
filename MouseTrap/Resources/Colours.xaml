@@ -3,21 +3,6 @@
 	<SolidColorBrush x:Key="Main.Background" Color="White"/>
 	<SolidColorBrush x:Key="ListSelected.Background" Color="#FF0078D7"/>
 	<SolidColorBrush x:Key="ListTextColour" Color="White"/>
-	<SolidColorBrush x:Key="MenuButton.Foreground" Color="Black" />
-	<SolidColorBrush x:Key="MenuButton.Background" Color="White" />
-	<SolidColorBrush x:Key="MenuButton.BorderBrush" Color="#FF0078D7"/>
-	<SolidColorBrush x:Key="MenuButton.HighlightedBackground" Color="#FFD2EBFF" />
-	<SolidColorBrush x:Key="MenuButton.HoverBackground" Color="#FFD2EBFF" />
-	<SolidColorBrush x:Key="MenuButton.HoverBorder" Color="#FF0078D7" />
-	<SolidColorBrush x:Key="MenuButton.HoverHighlightedBackground" Color="#FF82C7FF" />
-	<SolidColorBrush x:Key="MenuButton.DisabledForeground" Color="#FF838383" />
-	<SolidColorBrush x:Key="MenuButton.DisabledBackground" Color="White" />
-	<SolidColorBrush x:Key="MenuButton.DisabledBorder" Color="#FFADB2B5"/>
-	<SolidColorBrush x:Key="MenuButton.PressedForeground" Color="White" />
-	<SolidColorBrush x:Key="MenuButton.PressedBackground" Color="#FF33A4FF" />
-	<SolidColorBrush x:Key="MenuButton.PressedBorder" Color="#FF33A4FF" />
-	<SolidColorBrush x:Key="Warning.Background" Color="#FFFEBD38" />
-	<SolidColorBrush x:Key="Warning.Foreground" Color="Black" />
 	<SolidColorBrush x:Key="ContextMenu.BorderBrush" Color="#FF707070" />
 	<SolidColorBrush x:Key="MenuItem.IsHighlighted.Foreground" Color="White" />
 	<SolidColorBrush x:Key="MenuItem.IsHighlighted.Background" Color="#FF0078D7" />

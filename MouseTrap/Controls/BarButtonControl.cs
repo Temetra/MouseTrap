@@ -29,16 +29,6 @@ namespace MouseTrap.Controls
 		public static readonly DependencyProperty ImageProperty = Register<ImageSource>("Image");
 		public static readonly DependencyProperty ImageMarginProperty = Register<Thickness>("ImageMargin");
 		public static readonly DependencyProperty TextProperty = Register<string>("Text");
-		public static readonly DependencyProperty HighlightedBackgroundProperty = Register<Brush>("HighlightedBackground");
-		public static readonly DependencyProperty HoverBackgroundProperty = Register<Brush>("HoverBackground");
-		public static readonly DependencyProperty HoverBorderProperty = Register<Brush>("HoverBorder");
-		public static readonly DependencyProperty HoverHighlightedBackgroundProperty = Register<Brush>("HoverHighlightedBackground");
-		public static readonly DependencyProperty PressedForegroundProperty = Register<Brush>("PressedForeground");
-		public static readonly DependencyProperty PressedBackgroundProperty = Register<Brush>("PressedBackground");
-		public static readonly DependencyProperty PressedBorderProperty = Register<Brush>("PressedBorder");
-		public static readonly DependencyProperty DisabledBackgroundProperty = Register<Brush>("DisabledBackground");
-		public static readonly DependencyProperty DisabledBorderProperty = Register<Brush>("DisabledBorder");
-		public static readonly DependencyProperty DisabledForegroundProperty = Register<Brush>("DisabledForeground");
 		public static readonly DependencyProperty IsPressedProperty = Register<bool>("IsPressed");
 		public static readonly DependencyProperty IsHighlightedProperty = Register<bool>("IsHighlighted");
 		public static readonly DependencyProperty CommandProperty = Register<ICommand>("Command");
@@ -59,66 +49,6 @@ namespace MouseTrap.Controls
 		{
 			get => (string)GetValue(TextProperty);
 			set => SetValue(TextProperty, value);
-		}
-
-		public Brush HighlightedBackground
-		{
-			get => (Brush)GetValue(HighlightedBackgroundProperty);
-			set => SetValue(HighlightedBackgroundProperty, value);
-		}
-
-		public Brush HoverBackground
-		{
-			get => (Brush)GetValue(HoverBackgroundProperty);
-			set => SetValue(HoverBackgroundProperty, value);
-		}
-
-		public Brush HoverBorder
-		{
-			get => (Brush)GetValue(HoverBorderProperty);
-			set => SetValue(HoverBorderProperty, value);
-		}
-
-		public Brush HoverHighlightedBackground
-		{
-			get => (Brush)GetValue(HoverHighlightedBackgroundProperty);
-			set => SetValue(HoverHighlightedBackgroundProperty, value);
-		}
-
-		public Brush PressedForeground
-		{
-			get => (Brush)GetValue(PressedForegroundProperty);
-			set => SetValue(PressedForegroundProperty, value);
-		}
-
-		public Brush PressedBackground
-		{
-			get => (Brush)GetValue(PressedBackgroundProperty);
-			set => SetValue(PressedBackgroundProperty, value);
-		}
-
-		public Brush PressedBorder
-		{
-			get => (Brush)GetValue(PressedBorderProperty);
-			set => SetValue(PressedBorderProperty, value);
-		}
-
-		public Brush DisabledBackground
-		{
-			get => (Brush)GetValue(DisabledBackgroundProperty);
-			set => SetValue(DisabledBackgroundProperty, value);
-		}
-
-		public Brush DisabledBorder
-		{
-			get => (Brush)GetValue(DisabledBorderProperty);
-			set => SetValue(DisabledBorderProperty, value);
-		}
-
-		public Brush DisabledForeground
-		{
-			get => (Brush)GetValue(DisabledForegroundProperty);
-			set => SetValue(DisabledForegroundProperty, value);
 		}
 
 		public bool IsPressed
