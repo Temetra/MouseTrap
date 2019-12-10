@@ -14,24 +14,34 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
+			<!-- Button is disabled -->
 			<SolidColorBrush x:Key="Disabled.Foreground" Color="#FF838383" />
 			<SolidColorBrush x:Key="Disabled.Background" Color="White" />
 			<SolidColorBrush x:Key="Disabled.BorderBrush" Color="#FFADB2B5"/>
+			<!-- Button is enabled -->
 			<SolidColorBrush x:Key="Enabled.Foreground" Color="Black" />
 			<SolidColorBrush x:Key="Enabled.Background" Color="White" />
 			<SolidColorBrush x:Key="Enabled.BorderBrush" Color="#FF0078D7"/>
+			<!-- Button is enabled and cursor is over button -->
 			<SolidColorBrush x:Key="Hover.Foreground" Color="Black" />
 			<SolidColorBrush x:Key="Hover.Background" Color="#FFD2EBFF" />
 			<SolidColorBrush x:Key="Hover.BorderBrush" Color="#FF0078D7" />
+			<!-- Button is enabled and being pressed -->
+			<SolidColorBrush x:Key="Pressed.Enabled.Foreground" Color="White" />
+			<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Pressed.Enabled.BorderBrush" Color="#FF0078D7" />
+			<!-- Button is toggled on -->
 			<SolidColorBrush x:Key="Highlighted.Foreground" Color="Black" />
 			<SolidColorBrush x:Key="Highlighted.Background" Color="#FFD2EBFF" />
 			<SolidColorBrush x:Key="Highlighted.BorderBrush" Color="#FF0078D7" />
+			<!-- Button is toggled on and cursor is over button -->
 			<SolidColorBrush x:Key="Highlighted.Hover.Foreground" Color="Black" />
 			<SolidColorBrush x:Key="Highlighted.Hover.Background" Color="#FF82C7FF" />
 			<SolidColorBrush x:Key="Highlighted.Hover.BorderBrush" Color="#FF0078D7" />
-			<SolidColorBrush x:Key="Pressed.Foreground" Color="White" />
-			<SolidColorBrush x:Key="Pressed.Background" Color="#FF0078D7" />
-			<SolidColorBrush x:Key="Pressed.BorderBrush" Color="#FF0078D7" />
+			<!-- Button is toggled on and being pressed -->
+			<SolidColorBrush x:Key="Pressed.Highlighted.Foreground" Color="White" />
+			<SolidColorBrush x:Key="Pressed.Highlighted.Background" Color="#FF0078D7" />
+			<SolidColorBrush x:Key="Pressed.Highlighted.BorderBrush" Color="#FF0078D7" />
 		</Style.Resources>
 
 		<Setter Property="Margin" Value="0" />
@@ -73,13 +83,13 @@
 					</Border>
 					<ControlTemplate.Triggers>
 						<!-- Button is toggled on -->
-						<Trigger Property="IsHighlighted" Value="true">
+						<Trigger Property="IsHighlighted" Value="True">
 							<Setter Property="Foreground" Value="{DynamicResource Highlighted.Foreground}" />
 							<Setter Property="Background" Value="{DynamicResource Highlighted.Background}" />
 							<Setter Property="BorderBrush" Value="{DynamicResource Highlighted.BorderBrush}" />
 						</Trigger>
 
-						<!-- Cursor is over button -->
+						<!-- Button is enabled and cursor is over button -->
 						<Trigger Property="IsMouseOver" Value="True">
 							<Setter Property="Foreground" Value="{DynamicResource Hover.Foreground}" />
 							<Setter Property="Background" Value="{DynamicResource Hover.Background}" />
@@ -89,7 +99,7 @@
 						<!-- Button is toggled on and cursor is over button -->
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
-								<Condition Property="IsHighlighted" Value="true" />
+								<Condition Property="IsHighlighted" Value="True" />
 								<Condition Property="IsMouseOver" Value="True" />
 							</MultiTrigger.Conditions>
 							<Setter Property="Foreground" Value="{DynamicResource Highlighted.Hover.Foreground}" />
@@ -97,12 +107,27 @@
 							<Setter Property="BorderBrush" Value="{DynamicResource Highlighted.Hover.BorderBrush}" />
 						</MultiTrigger>
 
-						<!-- Button is pressed -->
-						<Trigger Property="IsPressed" Value="true">
-							<Setter Property="Foreground" Value="{DynamicResource Pressed.Foreground}" />
-							<Setter Property="Background" Value="{DynamicResource Pressed.Background}" />
-							<Setter Property="BorderBrush" Value="{DynamicResource Pressed.BorderBrush}" />
-						</Trigger>
+						<!-- Button is being pressed -->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsPressed" Value="True" />
+								<Condition Property="IsHighlighted" Value="False" />
+							</MultiTrigger.Conditions>
+							<Setter Property="Foreground" Value="{DynamicResource Pressed.Enabled.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Pressed.Enabled.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Pressed.Enabled.BorderBrush}" />
+						</MultiTrigger>
+
+						<!-- Button is being pressed -->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsPressed" Value="True" />
+								<Condition Property="IsHighlighted" Value="True" />
+							</MultiTrigger.Conditions>
+							<Setter Property="Foreground" Value="{DynamicResource Pressed.Highlighted.Foreground}" />
+							<Setter Property="Background" Value="{DynamicResource Pressed.Highlighted.Background}" />
+							<Setter Property="BorderBrush" Value="{DynamicResource Pressed.Highlighted.BorderBrush}" />
+						</MultiTrigger>
 
 						<!-- Button is disabled -->
 						<MultiTrigger>

@@ -16,8 +16,41 @@
 				<Setter Property="Width" Value="36" />
 				<Setter Property="Padding" Value="0" />
 				<Setter Property="ImageMargin" Value="8" />
-				<Setter Property="BorderThickness" Value="0" />
+				<Setter Property="BorderThickness" Value="2" />
 				<Setter Property="Text" Value="" />
+				<Style.Resources>
+					<SolidColorBrush x:Key="Enabled.BorderBrush" Color="White"/>
+					<SolidColorBrush x:Key="Hover.BorderBrush" Color="#FFD2EBFF" />
+					<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="#FFD2EBFF" />
+				</Style.Resources>
+			</Style>
+			<Style x:Key="LockButton" TargetType="{x:Type controls:BarButtonControl}">
+				<Style.Resources>
+					<!-- Button is enabled -->
+					<SolidColorBrush x:Key="Enabled.Foreground" Color="Black" />
+					<SolidColorBrush x:Key="Enabled.Background" Color="#ffffe6d5" />
+					<SolidColorBrush x:Key="Enabled.BorderBrush" Color="#ffff7f2a"/>
+					<!-- Button is enabled and cursor is over button -->
+					<SolidColorBrush x:Key="Hover.Foreground" Color="Black" />
+					<SolidColorBrush x:Key="Hover.Background" Color="#ffffccaa" />
+					<SolidColorBrush x:Key="Hover.BorderBrush" Color="#ffff7f2a" />
+					<!-- Button is enabled and being pressed -->
+					<SolidColorBrush x:Key="Pressed.Enabled.Foreground" Color="White" />
+					<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="#ffff7f2a" />
+					<SolidColorBrush x:Key="Pressed.Enabled.BorderBrush" Color="#ffff7f2a" />
+					<!-- Button is toggled on -->
+					<SolidColorBrush x:Key="Highlighted.Foreground" Color="Black" />
+					<SolidColorBrush x:Key="Highlighted.Background" Color="#ffd5ffe6" />
+					<SolidColorBrush x:Key="Highlighted.BorderBrush" Color="#ff00d455" />
+					<!-- Button is toggled on and cursor is over button -->
+					<SolidColorBrush x:Key="Highlighted.Hover.Foreground" Color="Black" />
+					<SolidColorBrush x:Key="Highlighted.Hover.Background" Color="#ff80ffb3" />
+					<SolidColorBrush x:Key="Highlighted.Hover.BorderBrush" Color="#ff00d455" />
+					<!-- Button is toggled on and being pressed -->
+					<SolidColorBrush x:Key="Pressed.Highlighted.Foreground" Color="White" />
+					<SolidColorBrush x:Key="Pressed.Highlighted.Background" Color="#ff00d455" />
+					<SolidColorBrush x:Key="Pressed.Highlighted.BorderBrush" Color="#ff00d455" />
+				</Style.Resources>
 			</Style>
 			<Style x:Key="GrayScaleStyle" TargetType="Image">
 				<Style.Triggers>
@@ -36,7 +69,6 @@
 	<DockPanel Height="36" LastChildFill="False">
 		
 		<controls:BarButtonControl 
-			Margin="0,0,4,0"
 			Text="Choose Window"
 			ToolTip="Select a window to lock from a list (F1)"
 			Image="{StaticResource 1f4bb-computer}"
@@ -54,7 +86,7 @@
 		</controls:BarButtonControl>
 
 		<controls:BarButtonControl 
-			Margin="0,0,4,0"
+			Margin="4,0,0,0"
 			Text="Find Program"
 			ToolTip="Find a program to lock on your system (F2)"
 			Image="{StaticResource 1f4c2-open_file_folder}"
@@ -71,24 +103,30 @@
 			</controls:BarButtonControl.IsEnabled>
 		</controls:BarButtonControl>
 
-		<controls:BarButtonControl 
+		<Rectangle Width="1" Fill="LightGray" Margin="16,8"/>
+
+		<controls:BarButtonControl
 			Image="{StaticResource 1f511-key}"
 			IsEnabled="{Binding WindowLockEnabled}"
 			Command="{Binding ToggleLockCommand}">
 			<controls:BarButtonControl.IsHighlighted>
 				<Binding Path="CurrentView" Converter="{StaticResource ViewBoolConverter}">
-					<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="LockWindow" /></Binding.ConverterParameter>
+					<Binding.ConverterParameter>
+						<binding:ViewTypeToBoolParameter ViewType="LockWindow" />
+					</Binding.ConverterParameter>
 				</Binding>
 			</controls:BarButtonControl.IsHighlighted>
 			<controls:BarButtonControl.Style>
-				<Style TargetType="controls:BarButtonControl">
+				<Style TargetType="controls:BarButtonControl" BasedOn="{StaticResource LockButton}">
 					<Setter Property="Text" Value="Lock Mouse"/>
 					<Setter Property="ToolTip" Value="Lock the mouse to the specified window (F3)"/>
 					<Style.Triggers>
 						<DataTrigger Value="True">
 							<DataTrigger.Binding>
 								<Binding Path="CurrentView" Converter="{StaticResource ViewBoolConverter}">
-									<Binding.ConverterParameter><binding:ViewTypeToBoolParameter ViewType="LockWindow" /></Binding.ConverterParameter>
+									<Binding.ConverterParameter>
+										<binding:ViewTypeToBoolParameter ViewType="LockWindow" />
+									</Binding.ConverterParameter>
 								</Binding>
 							</DataTrigger.Binding>
 							<Setter Property="Text" Value="Unlock Mouse"/>

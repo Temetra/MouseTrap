@@ -21,8 +21,8 @@
 					<SolidColorBrush x:Key="Enabled.BorderBrush" Color="#FFCCCCCC"/>
 					<SolidColorBrush x:Key="Hover.Background" Color="#FFCCCCCC" />
 					<SolidColorBrush x:Key="Hover.BorderBrush" Color="Gray" />
-					<SolidColorBrush x:Key="Pressed.Background" Color="Gray" />
-					<SolidColorBrush x:Key="Pressed.BorderBrush" Color="Gray" />
+					<SolidColorBrush x:Key="Pressed.Enabled.Background" Color="Gray" />
+					<SolidColorBrush x:Key="Pressed.Enabled.BorderBrush" Color="Gray" />
 				</Style.Resources>
 			</Style>
 		</ResourceDictionary>
