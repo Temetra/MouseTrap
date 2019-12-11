@@ -40,13 +40,33 @@ namespace MouseTrap
 		public App()
 		{
 			Startup += App_Startup;
-			Exit += App_Exit;
-			DispatcherUnhandledException += App_DispatcherUnhandledException;
 		}
 
 		// Event handlers
 		private void App_Startup(object sender, StartupEventArgs e)
 		{
+			if (e.Args.Length > 0 && e.Args[0] == "/error")
+			{
+				ShowError();
+			}
+			else
+			{
+				StartSystem();
+			}
+		}
+
+		private void ShowError()
+		{
+			var window = new Views.ErrorWindow();
+			window.Show();
+		}
+
+		private void StartSystem()
+		{
+			// Bind handlers
+			Exit += App_Exit;
+			DispatcherUnhandledException += App_DispatcherUnhandledException;
+
 			// Create system objects
 			foregroundWindowHook = new ForegroundWindowHook();
 			windowUpdateHook = new WindowUpdateHook();
@@ -71,19 +91,23 @@ namespace MouseTrap
 
 		private void App_Exit(object sender, ExitEventArgs e)
 		{
-			foregroundWindowHook.StopHook();
-			windowUpdateHook.StopHook();
-			mouseHook.StopHook();
+			foregroundWindowHook?.StopHook();
+			windowUpdateHook?.StopHook();
+			mouseHook?.StopHook();
 		}
 
 		private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
 		{
+			// Log error
 			var listener = new TextWriterTraceListener("error.txt") { TraceOutputOptions = TraceOptions.Timestamp };
 			Trace.AutoFlush = true;
 			Trace.Listeners.Clear();
 			Trace.Listeners.Add(listener);
 			Trace.TraceError($"{e.Exception.Message}\n{e.Exception.StackTrace}");
-			Views.ErrorWindow.ShowWindow();
+
+			// Start another process in error mode to show dialog
+			var processFilename = Process.GetCurrentProcess().MainModule.FileName;
+			Process.Start(processFilename, "/error");
 		}
 
 		// IDisposable
@@ -105,15 +129,15 @@ namespace MouseTrap
 			if (disposing)
 			{
 				// Free any other managed objects here.
-				mainWindowComponent.Dispose();
-				lockWindowComponent.Dispose();
-				lockingComponent.Dispose();
+				mainWindowComponent?.Dispose();
+				lockWindowComponent?.Dispose();
+				lockingComponent?.Dispose();
 			}
 
 			// Free any unmanaged objects here.
-			foregroundWindowHook.Dispose();
-			windowUpdateHook.Dispose();
-			mouseHook.Dispose();
+			foregroundWindowHook?.Dispose();
+			windowUpdateHook?.Dispose();
+			mouseHook?.Dispose();
 
 			// Done
 			_isDisposed = true;

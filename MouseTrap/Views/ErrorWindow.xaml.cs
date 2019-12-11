@@ -9,9 +9,7 @@ namespace MouseTrap.Views
 	/// </summary>
 	public partial class ErrorWindow : Window
 	{
-		private static ErrorWindow _errorWindow;
-
-		private ErrorWindow()
+		public ErrorWindow()
 		{
 			InitializeComponent();
 		}
@@ -24,15 +22,6 @@ namespace MouseTrap.Views
 		private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
 		{
 			Process.Start(e.Uri.OriginalString);
-		}
-
-		public static void ShowWindow()
-		{
-			if (_errorWindow == null)
-			{
-				_errorWindow = new ErrorWindow();
-				_errorWindow.ShowDialog();
-			}
 		}
 	}
 }
