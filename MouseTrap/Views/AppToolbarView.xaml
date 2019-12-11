@@ -42,16 +42,16 @@
 					<SolidColorBrush x:Key="Pressed.Enabled.BorderBrush" Color="#ffff7f2a" />
 					<!-- Button is toggled on -->
 					<SolidColorBrush x:Key="Highlighted.Foreground" Color="Black" />
-					<SolidColorBrush x:Key="Highlighted.Background" Color="#ffd5ffe6" />
-					<SolidColorBrush x:Key="Highlighted.BorderBrush" Color="#ff00d455" />
+					<SolidColorBrush x:Key="Highlighted.Background" Color="#ffd5ffd5" />
+					<SolidColorBrush x:Key="Highlighted.BorderBrush" Color="#ff00d400" />
 					<!-- Button is toggled on and cursor is over button -->
 					<SolidColorBrush x:Key="Highlighted.Hover.Foreground" Color="Black" />
-					<SolidColorBrush x:Key="Highlighted.Hover.Background" Color="#ff80ffb3" />
-					<SolidColorBrush x:Key="Highlighted.Hover.BorderBrush" Color="#ff00d455" />
+					<SolidColorBrush x:Key="Highlighted.Hover.Background" Color="#ffaaffaa" />
+					<SolidColorBrush x:Key="Highlighted.Hover.BorderBrush" Color="#ff00d400" />
 					<!-- Button is toggled on and being pressed -->
 					<SolidColorBrush x:Key="Pressed.Highlighted.Foreground" Color="White" />
-					<SolidColorBrush x:Key="Pressed.Highlighted.Background" Color="#ff00d455" />
-					<SolidColorBrush x:Key="Pressed.Highlighted.BorderBrush" Color="#ff00d455" />
+					<SolidColorBrush x:Key="Pressed.Highlighted.Background" Color="#ff00d400" />
+					<SolidColorBrush x:Key="Pressed.Highlighted.BorderBrush" Color="#ff00d400" />
 				</Style.Resources>
 			</Style>
 			<Style x:Key="GrayScaleStyle" TargetType="Image">
