@@ -9,6 +9,11 @@ namespace MouseTrap.DesignTime
 	{
 		public WindowList() : base()
 		{
+			AddItems();
+		}
+
+		private void AddItems()
+		{
 			// Create list
 			var items = new List<WindowListItem>
 			{
