@@ -46,6 +46,12 @@ MouseTrap can be downloaded from the [releases page][releases].
 * Compatible with Windows 11.
 * Requires [.NET 8.0][net8] and [Windows App SDK 1.5][winapp].
 
+## Compiling
+
+This project uses [Temetra.Windows][temwinlib] as a [local NuGet][localnuget] dependency.
+
 [net8]: https://dotnet.microsoft.com/en-us/download
 [winapp]: https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads
 [releases]: https://github.com/Temetra/MouseTrap/releases
+[temwinlib]: https://github.com/Temetra/Temetra.Windows
+[localnuget]: https://learn.microsoft.com/en-us/nuget/hosting-packages/local-feeds
