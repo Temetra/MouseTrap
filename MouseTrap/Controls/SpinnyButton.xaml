@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MouseTrap.Controls.SpinnyButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BorderBrush="Transparent"
+    Background="Transparent"
+    Padding="0"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="SpinnyAnim">
+            <DoubleAnimation 
+                Storyboard.TargetName="ButtonIcon" 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" 
+                From="0" To="{x:Bind SpinAngle}" Duration="{x:Bind Duration}">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Button 
+        x:Name="TheButton"
+        BorderBrush="{x:Bind BorderBrush}"
+        Background="{x:Bind Background}"
+        Padding="{x:Bind Padding}"
+        Width="{x:Bind Width}"
+        Height="{x:Bind Height}"
+        Flyout="{x:Bind Flyout}"
+        Click="Button_Click">
+        <FontIcon x:Name="ButtonIcon" Glyph="{x:Bind Glyph}" FontSize="{x:Bind FontSize}" RenderTransformOrigin="0.5, 0.5">
+            <FontIcon.RenderTransform>
+                <RotateTransform Angle="0" />
+            </FontIcon.RenderTransform>
+        </FontIcon>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                    <Storyboard>
+                        <DoubleAnimation 
+                            Storyboard.TargetName="ButtonIcon" 
+                            Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" 
+                            From="0" To="{x:Bind WindAngle}" Duration="0:0:0.25">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Button>
+</UserControl>

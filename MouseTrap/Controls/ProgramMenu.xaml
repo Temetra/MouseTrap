@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MouseTrap.Controls.ProgramMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:MouseTrap.Models"
+    xmlns:controls="using:MouseTrap.Controls"
+    xmlns:c="using:MouseTrap.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=models:IProgramMenuModel}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ToolbarButton" TargetType="controls:SpinnyButton">
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="12,0,0,0" />
+                <Setter Property="Width" Value="32" />
+                <Setter Property="Height" Value="32" />
+                <Setter Property="Duration" Value="0:0:0.5" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="16,0,16,0">
+
+        <controls:SpinnyButton 
+            x:Name="AddButton" 
+            Glyph="&#xE710;" 
+            WindAngle="-90" 
+            SpinAngle="180" 
+            ToolTipService.ToolTip="Add Program (Ctrl+N)" 
+            AutomationProperties.Name="Add Program" 
+            Click="AddButton_Click" 
+            Style="{ThemeResource ToolbarButton}">
+            <controls:SpinnyButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="N" />
+            </controls:SpinnyButton.KeyboardAccelerators>
+        </controls:SpinnyButton>
+
+        <controls:SpinnyButton 
+            x:Name="RefreshButton" 
+            Glyph="&#xE72C;" 
+            WindAngle="-45" 
+            SpinAngle="360" 
+            ToolTipService.ToolTip="Refresh (F5)" 
+            AutomationProperties.Name="Refresh" 
+            Click="RefreshButton_Click" 
+            Style="{ThemeResource ToolbarButton}">
+            <controls:SpinnyButton.KeyboardAccelerators>
+                <KeyboardAccelerator Key="F5" />
+            </controls:SpinnyButton.KeyboardAccelerators>
+        </controls:SpinnyButton>
+
+        <controls:SpinnyButton 
+            x:Name="SettingsButton" 
+            Glyph="&#xE713;" 
+            WindAngle="-45" 
+            SpinAngle="180" 
+            ToolTipService.ToolTip="Settings" 
+            AutomationProperties.Name="Settings" 
+            Style="{ThemeResource ToolbarButton}">
+            <controls:SpinnyButton.Flyout>
+                <Flyout x:Name="SettingsFlyout" ShouldConstrainToRootBounds="False">
+                    <StackPanel Width="200">
+
+                        <!-- Filter submeu -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12" IsTabStop="True">
+                            <FontIcon Glyph="&#xE71C;" />
+                            <TextBlock 
+                                Text="Filter" 
+                                Margin="10,0,0,0" 
+                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                ToolTipService.ToolTip="Filter programs by name or file path." />
+                        </StackPanel>
+                        <AutoSuggestBox 
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted" 
+                            Text="{x:Bind ViewModel.Filter, Mode=TwoWay}" 
+                            QueryIcon="Find" 
+                            PlaceholderText="Filter programs" 
+                            HorizontalAlignment="Stretch" />
+
+                        <!-- Padding submenu -->
+                        <StackPanel Orientation="Horizontal" Margin="0,24,0,12">
+                            <FontIcon Glyph="&#xE9A6;" />
+                            <TextBlock 
+                                Text="Padding" 
+                                Margin="10,0,0,0" 
+                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                ToolTipService.ToolTip="Add padding to avoid moving or resizing windows accidentally." />
+                        </StackPanel>
+                        <Slider 
+                            x:Name="TitlePaddingSlider" 
+                            Header="Titlebar" 
+                            AutomationProperties.Name="Titlebar Padding Slider" 
+                            Margin="0,0,0,4" 
+                            Minimum="0" Maximum="64" 
+                            TickFrequency="16" TickPlacement="Outside" SnapsTo="StepValues" 
+                            Value="{x:Bind ViewModel.TitlePadding, Mode=TwoWay}" 
+                            />
+                        <Slider 
+                            x:Name="WindowPaddingSlider" 
+                            Header="Window" 
+                            AutomationProperties.Name="Window Padding Slider" 
+                            Minimum="0" Maximum="64" 
+                            TickFrequency="16" TickPlacement="Outside" SnapsTo="StepValues" 
+                            Value="{x:Bind ViewModel.WindowPadding, Mode=TwoWay}" 
+                            />
+
+                        <!-- Sound submenu -->
+                        <StackPanel Orientation="Horizontal" Margin="0,24,0,12">
+                            <FontIcon Glyph="&#xE8D6;" />
+                            <TextBlock 
+                                Text="Sound" 
+                                Margin="10,0,0,0" 
+                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                ToolTipService.ToolTip="Play sound when the cursor is trapped." />
+                        </StackPanel>
+                        <ToggleSwitch OffContent="Disabled" OnContent="Enabled" IsOn="{x:Bind ViewModel.UseAudioFeedback, Mode=TwoWay}" />
+
+                        <!-- Theme submenu -->
+                        <StackPanel Orientation="Horizontal" Margin="0,24,0,12">
+                            <FontIcon Glyph="&#xE706;" />
+                            <TextBlock 
+                                Text="Theme" 
+                                Margin="10,0,0,0" 
+                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                ToolTipService.ToolTip="Choose a theme for MouseTrap, or use the system default." />
+                        </StackPanel>
+                        <GridView 
+                            x:Name="ThemeGrid" 
+                            HorizontalAlignment="Stretch" 
+                            IsItemClickEnabled="True" 
+                            ItemsSource="{x:Bind ViewModel.Themes}"
+                            SelectedIndex="{x:Bind c:Binding.ThemeToInt(ViewModel.SelectedTheme)}" 
+                            SelectionMode="Single"
+                            ItemClick="ThemeGrid_ItemClick">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:IThemeModel">
+                                    <Rectangle 
+                                        Width="32" Height="32" 
+                                        RadiusX="4" RadiusY="4" 
+                                        Fill="{x:Bind Fill}" 
+                                        Stroke="LightGray" StrokeThickness="1" 
+                                        Tag="{x:Bind Tag}" 
+                                        ToolTipService.ToolTip="{x:Bind Tooltip}" 
+                                        AutomationProperties.Name="{x:Bind Name}" />
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+
+                    </StackPanel>
+                </Flyout>
+            </controls:SpinnyButton.Flyout>
+        </controls:SpinnyButton>
+    </StackPanel>
+</UserControl>

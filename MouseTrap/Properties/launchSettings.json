@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MouseTrap (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MouseTrap (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

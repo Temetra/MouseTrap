@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MouseTrap.Controls.ProgramCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:MouseTrap.Models"
+    xmlns:c="using:MouseTrap.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    d:DataContext="{d:DesignInstance Type=models:IProgramModel}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ToggleSwitch.xaml" />
+                <ResourceDictionary Source="/Styles/RoundToggleButton.xaml" />
+                <ResourceDictionary Source="/Styles/CardButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <CommandBarFlyout x:Name="ContextMenu" ShowMode="Auto" AlwaysExpanded="True">
+                <AppBarButton Label="Copy" Icon="Copy" ToolTipService.ToolTip="Copy Path" Tag="Copy" Click="AppBarButton_Click" />
+                <AppBarButton Label="Open" Icon="Folder" ToolTipService.ToolTip="Open Folder" Tag="Explore" Click="AppBarButton_Click" />
+                <AppBarButton Label="Run" ToolTipService.ToolTip="Run Program" Tag="Run" Click="AppBarButton_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE756;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBarFlyout>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Button 
+        x:Name="TheButton"
+        Style="{ThemeResource CardButton}"
+        Padding="0" Margin="0" 
+        CornerRadius="8"
+        Background="{ThemeResource CardBackgroundFillColorDefault}"
+        BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefault}" 
+        Translation="0,0,8" Shadow="{ThemeResource SharedShadow}"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch"
+        ContextRequested="Button_ContextRequested">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorSecondary}">
+                <Image x:Name="AppIconImage" Margin="12" Width="48" Height="48" Source="{x:Bind ViewModel.AppIcon, Mode=OneWay}" />
+            </Border>
+
+            <StackPanel Grid.Column="1" Padding="16,8" VerticalAlignment="Center">
+                <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{ThemeResource BodyTextBlockStyle}" />
+                <TextBlock Text="{x:Bind ViewModel.FullPath, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind ViewModel.FullPath, Mode=OneWay}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemBaseMediumLowColor}" />
+            </StackPanel>
+
+            <ToggleSwitch 
+                x:Name="CardSwitch" 
+                Grid.Column="2" 
+                Margin="0,0,12,0" 
+                OnContent="On" OffContent="Off"
+                ToolTipService.ToolTip="Enable cursor trapping"
+                IsOn="{x:Bind ViewModel.CanTrap, Mode=TwoWay}" 
+                Visibility="{x:Bind c:Binding.TrueToVisibility(ViewModel.IsPinned), Mode=OneWay}"
+                Style="{ThemeResource FlippedToggleSwitchStyle}" />
+
+            <ToggleButton 
+                x:Name="CardButton" 
+                Grid.Column="3" 
+                Width="32"
+                Height="32"
+                Padding="8"
+                Margin="12,0" 
+                Content='{x:Bind c:Binding.BoolToString(ViewModel.IsPinned, "Unpin", "Pin"), Mode=OneWay}'
+                ToolTipService.ToolTip='{x:Bind c:Binding.BoolToString(ViewModel.IsPinned, "Unpin", "Pin"), Mode=OneWay}'
+                IsChecked="{x:Bind ViewModel.IsPinned, Mode=TwoWay}"
+                Style="{ThemeResource RoundToggleButton}" />
+        </Grid>
+    </Button>
+</UserControl>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="MouseTrap.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="using:MouseTrap.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d">
+
+    <Grid x:Name="MainContainer" Background="{ThemeResource SolidBackgroundFillColorTertiary}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="AppTitleBar" Height="48" Margin="0,0,0,4">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <BitmapImage x:Key="TitleBarIconBitmap" UriSource="/Assets/TitleIcon.png" />
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition x:Name="IconColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="TitleColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="DragColumn" Width="*"/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="TitleBarIcon" Grid.Column="1" Source="{ThemeResource TitleBarIconBitmap}" Width="24" Height="24" Margin="8,0,12,0" />
+            <TextBlock x:Name="TitleBarTextBlock" Grid.Column="2" Text="MouseTrap" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" />
+        </Grid>
+        <controls:CustomInfoBar x:Name="MessageBar" Margin="0,0,0,12" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed" IsOpen="False" Severity="Success" Title="" Message="" />
+        <controls:ViewModelFrame x:Name="RootFrame" Grid.Row="2" />
+    </Grid>
+</Window>
