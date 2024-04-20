@@ -21,7 +21,7 @@ MouseTrap can be downloaded from the [releases page][releases].
 
 ## Preview
 
-<video src="https://github.com/Temetra/MouseTrap/assets/1958965/d04b9c39-4a96-4a81-a573-88b9b4da1813"></video>
+<video src="https://github.com/Temetra/MouseTrap/assets/1958965/9470b283-8632-4d87-955e-d8436c68f0b7"></video>
 
 ## Usage
 
