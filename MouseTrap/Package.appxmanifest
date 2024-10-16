@@ -10,7 +10,7 @@
   <Identity
     Name="31308406-c962-4a00-b3db-182c12bd5fdf"
     Publisher="CN=Temetra"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="31308406-c962-4a00-b3db-182c12bd5fdf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
