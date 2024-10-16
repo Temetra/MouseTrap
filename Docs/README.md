@@ -17,7 +17,7 @@ A Windows app that restricts the mouse cursor to a window.
 
 MouseTrap can be downloaded from the [releases page][releases]. 
 
-[.NET 8.0][net8] and [Windows App SDK 1.5][winapp] runtimes are required.
+[.NET 8.0][net8] and [Windows App SDK 1.6][winapp] runtimes are required.
 
 ## Preview
 
@@ -44,7 +44,7 @@ MouseTrap can be downloaded from the [releases page][releases].
 * This is a WinUI 3 application.
 * Designed and tested on Windows 10.
 * Compatible with Windows 11.
-* Requires [.NET 8.0][net8] and [Windows App SDK 1.5][winapp].
+* Requires [.NET 8.0][net8] and [Windows App SDK 1.6][winapp].
 
 ## Compiling
 
