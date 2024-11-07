@@ -184,13 +184,24 @@ public class ProgramDataModel : INotifyPropertyChanged
         // Get fresh list of available programs
         Temetra.Windows.FilteredWindowsEnumerator.EnumWindows(x =>
         {
-            var key = ProgramItem.GetKey(x.Path, x.Executable);
-            validKeys.Add(key);
-
-            if (!data.ContainsKey(key))
+            if (x.Status == Temetra.Windows.EnumerationResultStatus.Successful)
             {
-                ProgramItem item = new(x.Description, x.Path, x.Executable, x.Image, false, false);
-                data.Add(key, item);
+                var key = ProgramItem.GetKey(x.Details.Path, x.Details.Executable);
+                validKeys.Add(key);
+
+                if (!data.ContainsKey(key))
+                {
+                    ProgramItem item = new(x.Details.Description, x.Details.Path, x.Details.Executable, x.Details.Image, false, false);
+                    data.Add(key, item);
+                }
+            }
+            else if (x.Status == Temetra.Windows.EnumerationResultStatus.NoDetails)
+            {
+                Log.Logger.Information("Unable to get details for {Context}", x.Context);
+            }
+            else
+            {
+                Log.Logger.Debug("Window filtered: Reason = {Reason}, HWND = {Context}", x.Status, x.Context);
             }
 
             return true;

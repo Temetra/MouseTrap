@@ -46,7 +46,7 @@
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240923002" />
 		<PackageReference Include="System.Reactive" Version="6.0.1" />
-		<PackageReference Include="Temetra.Windows" Version="1.23.0" />
+		<PackageReference Include="Temetra.Windows" Version="1.24.0" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
