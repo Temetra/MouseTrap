@@ -10,7 +10,7 @@ internal interface IProgramMenuModel : INotifyPropertyChanged
     public int TitlePadding { get; set; }
     public int WindowPadding { get; set; }
     public ElementTheme SelectedTheme { get; set; }
-    public bool UseAudioFeedback { get; set; }
+    public double AudioVolume { get; set; }
     public List<IThemeModel> Themes { get; }
     public void AddProgram(string filename);
     public void Refresh();

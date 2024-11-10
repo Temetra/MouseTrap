@@ -120,7 +120,14 @@
                                 Style="{ThemeResource BaseTextBlockStyle}" 
                                 ToolTipService.ToolTip="Play sound when the cursor is trapped." />
                         </StackPanel>
-                        <ToggleSwitch OffContent="Disabled" OnContent="Enabled" IsOn="{x:Bind ViewModel.UseAudioFeedback, Mode=TwoWay}" />
+                        <Slider 
+                            x:Name="AudioVolumeSlider" 
+                            Header="" 
+                            AutomationProperties.Name="Audio Volume Slider" 
+                            Minimum="0" Maximum="100" StepFrequency="10"
+                            TickFrequency="50" TickPlacement="Outside" SnapsTo="StepValues"
+                            Value="{x:Bind ViewModel.AudioVolume, Mode=TwoWay}" 
+                            />
 
                         <!-- Theme submenu -->
                         <StackPanel Orientation="Horizontal" Margin="0,24,0,12">

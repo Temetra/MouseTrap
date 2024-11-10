@@ -15,7 +15,7 @@ internal sealed class SettingsModel : ISettingsModel
         SelectedTheme = (ElementTheme)(int)settingsModel.SelectedTheme;
         TitlePadding = settingsModel.TitlePadding;
         WindowPadding = settingsModel.WindowPadding;
-        UseAudioFeedback = settingsModel.UseAudioFeedback;
+        AudioVolume = settingsModel.AudioVolume;
     }
 
     private readonly ProgramDataModel dataModel;
@@ -23,7 +23,7 @@ internal sealed class SettingsModel : ISettingsModel
     private ElementTheme selectedTheme;
     private int titlePadding;
     private int windowPadding;
-    private bool useAudioFeedback;
+    private double audioVolume;
     private string filter;
 
     public void Refresh() =>
@@ -105,17 +105,17 @@ internal sealed class SettingsModel : ISettingsModel
         }
     }
 
-    public bool UseAudioFeedback
+    public double AudioVolume
     {
-        get => useAudioFeedback;
+        get => audioVolume;
         set
         {
-            if (useAudioFeedback != value)
+            if (audioVolume != value)
             {
                 // Update local store
-                useAudioFeedback = value;
+                audioVolume = value;
                 // Send data back to model
-                settingsModel.UseAudioFeedback = value;
+                settingsModel.AudioVolume = value;
                 // Update UI
                 OnPropertyChanged();
             }

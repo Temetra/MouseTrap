@@ -1,6 +1,6 @@
 ﻿using MouseTrap.Core;
 using System.IO;
-using System.Media;
+using System.Windows.Media;
 
 namespace MouseTrap.Services;
 
@@ -8,8 +8,8 @@ internal class SoundService(CursorService cursorService, SettingsDataModel setti
 {
     private readonly CursorService cursorService = cursorService;
     private readonly SettingsDataModel settingsModel = settingsModel;
-    private SoundPlayer activatedSound;
-    private SoundPlayer deactivatedSound;
+    private MediaPlayer activatedSound;
+    private MediaPlayer deactivatedSound;
 
     public void Start()
     {
@@ -25,28 +25,40 @@ internal class SoundService(CursorService cursorService, SettingsDataModel setti
 
     private void CursorService_Updated(object sender, ProgramItem item)
     {
-        if (settingsModel.UseAudioFeedback)
+        if (settingsModel.AudioVolume > 0)
         {
             if (item != null)
             {
-                activatedSound?.Play();
+                Play(activatedSound, settingsModel.AudioVolume);
             }
             else
             {
-                deactivatedSound?.Play();
+                Play(deactivatedSound, settingsModel.AudioVolume);
             }
         }
     }
 
-    private static SoundPlayer GetPlayer(string path)
+    private static MediaPlayer GetPlayer(string path)
     {
         if (File.Exists(path))
         {
-            return new(path);
+            MediaPlayer player = new();
+            player.Open(new System.Uri(Path.GetFullPath(path)));
+            return player;
         }
         else
         {
             return null;
+        }
+    }
+
+    private static void Play(MediaPlayer player, double volume)
+    {
+        if (player != null)
+        {
+            player.Position = System.TimeSpan.Zero;
+            player.Volume = volume / 100;
+            player.Play();
         }
     }
 }

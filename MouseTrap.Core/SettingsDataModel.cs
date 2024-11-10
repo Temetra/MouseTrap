@@ -26,9 +26,9 @@ public class SettingsDataModel : Settings, INotifyPropertyChanged
             base.TitlePadding = source.TitlePadding;
             base.WindowPadding = source.WindowPadding;
             base.SelectedTheme = source.SelectedTheme;
-            base.UseAudioFeedback = source.UseAudioFeedback;
             base.AudioActivate = source.AudioActivate;
             base.AudioDeactivate = source.AudioDeactivate;
+            base.AudioVolume = source.AudioVolume;
         }
     }
 
@@ -71,19 +71,6 @@ public class SettingsDataModel : Settings, INotifyPropertyChanged
         }
     }
 
-    public new bool UseAudioFeedback
-    {
-        get => base.UseAudioFeedback;
-        set
-        {
-            if (base.UseAudioFeedback != value)
-            {
-                base.UseAudioFeedback = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
     public new string AudioActivate
     {
         get => base.AudioActivate;
@@ -105,6 +92,19 @@ public class SettingsDataModel : Settings, INotifyPropertyChanged
             if (base.AudioDeactivate != value)
             {
                 base.AudioDeactivate = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public new double AudioVolume
+    {
+        get => base.AudioVolume;
+        set
+        {
+            if (base.AudioVolume != value)
+            {
+                base.AudioVolume = value;
                 OnPropertyChanged();
             }
         }
