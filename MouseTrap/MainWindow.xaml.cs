@@ -35,7 +35,6 @@ internal sealed partial class MainWindow : Window
         SetTitleBarForegroundColor();
 
         // Change visuals for some state changes
-        Activated += MainWindow_Activated;
         MainContainer.ActualThemeChanged += MainContainer_ActualThemeChanged;
         MainContainer.RequestedTheme = (ElementTheme)(int)settingsModel.SelectedTheme;
     }
@@ -55,18 +54,6 @@ internal sealed partial class MainWindow : Window
                 MainContainer.RequestedTheme = (ElementTheme)(int)settingsModel.SelectedTheme;
             }
         });
-    }
-
-    private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
-    {
-        if (args.WindowActivationState == WindowActivationState.Deactivated)
-        {
-            // TODO: Fade out icon
-        }
-        else
-        {
-            // TODO: Restore icon
-        }
     }
 
     private void MainContainer_ActualThemeChanged(FrameworkElement sender, object args)
