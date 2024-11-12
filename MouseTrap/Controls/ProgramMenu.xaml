@@ -13,6 +13,9 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/TextBoxFix.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <Style x:Key="ToolbarButton" TargetType="controls:SpinnyButton">
                 <Setter Property="BorderBrush" Value="Transparent" />
                 <Setter Property="Background" Value="Transparent" />
@@ -74,12 +77,13 @@
                             <TextBlock 
                                 Text="Filter" 
                                 Margin="10,0,0,0" 
-                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                Style="{ThemeResource xBaseTextBlockStyle}" 
                                 ToolTipService.ToolTip="Filter programs by name or file path." />
                         </StackPanel>
                         <AutoSuggestBox 
                             QuerySubmitted="AutoSuggestBox_QuerySubmitted" 
                             Text="{x:Bind ViewModel.Filter, Mode=TwoWay}" 
+                            TextBoxStyle="{ThemeResource TextBoxFix}"
                             QueryIcon="Find" 
                             PlaceholderText="Filter programs" 
                             HorizontalAlignment="Stretch" />
@@ -90,7 +94,7 @@
                             <TextBlock 
                                 Text="Padding" 
                                 Margin="10,0,0,0" 
-                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                Style="{ThemeResource xBaseTextBlockStyle}" 
                                 ToolTipService.ToolTip="Add padding to avoid moving or resizing windows accidentally." />
                         </StackPanel>
                         <Slider 
@@ -117,7 +121,7 @@
                             <TextBlock 
                                 Text="Sound" 
                                 Margin="10,0,0,0" 
-                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                Style="{ThemeResource xBaseTextBlockStyle}" 
                                 ToolTipService.ToolTip="Play sound when the cursor is trapped." />
                         </StackPanel>
                         <Slider 
@@ -135,7 +139,7 @@
                             <TextBlock 
                                 Text="Theme" 
                                 Margin="10,0,0,0" 
-                                Style="{ThemeResource BaseTextBlockStyle}" 
+                                Style="{ThemeResource xBaseTextBlockStyle}" 
                                 ToolTipService.ToolTip="Choose a theme for MouseTrap, or use the system default." />
                         </StackPanel>
                         <GridView 

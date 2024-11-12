@@ -49,8 +49,15 @@ public class ProgramDataModel : INotifyPropertyChanged
             data.Clear();
             foreach (var item in items)
             {
-                item.IsPinned = true;
-                data.TryAdd(item.Key, item);
+                if (File.Exists(item.FullPath))
+                {
+                    item.IsPinned = true;
+                    data.TryAdd(item.Key, item);
+                }
+                else
+                {
+                    Log.Logger.Information("Pinned program not found: {Filename}", item.FullPath);
+                }
             }
         }
     }

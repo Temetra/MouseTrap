@@ -18,7 +18,7 @@ public class CursorService(ProgramDataModel dataModel, SettingsDataModel setting
     {
         Log.Logger.Debug("Starting CursorService");
         cursorHook = new ClipCursorHook();
-        windowHook = new ForegroundWindowHook();
+        windowHook = new ForegroundWindowHook(skipOwnProcess: true);
         windowHook.ForegroundWindowChanged += WindowHook_ForegroundWindowChanged;
         windowHook.StartHook();
     }
@@ -29,6 +29,21 @@ public class CursorService(ProgramDataModel dataModel, SettingsDataModel setting
         windowHook.ForegroundWindowChanged -= WindowHook_ForegroundWindowChanged;
         windowHook.Dispose();
         cursorHook.Dispose();
+    }
+
+    public void Deactivate()
+    {
+        // It doesn't matter if cursorHook is repeatedly stopped
+        cursorHook?.StopHook();
+
+        // But avoiding event spam when alt-tabbing is good
+        if (isHooking)
+        {
+            Updated?.Invoke(this, null);
+            Log.Logger.Information("Stop cursor hook");
+        }
+
+        isHooking = false;
     }
 
     private void WindowHook_ForegroundWindowChanged(object sender, ForegroundWindowChangedEventArgs e)
@@ -55,17 +70,7 @@ public class CursorService(ProgramDataModel dataModel, SettingsDataModel setting
         }
         else
         {
-            // It doesn't matter if cursorHook is repeatedly stopped
-            cursorHook?.StopHook();
-
-            // But avoiding event spam when alt-tabbing is good
-            if (isHooking)
-            {
-                Updated?.Invoke(this, null);
-                Log.Logger.Information("Stop cursor hook");
-            }
-
-            isHooking = false;
+            Deactivate();
         }
     }
 }

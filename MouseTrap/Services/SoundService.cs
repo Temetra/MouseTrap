@@ -1,13 +1,15 @@
-﻿using MouseTrap.Core;
+﻿using Microsoft.UI.Dispatching;
+using MouseTrap.Core;
 using System.IO;
 using System.Windows.Media;
 
 namespace MouseTrap.Services;
 
-internal class SoundService(CursorService cursorService, SettingsDataModel settingsModel)
+internal class SoundService(CursorService cursorService, SettingsDataModel settingsModel, DispatcherQueue dispatcherQueue)
 {
     private readonly CursorService cursorService = cursorService;
     private readonly SettingsDataModel settingsModel = settingsModel;
+    private readonly DispatcherQueue dispatcherQueue = dispatcherQueue;
     private MediaPlayer activatedSound;
     private MediaPlayer deactivatedSound;
 
@@ -52,13 +54,16 @@ internal class SoundService(CursorService cursorService, SettingsDataModel setti
         }
     }
 
-    private static void Play(MediaPlayer player, double volume)
+    private void Play(MediaPlayer player, double volume)
     {
-        if (player != null)
+        dispatcherQueue.TryEnqueue(() =>
         {
-            player.Position = System.TimeSpan.Zero;
-            player.Volume = volume / 100;
-            player.Play();
-        }
+            if (player != null)
+            {
+                player.Position = System.TimeSpan.Zero;
+                player.Volume = volume / 100;
+                player.Play();
+            }
+        });
     }
 }

@@ -11,18 +11,18 @@ public class Log
     private static Logger CreateLogger()
     {
 #if DEBUG
-        var level = LogEventLevel.Debug;
+        var cfg = new LoggerConfiguration()
+            .MinimumLevel.Is(LogEventLevel.Debug)
+            .WriteTo.File($"log-{DateTime.Now:yyyyMMdd-HHmmss}.txt");
 #else
-        var level = LogEventLevel.Information;
-#endif
-
-        return new LoggerConfiguration()
-            .MinimumLevel.Is(level)
+        var cfg = new LoggerConfiguration()
+            .MinimumLevel.Is(LogEventLevel.Information)
             .WriteTo.File(
-                path: "log.txt",
+                path: $"log.txt",
                 rollingInterval: RollingInterval.Day,
                 rollOnFileSizeLimit: true,
-                retainedFileCountLimit: 2)
-            .CreateLogger();
+                retainedFileCountLimit: 2);
+#endif
+        return cfg.CreateLogger();
     }
 }

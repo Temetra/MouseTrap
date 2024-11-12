@@ -17,7 +17,7 @@
 		<Authors>Temetra</Authors>
 		<Title>MouseTrap</Title>
 		<PackageProjectUrl>https://github.com/Temetra/MouseTrap</PackageProjectUrl>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -46,7 +46,7 @@
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240923002" />
 		<PackageReference Include="System.Reactive" Version="6.0.1" />
-		<PackageReference Include="Temetra.Windows" Version="1.24.0" />
+		<PackageReference Include="Temetra.Windows" Version="1.25.0" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 

@@ -9,11 +9,19 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
+                <ResourceDictionary>
+                    <Style x:Key="xBaseTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+                        <Setter Property="LineHeight" Value="19.5" />
+                        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+                    </Style>
+                    <Style x:Key="xBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                        <Setter Property="LineHeight" Value="19.5" />
+                        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <ThemeShadow x:Name="SharedShadow" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
-
-

@@ -30,7 +30,7 @@
             <Image x:Name="TitleBarIcon" Grid.Column="1" Source="{ThemeResource TitleBarIconBitmap}" Width="24" Height="24" Margin="8,0,12,0" />
             <TextBlock x:Name="TitleBarTextBlock" Grid.Column="2" Text="MouseTrap" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
-        <controls:CustomInfoBar x:Name="MessageBar" Margin="0,0,0,12" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed" IsOpen="False" Severity="Success" Title="" Message="" />
+        <controls:CustomInfoBar x:Name="MessageBar" Margin="0,0,0,12" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed" />
         <controls:ViewModelFrame x:Name="RootFrame" Grid.Row="2" />
     </Grid>
 </Window>

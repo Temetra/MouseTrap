@@ -11,15 +11,25 @@ namespace MouseTrap;
 /// </summary>
 internal sealed partial class MainWindow : Window
 {
-    public MainWindow(SettingsDataModel settingsModel)
+    private readonly SettingsDataModel settingsModel;
+    private readonly CursorService cursorService;
+    public CustomInfoBar Message => MessageBar;
+    public ViewModelFrame Frame => RootFrame;
+
+    public MainWindow(SettingsDataModel settingsModel, CursorService cursorService)
     {
         this.InitializeComponent();
 
         // Set fields
         this.settingsModel = settingsModel;
+        this.cursorService = cursorService;
 
         // Listen for theme changes
         settingsModel.PropertyChanged += SettingsModel_PropertyChanged;
+
+        // Handle events
+        Activated += MainWindow_Activated;
+        Closed += MainWindow_Closed;
 
         // Set window size
         var handle = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -39,11 +49,6 @@ internal sealed partial class MainWindow : Window
         MainContainer.RequestedTheme = (ElementTheme)(int)settingsModel.SelectedTheme;
     }
 
-    private readonly SettingsDataModel settingsModel;
-
-    public CustomInfoBar Message => MessageBar;
-    public ViewModelFrame Frame => RootFrame;
-
     // Incoming change from data model
     private void SettingsModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
@@ -54,6 +59,23 @@ internal sealed partial class MainWindow : Window
                 MainContainer.RequestedTheme = (ElementTheme)(int)settingsModel.SelectedTheme;
             }
         });
+    }
+
+    // Deactivate cursor service if MouseTrap becomes active window
+    // SetWinEventHook interferes with WinUI3 minimize/restore somehow
+    // Using WINEVENT_SKIPOWNPROCESS fixes it, but the cursor hook
+    // needs to be deactivated when switching directly back to MouseTrap
+    private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+    {
+        if (args.WindowActivationState != WindowActivationState.Deactivated)
+        {
+            cursorService.Deactivate();
+        }
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        Log.Logger.Information("Window closed");
     }
 
     private void MainContainer_ActualThemeChanged(FrameworkElement sender, object args)

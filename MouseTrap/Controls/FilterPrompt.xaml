@@ -24,9 +24,9 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <FontIcon Grid.Column="0" Glyph="&#xE71C;" FontSize="14" Margin="0,0,8,0" />
-            <TextBlock Grid.Column="1" Text="Filtered by &quot;"/>
-            <TextBlock Grid.Column="2" Text="{x:Bind ViewModel.Filter, Mode=OneWay}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Column="3" Text="&quot;"/>
+            <TextBlock Style="{ThemeResource xBodyTextBlockStyle}" Grid.Column="1" Text="Filtered by &quot;"/>
+            <TextBlock Style="{ThemeResource xBodyTextBlockStyle}" Grid.Column="2" Text="{x:Bind ViewModel.Filter, Mode=OneWay}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+            <TextBlock Style="{ThemeResource xBodyTextBlockStyle}" Grid.Column="3" Text="&quot;"/>
         </Grid>
         <Button Grid.Column="2" Margin="0" Padding="0" Width="32" Height="32" Click="ClearFilterButton_Click">
             <FontIcon Glyph="&#xE711;" FontSize="14" />

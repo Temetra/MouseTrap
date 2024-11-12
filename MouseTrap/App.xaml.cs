@@ -44,6 +44,7 @@ public partial class App : Application
     {
         // Start
         Log.Logger.Information("App launched");
+        var dispatcherQueue = DispatcherQueue.GetForCurrentThread();
 
         // Single instance activation
         var appArgs = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
@@ -64,11 +65,10 @@ public partial class App : Application
         Settings = new();
         DataStore = new(Data, Settings);
         CursorService = new(Data, Settings);
-        SoundService = new(CursorService, Settings);
+        SoundService = new(CursorService, Settings, dispatcherQueue);
         IconService = new();
 
         // Create factories
-        var dispatcherQueue = DispatcherQueue.GetForCurrentThread();
         MainPageModelFactory = new(dispatcherQueue, Data, Settings, IconService, CursorService);
 
         // Start services
@@ -77,9 +77,8 @@ public partial class App : Application
         SoundService.Start();
 
         // Create main window
-        MainWindow = new(Settings);
+        MainWindow = new(Settings, CursorService);
         MainWindow.AppWindow.Closing += AppWindow_Closing;
-        MainWindow.Closed += MainWindow_Closed;
         MainWindow.Activate();
         MainWindow.Frame.AddViewModelFactory(typeof(MainPage), MainPageModelFactory.Create);
         MainWindow.Frame.Navigate(typeof(MainPage));
@@ -119,10 +118,5 @@ public partial class App : Application
 
         // Close window for real
         MainWindow.Close();
-    }
-
-    private void MainWindow_Closed(object sender, WindowEventArgs args)
-    {
-        Log.Logger.Information("App exited");
     }
 }

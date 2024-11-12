@@ -12,7 +12,7 @@ public class ProgramItem(string Title, string ProgramPath, string Executable, st
 
     public static string GetKey(string filename)
     {
-        var bytes = Encoding.UTF8.GetBytes(filename);
+        var bytes = Encoding.UTF8.GetBytes(filename.ToLowerInvariant());
         var hash = SHA256.HashData(bytes);
         return Convert.ToBase64String(hash);
     }
